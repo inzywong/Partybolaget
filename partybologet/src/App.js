@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
+import { modelInstance } from './data/drinkModel';
 
 import './App.css';
 
@@ -21,8 +22,7 @@ class App extends Component {
 					{/* CONTENT -------------------------------------------------- */}			
 					<div className="appContent container-fluid">
 						{/* We render different components based on the path */}
-						<Route exact path="/" component={Welcome}/> {/* This brings us to the Welcome view */}
-
+						<Route exact path="/" render={() => <Welcome model={modelInstance}/>}/> {/* This brings us to the Welcome view */}
 										
 					</div>
 					{/* END OF CONTENT ------------------------------------------- */}				
