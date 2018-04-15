@@ -1,0 +1,11 @@
+
+
+TODO:
+-------------------------
+- Create the 'CREATE GUESTS PROFILE' component
+- 
+
+NEEDS:
+-------------------------
+- Persistent data
+- 

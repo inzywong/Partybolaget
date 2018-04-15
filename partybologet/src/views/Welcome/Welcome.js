@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 
 import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router';
+
 
 import './Welcome.css';
 
@@ -13,7 +15,8 @@ class Welcome extends Component {
     // We put on state the properties we want to use and modify in the component
     this.state = {
 			numberOfGuests: this.props.model.getNumberOfGuests(),
-			partyDuration: this.props.model.getPartyDuration()
+			partyDuration: this.props.model.getPartyDuration(),
+			redirect: false
 		}
   }
 	
@@ -73,18 +76,31 @@ class Welcome extends Component {
 	/* CLICKED ON 'PLAN PARTY!' */
 	handleSubmit(e){
 
-		if(this.refs.partyName.value === ''){
+		if(this.refs.partyName.value === '' ){
 			alert('You need to specify the name of the Party!');
 		} 
-
+		else if(this.state.numberOfGuests == 0)
+		{
+			alert("I'm sorry but you can't have a party without guests");			
+		}
+		else if(this.state.partyDuration == 0)
+		{
+			alert("I'm sorry but the party needs to be at least 1 hour long");			
+		}
 		else {
 			this.props.model.setPartyName(this.refs.partyName.value)
+			this.setState({redirect: true});
 		}
 		
-		//e.preventDefault(); // preventing from submitting the form
+		e.preventDefault(); // preventing from submitting the form
 	}	
 	
   render() {
+		if (this.state.redirect) {
+    	return <Redirect push to="/createguestprofile" />;
+  	}
+		
+		
     return (
       <div className="Welcome col-12">
 				<h1> Create your party now </h1>    
@@ -121,8 +137,9 @@ class Welcome extends Component {
 						</button>		
 						<br/> <br/>
 					</div>						
-				
+					
 					<input type="submit" value="Plan Party!"/>
+
 				</form>
       </div>
     );

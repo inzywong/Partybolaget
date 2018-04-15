@@ -38,6 +38,9 @@ const drinkModel = function () {
 		notifyObservers();		
 	}
 	
+	this.getPartyName = function(name) {
+		return partyName;		
+	}	
 	
 	
   // Observer pattern

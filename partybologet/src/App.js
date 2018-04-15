@@ -6,6 +6,7 @@ import './App.css';
 
 /* Importing components */
 import Welcome from './views/Welcome/Welcome';
+import CreateGuestProfile from './views/CreateGuestProfile/CreateGuestProfile';
 
 
 class App extends Component {
@@ -23,7 +24,9 @@ class App extends Component {
 					<div className="appContent container-fluid">
 						{/* We render different components based on the path */}
 						<Route exact path="/" render={() => <Welcome model={modelInstance}/>}/> {/* This brings us to the Welcome view */}
-										
+									
+						<Route path="/createguestprofile"  render={() => <CreateGuestProfile model={modelInstance}/>}/>			
+
 					</div>
 					{/* END OF CONTENT ------------------------------------------- */}				
 			
