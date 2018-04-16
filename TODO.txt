@@ -3,7 +3,11 @@
 TODO:
 -------------------------
 - Create the 'CREATE GUESTS PROFILE' component
+- GuestProfile.js has a function to relete itselfe. We can search for a better way of doing that. Right now we set the this.state.deleted to true, then return null in the render. But the component still exists and takes space in the memory.
+- Add a button on the "Create the guests profile" view to allow the user to add a guest.
+- we need to find a way of removing the component (call a destructor). Right now we are just removing GuestProfile.js from the observers and avoiding it to be updated(), so it doesn't get updated. But we are creating a bunch of objects which doesn't get deleted!
 - 
+
 
 NEEDS:
 -------------------------
