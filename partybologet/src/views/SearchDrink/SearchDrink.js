@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import './SearchDrink.css';
 import FilterDrink from '../FilterDrink/FilterDrink';
 import SelectDrink from '../SelectDrink/SelectDrink';
+import DrinkType from '../DrinkType/DrinkType';
+import Alcometer from '../Alcometer/Alcometer';
+import ChosenDrinkMenu from '../ChosenDrinkMenu/ChosenDrinkMenu';
 
 class SearchDrink extends Component {
 
@@ -44,11 +47,24 @@ class SearchDrink extends Component {
       case 'LOADED':
       return (
         <div className="searchDrink row">
-          <div className="filterDrink col-md-2">
-            <FilterDrink model={this.props.model}/>
+          <div className="col-md-2">
+            <div className="drinkType">
+              <DrinkType model={this.props.model}/>
+            </div>
+            <div className="">
+              <ChosenDrinkMenu model={this.props.model}/>
+            </div>
           </div>
-          <div className="selectDrink col-md-10">
-            <SelectDrink model={this.props.model} />
+          <div className="filterDrink col-md-8">
+            <div className="">
+              <FilterDrink model={this.props.model}/>
+            </div>
+            <div className="">
+              <SelectDrink model={this.props.model} />
+            </div>
+          </div>
+          <div className="alcometer col-md-2">
+            <Alcometer model={this.props.model} />
           </div>
         </div>
       );

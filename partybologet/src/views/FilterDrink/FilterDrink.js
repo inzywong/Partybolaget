@@ -7,9 +7,9 @@ class FilterDrink extends Component {
     super(props)
     this.state = {
       filterDrink: 'Filter Drink',
-      drinkType: 'Drink Type',
-      isChecked:false,
-      drinkPrice: 'Drink Price'
+      drinkPrice: 'Drink Price',
+      alcoholPercentage: 'Alcohol Percentage',
+      sort:'Sort by'
     }
   }
 
@@ -17,15 +17,6 @@ class FilterDrink extends Component {
   this.setState({
   })
 }
-
-  toggleChange = (e) => {
-    if (e.target.checked==true){
-      //setDrinkFilterPrice(e.target.value);
-    } else {
-      //setDrinkFilterPrice("");
-      //this.state.isChecked==true;
-    }
-  }
 
   onMinPriceTextChanged = (e) => {
     this.props.model.setDrinkMinPrice(e.target.value)
@@ -35,22 +26,41 @@ class FilterDrink extends Component {
     this.props.model.setDrinkMaxPrice(e.target.value)
   }
 
+  onMinAlcoholTextChanged = (e) => {
+    this.props.model.setDrinkMinAlcoholPercentage(e.target.value)
+  }
+
+  onMaxAlcoholTextChanged = (e) => {
+    this.props.model.setDrinkMaxAlcoholPercentage(e.target.value)
+  }
+
+  onSearchTypeChanged = (e) => {
+    this.props.model.setSearchType(e.target.value)
+  }
+
   render() {
     return (
-      <div className="FilterDrink">
-        <h3>{this.state.filterDrink}</h3>
-        <p>{this.state.drinkType}</p>
-        <label>
-          <input type="checkbox" value="beer" onChange={this.toggleChange} />
-          Beer
-        </label>
-        <label>
-          <input type="checkbox" value="wine"  onChange={this.toggleChange} />
-          Wine
-        </label>
-        <p>{this.state.drinkPrice}</p>
-          <input type="number" className="col" onChange={this.onMinPriceTextChanged} placeholder="Enter Price"/>
-          <input type="number" className="col" onChange={this.onMaxPriceTextChanged} placeholder="Enter Price"/>
+      <div className="FilterDrink row">
+        <h4>{this.state.filterDrink}</h4>
+        <div className="drinkPrice col">
+          <p>{this.state.drinkPrice}</p>
+          <input type="number" onChange={this.onMinPriceTextChanged} placeholder="Minimal Price"/>
+          <input type="number" onChange={this.onMaxPriceTextChanged} placeholder="Maximal Price"/>
+        </div>
+        <div className="alcoholPercentage col">
+          <p>{this.state.alcoholPercentage}</p>
+          <input type="number" onChange={this.onMinAlcoholTextChanged} placeholder="Minimal Alcohol Percentage"/>
+          <input type="number" onChange={this.onMaxAlcoholTextChanged} placeholder="Maximal Alcohol Percentage"/>
+        </div>
+        <div className="col">
+          <p>{this.state.sort}</p>
+          <select className="col-sm-2" onChange={this.onSearchTypeChanged}>
+            <option value="">All</option>
+            <option value="name">Name</option>
+            <option value="price">Price</option>
+            <option value="alcohol">Alcohol Percentage</option>
+          </select>
+        </div>
       </div>
     );
   }

@@ -11,7 +11,7 @@ class SelectDrink extends Component {
 
   componentDidMount = () => {
     this.props.model.addObserver(this)
-    
+
     this.props.model.getAllDrinks().then(drinks => {
       this.setState({
         status: 'LOADED',
@@ -29,18 +29,27 @@ class SelectDrink extends Component {
   }
 
   update() {
-  this.props.model.getAllDrinks().then(drinks => {
+    this.props.model.getAllDrinks().then(drinks => {
 
-    this.setState({
-      status: 'LOADED',
-      drinks: drinks
+      this.setState({
+        status: 'LOADED',
+        drinks: drinks
+      })
+    }).catch(() => {
+      this.setState({
+        status: 'ERROR'
+      })
     })
-  }).catch(() => {
-    this.setState({
-      status: 'ERROR'
-    })
-  })
-}
+  }
+
+  onDrinkClicked = (e) => {
+    var d = {
+      id: e.target.value,
+      name: e.target.attributes.getNamedItem("data-value").value,
+      amount: 0
+    }
+    this.props.model.setChosenDrink(d)
+  }
 
   render() {
     let drinksList = null;
@@ -51,10 +60,14 @@ class SelectDrink extends Component {
         break;
       case 'LOADED':
         drinksList = this.state.drinks.map((drink) =>
-          <div key={drink.id} className="dishes col-sm-2" style={{width:215}}>
+          <div key={drink.id} className="drinkList col-sm-2">
             <p>{drink.name}</p>
-            <p>{drink.volume} L</p>
+            <p>{Math.round(drink.alcohol*100)} %</p>
+            <p>{drink.volume*1000} mL</p>
             <p>{drink.price} kr</p>
+            <button value={drink.id} data-value={drink.name} onClick={this.onDrinkClicked}>
+              Add
+            </button>
           </div>
         )
         break;
@@ -64,7 +77,7 @@ class SelectDrink extends Component {
     }
 
     return (
-      <div className="Dishes">
+      <div className="Drinks">
         <h3 className="row">Choose Drink</h3>
         <div className="row">
           {drinksList}
