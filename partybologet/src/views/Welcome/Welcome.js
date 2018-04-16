@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-
 import { Link } from 'react-router-dom';
 import { Redirect } from 'react-router';
+
 
 
 import './Welcome.css';
@@ -49,13 +49,22 @@ class Welcome extends Component {
 	onNumberOfGuestsChanged = (increment) => {
 
 		var nGuests = this.props.model.getNumberOfGuests();
+
 		nGuests += increment;
 
 		if(nGuests <0){
 			nGuests = 0;
 		}
 
-		this.props.model.setNumberOfGuests(nGuests);
+		//this.props.model.setNumberOfGuests(nGuests);
+		
+		// Creating the guests
+		if(increment > 0){
+			this.props.model.createGuests(increment);
+		}
+		else if(increment < 0 && (this.props.model.getNumberOfGuests()+increment) >= 0){
+			this.props.model.deleteLastGuestsAdded(-increment);
+		}
 	}
 
 	/* DURATION CHANGED */
@@ -87,8 +96,11 @@ class Welcome extends Component {
 		{
 			alert("I'm sorry but the party needs to be at least 1 hour long");
 		}
+		
+		// In case the form was filled correctly, we can create the party.
 		else {
 			this.props.model.setPartyName(this.refs.partyName.value)
+
 			this.setState({redirect: true});
 		}
 

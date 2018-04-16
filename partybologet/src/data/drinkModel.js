@@ -1,3 +1,6 @@
+import uuid from 'uuid'; // This is being used to generate unique keys for the guests objects. 
+												 // Take a look at this.createGuests and you'll see how it's being used.
+
 
 const httpOptions = {
   headers: {'X-Mashape-Key': 'Qu9grxVNWpmshA4Kl9pTwyiJxVGUp1lKzrZjsnghQMkFkfA4LB'}
@@ -9,7 +12,99 @@ const drinkModel = function () {
 	var partyDuration = 0;
 	var numberOfGuests = 0;
 	var observers = [];
+	
+	var guests = [];
+	/* This is the structure of the guests elements:
+		{
+			name: 'Johan',
+			sex: 'm',
+			weight: 90,
+			drinkingSkills: 'hard',
+			preferedDrink: 'wisky',
+			id: 928,
+			saved: false
+		},
+*/
+	
+	this.deleteGuestById = function(id){
+		var index = guests.findIndex(g => g.id === id);
 
+		if(index >= 0)
+		{
+			guests.splice(index, 1);
+
+			numberOfGuests--;			
+
+			notifyObservers();	
+		}
+		/*
+		console.log("Guests list:");
+		console.log(guests);
+		console.log("---------------------------");		*/		
+	}
+	
+	this.deleteLastGuestsAdded = function (n){		
+		// Deleting guests
+		for(var i=0; i<n; i++)
+		{
+			if(guests.length > 0){
+				guests.splice(-1,1); // remove last item of the array
+				numberOfGuests--;
+			}
+		}
+		notifyObservers();	
+		
+		/*
+		console.log("Guests list:");
+		console.log(guests);
+		console.log("---------------------------");		*/
+	}
+	
+	// Returns the guest object
+	this.getGuestById = function(id){		
+		var index = guests.findIndex(g => g.id === id);
+
+		return guests[index];
+	}
+	
+	this.saveGuest = function(guest){
+		var index = guests.findIndex(g => g.id === guest.id);
+		
+		guests[index] = guest;
+		notifyObservers();
+	}
+	
+	this.createGuests = function(n){
+		
+		// Creating the guests
+		for(var i=0; i<n; i++)
+		{
+			var guest = {
+					name: '',
+					sex: '',
+					weight: 30,
+					drinkingSkills: '',
+					preferedDrink: '',
+					id: uuid.v4(),
+					saved: false
+			};
+				
+			guests.push(guest);
+		}	
+		
+		numberOfGuests+= n;
+		
+		notifyObservers();
+		
+		/*
+		console.log("Guests list:");
+		console.log(guests);
+		console.log("---------------------------");		*/
+	}
+
+	this.getGuests = function (){
+		return guests;
+	}
 
   this.setNumberOfGuests = function (num) {
       numberOfGuests = num;

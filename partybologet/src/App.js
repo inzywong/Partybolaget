@@ -4,13 +4,15 @@ import { modelInstance } from './data/drinkModel';
 
 import './App.css';
 
-/* Importing components */
+/* Importing components --------------------------------------- */
 import Welcome from './views/Welcome/Welcome';
 import CreateGuestProfile from './views/CreateGuestProfile/CreateGuestProfile';
 
 import FilterDrink from "./views/FilterDrink/FilterDrink";
 import SelectDrink from "./views/SelectDrink/SelectDrink";
 import SearchDrink from "./views/SearchDrink/SearchDrink";
+import GuestProfile from "./views/GuestProfile/GuestProfile";
+/*--------------------------------------------------------------*/
 
 
 class App extends Component {
