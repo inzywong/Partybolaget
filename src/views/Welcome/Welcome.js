@@ -121,6 +121,7 @@ class Welcome extends Component {
 
 					{/*  PARTY NAME  */}
 					<div>
+						<p> welcome test </p>
 						<p> Name of the Party: </p>
 						<input type="text" ref="partyName" /> <br/> <br/>
 					</div>
