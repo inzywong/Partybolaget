@@ -113,11 +113,48 @@ const drinkModel = function () {
 
   let searchType="";
 
-  var drinkMenu = [
-  ];
+  var drinkMenu = [];
 
   var addDrinkId = "";
   var minusDrinkId = "";
+
+  var chosenDrinkType = "";
+  var chosenDrinkTypeCode = "";
+  var chosenDrinkTypeThreshold = "";
+  var chosenDrinkTypeamount = "";
+
+  var drinkType = [
+    {
+      type: "beer",
+      code: "4%2C6%2C7%2C8%2C16%2C17%2C19",
+      threshold : 40,
+      amount : 0
+    },
+    {
+      type: "wine",
+      code: "20%2C23%2C30",
+      threshold : 60,
+      amount : 0
+    },
+    {
+      type: "champagne",
+      code: "32%2C34%2C35",
+      threshold : 80,
+      amount : 0
+    },
+    {
+      type: "hardliquor",
+      code: "1%2C3%2C5%2C8%2C12%2C14%2C18",
+      threshold : 20,
+      amount : 0
+    },
+    {
+      type: "liquor",
+      code: "2%2C6%2C10%2C11%2C15",
+      threshold : 55,
+      amount : 0
+    }
+  ];
 
 	this.getGuests = function (){
 		return guests;
@@ -238,6 +275,7 @@ const drinkModel = function () {
     var index;
     index= drinkMenu.map(function(x) {return x.id; }).indexOf(addDrinkId);
     drinkMenu[index].amount = drinkMenu[index].amount + 1;
+    chosenDrinkTypeamount=chosenDrinkTypeamount+drinkMenu[index].amount*(drinkMenu[index].alcohol/10);
     notifyObservers();
   }
 
@@ -248,8 +286,42 @@ const drinkModel = function () {
       drinkMenu[index].amount = drinkMenu[index].amount;
     } else {
       drinkMenu[index].amount = drinkMenu[index].amount - 1;
+      chosenDrinkTypeamount=chosenDrinkTypeamount-drinkMenu[index].amount*(drinkMenu[index].alcohol/10);
     }
     notifyObservers();
+  }
+
+  this.getDrinkType = function (){
+    return drinkType;
+  }
+
+  this.setDrinkTypeToSearch = function (drink){
+    for (var i = 0; i < drinkType.length; i++) {
+      if (drink==drinkType[i].type){
+        chosenDrinkTypeCode=drinkType[i].code;
+        chosenDrinkTypeThreshold=drinkType[i].threshold;
+        chosenDrinkTypeamount=drinkType[i].amount;
+      }
+    }
+    notifyObservers();
+  }
+
+  this.getDrinkTypeThreshold = function (){
+    return chosenDrinkTypeThreshold;
+  }
+
+  this.getDrinkTypeAmount = function (){
+    return chosenDrinkTypeamount;
+  }
+
+  this.checkThreshold = function(){
+    var notify="";
+    if (chosenDrinkTypeamount>chosenDrinkTypeThreshold){
+      notify = "You Have Enough Drinks";
+    } else {
+      notify = "";
+    }
+    return notify;
   }
 
   this.getAllDrinks = function () {
@@ -263,6 +335,9 @@ const drinkModel = function () {
     }
     if(searchType !== "") {
       url +="&order_by="+ searchType;
+    }
+    if(chosenDrinkTypeCode !== "") {
+      url +="&tag="+ chosenDrinkTypeCode;console.log(url);
     }
 
     return fetch(url, httpOptions)

@@ -6,7 +6,7 @@ class Alcometer extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      alcometer: 'Alcometer'
+      alcometer: 'Alcometer',
     }
   }
 
@@ -19,6 +19,9 @@ class Alcometer extends Component {
     return (
       <div className="FilterDrink">
         <h3>{this.state.alcometer}</h3>
+        <p>{this.props.model.getDrinkTypeThreshold()+"%"}</p>
+        <p>{this.props.model.getDrinkTypeAmount()}</p>
+        <p>{this.props.model.checkThreshold()}</p>
       </div>
     );
   }

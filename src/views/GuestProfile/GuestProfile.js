@@ -9,7 +9,7 @@ class GuestProfile extends Component {
   constructor(props) {
     super(props)
 
-		
+
     // We put on state the properties we want to use and modify in the component
     this.state = {
 			name:	this.props.model.getGuestById(this.props.guestId).name,
@@ -19,15 +19,15 @@ class GuestProfile extends Component {
 			preferedDrink: this.props.model.getGuestById(this.props.guestId).preferedDrink,
 			saved: this.props.model.getGuestById(this.props.guestId).saved,
 			deleted: false
-		}		
+		}
   }
 
 
 
 	// Called by React when the component is shown to the user (mounted to DOM)
-  componentDidMount() {	
+  componentDidMount() {
 		//console.log(this.props.guestId);
-		
+
     this.props.model.addObserver(this)
   }
 	// Called by React when the component is removed from the DOM
@@ -49,13 +49,13 @@ class GuestProfile extends Component {
 				weight: this.props.model.getGuestById(this.props.guestId).weight,
 				drinkingSkills: this.props.model.getGuestById(this.props.guestId).drinkingSkills,
 				preferedDrink: this.props.model.getGuestById(this.props.guestId).preferedDrink,
-				saved: this.props.model.getGuestById(this.props.guestId).saved			
+				saved: this.props.model.getGuestById(this.props.guestId).saved
 			});
 		}
   }
 
 	handleSubmit(e){
-		
+
 		if(this.refs.guestName.value === '' ){
 			alert('You need to specify a name for the Guest!');
 		}
@@ -69,52 +69,52 @@ class GuestProfile extends Component {
 				id: this.props.guestId,
 				saved: true
 			};
-			
+
 			this.props.model.saveGuest(guestProf);
 		}
-		
+
 		e.preventDefault(); // preventing from submitting the form
 	}
 
-	
+
 	onWeightChanged = (increment) =>{
 		var w = this.state.weight + increment;
-		
+
 		if(w<30)
 		{
 			w = 30;
 		}
-		
+
     this.setState({
 			weight: w
 		});
 	}
-	
 
-	
-	
+
+
+
 	editProfile = () =>{
 		this.setState({saved: false});
 	}
-	
+
 	deleteGuest = () =>{
 		// Deleting this component
     //this.setState({
 		//	deleted: true
-		//});	
+		//});
 		this.state.deleted = true;
-		
+
 		this.props.model.deleteGuestById(this.props.guestId);
-				
+
 		//ReactDOM.unmountComponentAtNode(document.getElementById('root'));
     this.props.model.removeObserver(this);
-	}	
-	
-	
-	
+	}
+
+
+
 
   render() {
-	
+
 		// In case this Guest was deleted, we should not display it anymore.
 		if(this.state.deleted)
 		{
@@ -123,12 +123,12 @@ class GuestProfile extends Component {
 		// If this guest was already saved.
 		else if(this.state.saved)
 		{
-			
+
 			return(
 				<div className="GuestProfile row blue square">
 					{/*  PARTY NAME  ----------------------------*/}
 					<div>
-						<p> Guest Name: <b> {this.state.name} </b> </p> 
+						<p> Guest Name: <b> {this.state.name} </b> </p>
 					</div>
 					{/*------------------------------------------*/}
 
@@ -160,15 +160,15 @@ class GuestProfile extends Component {
 					{/*------------------------------------------*/}
 
 					<button type="button" className="btn" onClick={() => this.editProfile()}>
-						Edit Profile 
+						Edit Profile
 					</button>
-		
+
 					<button type="button" className="btn" onClick={() => this.deleteGuest()}>
 						Delete Guest
 					</button>
-				</div>			
+				</div>
 			);
-		
+
 		}
 		// If this guest is being edited.
 		else
@@ -190,7 +190,7 @@ class GuestProfile extends Component {
 						<div>
 							<p> Sex </p>
 							<select ref="sex">
-								<option value="f">Female</option>							
+								<option value="f">Female</option>
 								<option value="m">Male</option>
 							</select>
 						</div>
@@ -229,7 +229,7 @@ class GuestProfile extends Component {
 							<p> Drinking Preference </p>
 							<select ref="drinkingPreference">
 								<option value="beer">Beer</option>
-								<option value="Wine">Wine</option>
+								<option value="wine">Wine</option>
 								<option value="champagne">Champagne</option>
 								<option value="hardliquor">Hard Liquor</option>
 								<option value="liquor">Liquor</option>
@@ -241,14 +241,14 @@ class GuestProfile extends Component {
 						<input type="submit" value="Create Profile"/>
 
 					</form>
-					
+
 					{/* DELETE PROFILE */}
 					<button type="button" className="btn" onClick={() => this.deleteGuest()}>
 						Delete Guest
 					</button>
 				</div>
-			);			 
-		}	 
+			);
+		}
   }
 }
 

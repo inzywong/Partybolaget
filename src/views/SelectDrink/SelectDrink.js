@@ -46,7 +46,10 @@ class SelectDrink extends Component {
     var d = {
       id: e.target.value,
       name: e.target.attributes.getNamedItem("data-value").value,
-      amount: 0
+      amount: 0,
+      alcohol :e.target.attributes.getNamedItem("data-value1").value,
+      volume:e.target.attributes.getNamedItem("data-value2").value,
+      price:e.target.attributes.getNamedItem("data-value3").value
     }
     this.props.model.setChosenDrink(d)
   }
@@ -65,7 +68,7 @@ class SelectDrink extends Component {
             <p>{Math.round(drink.alcohol*100)} %</p>
             <p>{drink.volume*1000} mL</p>
             <p>{drink.price} kr</p>
-            <button value={drink.id} data-value={drink.name} onClick={this.onDrinkClicked}>
+            <button value={drink.id} data-value={drink.name} data-value1={drink.alcohol*100} data-value2={drink.volume*1000} data-value3={drink.price} onClick={this.onDrinkClicked}>
               Add
             </button>
           </div>
