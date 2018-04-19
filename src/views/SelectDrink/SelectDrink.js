@@ -60,7 +60,7 @@ class SelectDrink extends Component {
         break;
       case 'LOADED':
         drinksList = this.state.drinks.map((drink) =>
-          <div key={drink.id} className="drinkList col-sm-2">
+          <div key={drink.id} className="drinkCard drinkList col-sm-2">
             <p>{drink.name}</p>
             <p>{Math.round(drink.alcohol*100)} %</p>
             <p>{drink.volume*1000} mL</p>
@@ -77,7 +77,7 @@ class SelectDrink extends Component {
     }
 
     return (
-      <div className="Drinks">
+      <div className="row Drinks col-md-12">
         <h3 className="row">Choose Drink</h3>
         <div className="row">
           {drinksList}

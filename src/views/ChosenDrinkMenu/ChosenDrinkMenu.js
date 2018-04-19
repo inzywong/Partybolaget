@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import './ChosenDrinkMenu.css';
+import { Link } from 'react-router-dom';
+
 
 class ChosenDrinkMenu extends Component {
 
@@ -51,9 +53,13 @@ class ChosenDrinkMenu extends Component {
       )
 
     return (
-      <div className="chosenDrink">
+      <div className="chosenDrink col-md-12">
         <h3>{this.state.drinkMenu}</h3>
         {chosenDrinksList}
+        <Link to="/SummaryPage">
+          <button className="btn btn-success" value="SummaryPage">Confirm</button>
+				</Link>
+        
       </div>
     );
   }

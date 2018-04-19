@@ -132,6 +132,10 @@ const drinkModel = function () {
   	return numberOfGuests;
   }
 
+  this.getDrinkMenu = function(){
+    return drinkMenu;
+  }
+
   this.setPartyDuration = function (num) {
 		partyDuration = num;
     notifyObservers();
