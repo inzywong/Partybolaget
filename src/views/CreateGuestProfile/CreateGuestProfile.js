@@ -66,9 +66,13 @@ class CreateGuestProfile extends Component {
 				
 				// Save the drink types the guests chose
 				this.props.model.createDrinkTypesList();
-				//console.log(this.props.model.getDrinkType());
 				
-				// Calculate 
+				// Calculate the mininum amount of alcohol volume for each drink type
+				this.props.model.calculateVolumeOfAlcohol();
+				
+				// Checking how the 'drinkTypesChosenByGuests' looks like
+				console.log(this.props.model.getDrinkType());
+
 				
 				this.setState({
 					redirectToSearchDrink: true
