@@ -48,35 +48,31 @@ class CreateGuestProfile extends Component {
 		})
   }
 
-	
+
 	addGuest = () => {
 		this.props.model.createGuests(1);
-	}	
-	
-	
+	}
+
+
 	onPlanDrinksClicked  = () =>
 	{	
 		// GUEST LIST IS NOT EMPTY
 		if(this.props.model.getNumberOfGuests() > 0){
 			// Check if all profiles were created
-						
+
 			// REDIRECT TO Search drink
 			// If all profiles were properly created, let's redirect to the search drink page
 			if(this.props.model.wereAllProfilesCreated()){
-				
+
 				// Save the drink types the guests chose
 				this.props.model.createDrinkTypesList();
-				
-				// Calculate the mininum amount of alcohol volume for each drink type
-				this.props.model.calculateVolumeOfAlcohol();
-				
-				// Checking how the 'drinkTypesChosenByGuests' looks like
-				console.log(this.props.model.getDrinkType());
+				//console.log(this.props.model.getDrinkType());
 
-				
+				// Calculate
+
 				this.setState({
 					redirectToSearchDrink: true
-				})				
+				})
 			}
 			// GUEST LIST IS EMPTY
 			else{ // In case the user didn't save/create all the profiles
@@ -90,28 +86,28 @@ class CreateGuestProfile extends Component {
 	}
 
   render() {
-		
+
 		var listOfGuests = null;
-		
+
 		if(this.state.numberOfGuests > 0 ){
-			listOfGuests = this.state.guests.map( guest => 			 
+			listOfGuests = this.state.guests.map( guest =>
 					<GuestProfile key={guest.id} guestId={guest.id} model={this.props.model}/>
 				);
 		}
 	  else{
 			listOfGuests = "You don't have guests"
 		}
-			 
-		
+
+
 		// REDIRECT TO SEARCH DRINK PAGE
 		if(this.state.redirectToSearchDrink){
 		  return <Redirect push to="/searchdrink" />;
 		}
-		
+
 		// REDIRECT TO PLAN PARTY PAGE
 		else if(this.state.returnToEditParty)
 		{
-			
+
 		}
 		else{
 			return (
@@ -132,7 +128,7 @@ class CreateGuestProfile extends Component {
 					</button>
 
 				</div>
-			);			
+			);
 		}
 
   }

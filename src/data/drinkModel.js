@@ -61,12 +61,7 @@ const drinkModel = function () {
 
 
 	//
-  var drinkTypesChosenByGuests = [{
-    type: "wine",
-    code: "20%2C23%2C30",
-    minimumAlcoholVolume : 60,
-    currentAlchoholVolume : 0
-  }];
+  var drinkTypesChosenByGuests = [];
 	/* drinkTypesChosenByGuests will look like this:
     {
       type: "beer",
