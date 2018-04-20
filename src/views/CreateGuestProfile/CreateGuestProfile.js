@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './CreateGuestProfile.css';
+import { Redirect } from 'react-router';
 
 
 
@@ -18,7 +19,9 @@ class CreateGuestProfile extends Component {
 			partyName: this.props.model.getPartyName(),
 			numberOfGuests: this.props.model.getNumberOfGuests(),
 			partyDuration: this.props.model.getPartyDuration(),
-			guests: this.props.model.getGuests()
+			guests: this.props.model.getGuests(),
+			redirectToSearchDrink: false,
+			returnToEditParty: false
 		}
   }
 
@@ -51,6 +54,29 @@ class CreateGuestProfile extends Component {
 	}	
 	
 	
+	onPlanDrinksClicked  = () =>
+	{
+	
+		// Check if there is at least one Guest on the list
+		if(this.props.model.getNumberOfGuests() > 0){
+			// Check if all profiles were created
+						
+			// If all profiles were properly created, let's redirect to the search drink page
+			if(this.props.model.wereAllProfilesCreated()){
+				this.setState({
+					redirectToSearchDrink: true
+				})				
+			}
+			else{ // In case the user didn't save/create all the profiles
+				alert("Please create and save all the profiles before planning the drinks");
+			}
+		}
+		else // We can't have any party if there are no guests
+		{
+			alert("I'm sorry but you can't have a party without guests");
+		}
+		
+	}
 
   render() {
 		
@@ -65,31 +91,40 @@ class CreateGuestProfile extends Component {
 			listOfGuests = "You don't have guests"
 		}
 			 
-			 
-	
 		
+		// REDIRECT TO SEARCH DRINK PAGE
+		if(this.state.redirectToSearchDrink){
+			console.log("redirecting to search drink page");
+		  return <Redirect push to="/searchdrink" />;
+		}
 		
-    return (
-      <div className="CreateGuestProfile col-12">
-				<h1> Create the Guests Profile for: {this.state.partyName}</h1>
-				<h3> Number of Guests: {this.state.numberOfGuests}</h3>
-				<button type="button" className="btn" onClick={() => this.addGuest()}>
-					Add 1 Guest
-				</button>
-				
-				<div>
-					{listOfGuests}
+		// REDIRECT TO PLAN PARTY PAGE
+		else if(this.state.returnToEditParty)
+		{
+			
+		}
+		else{
+			return (
+				<div className="CreateGuestProfile col-12">
+					<h1> Create the Guests Profile for: {this.state.partyName}</h1>
+					<h3> Number of Guests: {this.state.numberOfGuests}</h3>
+					<button type="button" className="btn" onClick={() => this.addGuest()}>
+						Add 1 Guest
+					</button>
+
+					<div>
+						{listOfGuests}
+					</div>
+
+
+					<button onClick={this.onPlanDrinksClicked}>
+							Plan Drinks
+					</button>
+
 				</div>
-			
-			
-				<Link to="/searchdrink">
-					<button>
-	        	Plan Drinks
-	        </button>
-				</Link>
-			
-      </div>
-    );
+			);			
+		}
+
   }
 }
 

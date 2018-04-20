@@ -8,6 +8,8 @@ const httpOptions = {
 
 
 const drinkModel = function () {
+	
+	// VARIABLES ------------------------------------------------------------
 	var partyName = "";
 	var partyDuration = 0;
 	var numberOfGuests = 0;
@@ -25,6 +27,72 @@ const drinkModel = function () {
 			saved: false
 		},
 */
+
+  // Variables for the search view model
+  let drinkMinPrice = "";
+  let drinkMaxPrice = "";
+  let drinkFilter = "";
+
+  let drinkMinAlcoholPercentage = "";
+  let drinkMaxAlcoholPercentage = "";
+
+  let searchType="";
+
+  var drinkMenu = [];
+
+  var addDrinkId = "";
+  var minusDrinkId = "";
+
+  var chosenDrinkType = "";
+  var chosenDrinkTypeCode = "";
+  var chosenDrinkTypeThreshold = "";
+  var chosenDrinkTypeamount = "";
+
+  var drinkType = [
+    {
+      type: "beer",
+      code: "4%2C6%2C7%2C8%2C16%2C17%2C19",
+      threshold : 40,
+      amount : 0
+    },
+    {
+      type: "wine",
+      code: "20%2C23%2C30",
+      threshold : 60,
+      amount : 0
+    },
+    {
+      type: "champagne",
+      code: "32%2C34%2C35",
+      threshold : 80,
+      amount : 0
+    },
+    {
+      type: "hardliquor",
+      code: "1%2C3%2C5%2C8%2C12%2C14%2C18",
+      threshold : 20,
+      amount : 0
+    },
+    {
+      type: "liquor",
+      code: "2%2C6%2C10%2C11%2C15",
+      threshold : 55,
+      amount : 0
+    }
+  ];
+	
+	// -----------------------------------------------------------
+	
+	this.wereAllProfilesCreated = function()
+	{
+		for(var i=0; i< guests.length; i++ ){
+			if(!guests[i].saved){
+				return false
+			}
+		}
+		return true;
+	}
+	
 
 	this.deleteGuestById = function(id){
 		var index = guests.findIndex(g => g.id === id);
@@ -103,58 +171,7 @@ const drinkModel = function () {
 	}
 
 
-  /////////////for search view model
-  let drinkMinPrice = "";
-  let drinkMaxPrice = "";
-  let drinkFilter = "";
 
-  let drinkMinAlcoholPercentage = "";
-  let drinkMaxAlcoholPercentage = "";
-
-  let searchType="";
-
-  var drinkMenu = [];
-
-  var addDrinkId = "";
-  var minusDrinkId = "";
-
-  var chosenDrinkType = "";
-  var chosenDrinkTypeCode = "";
-  var chosenDrinkTypeThreshold = "";
-  var chosenDrinkTypeamount = "";
-
-  var drinkType = [
-    {
-      type: "beer",
-      code: "4%2C6%2C7%2C8%2C16%2C17%2C19",
-      threshold : 40,
-      amount : 0
-    },
-    {
-      type: "wine",
-      code: "20%2C23%2C30",
-      threshold : 60,
-      amount : 0
-    },
-    {
-      type: "champagne",
-      code: "32%2C34%2C35",
-      threshold : 80,
-      amount : 0
-    },
-    {
-      type: "hardliquor",
-      code: "1%2C3%2C5%2C8%2C12%2C14%2C18",
-      threshold : 20,
-      amount : 0
-    },
-    {
-      type: "liquor",
-      code: "2%2C6%2C10%2C11%2C15",
-      threshold : 55,
-      amount : 0
-    }
-  ];
 
 	this.getGuests = function (){
 		return guests;
