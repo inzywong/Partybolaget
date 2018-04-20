@@ -6,9 +6,9 @@
 
 4- Your project file structure (short description/purpose of each file): Inside the source folder, you will be able to find the model and the views in separate folders. The model is inside the /data folder, and teh views are inside the /views folder as shown below:
 <br/><br/>
-/Data<br/>
+-> Data<br/>
 	drinkmodel.js<br/>
-/Views<br/>
+-> Views<br/>
 	Welcome/welcome.js -> The very first page where the user can pick the name of the event, how long it's gonna take, and the number of guests<br/>
 	CreateGuestProfile/CreateGuestProfile.js -> Here you create the profile of the guests.<br/>
 	GuestProfile/GuestProfile.js -> This represents the view/controller for each profile.<br/>
