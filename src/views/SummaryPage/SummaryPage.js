@@ -31,7 +31,7 @@ class SummaryPage extends Component {
 		})
   }
 
-	
+
   render() {
 		let drinkList=null;
 		drinkList = this.state.drinkMenu.map((drink) =>
@@ -42,7 +42,7 @@ class SummaryPage extends Component {
             <p>{drink.price} kr</p>
           </div>
 				)
-				
+
     return (
       <div className="col-lg-12">
 			<h1>Summary</h1>

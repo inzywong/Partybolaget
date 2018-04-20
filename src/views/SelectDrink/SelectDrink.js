@@ -5,17 +5,20 @@ class SelectDrink extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      status: 'INITIAL'
+      status: 'INITIAL',
+      chooseDrinkWithName : 'Choose ' + this.props.model.getDrinkTypeName()
     }
   }
 
+// Called by React when the component is shown to the user (mounted to DOM)
   componentDidMount = () => {
     this.props.model.addObserver(this)
 
     this.props.model.getAllDrinks().then(drinks => {
       this.setState({
         status: 'LOADED',
-        drinks: drinks
+        drinks: drinks,
+        chooseDrinkWithName : 'Choose ' + this.props.model.getDrinkTypeName()
       })
     }).catch(() => {
       this.setState({
@@ -24,16 +27,22 @@ class SelectDrink extends Component {
     })
   }
 
+// Called by React when the component is removed from the DOM
   componentWillUnmount() {
     this.props.model.removeObserver(this)
+
   }
 
   update() {
-    this.props.model.getAllDrinks().then(drinks => {
+    this.setState({
+      status: 'INITIAL',
+    })
 
+    this.props.model.getAllDrinks().then(drinks => {
       this.setState({
         status: 'LOADED',
-        drinks: drinks
+        drinks: drinks,
+        chooseDrinkWithName : 'Choose ' + this.props.model.getDrinkTypeName()
       })
     }).catch(() => {
       this.setState({
@@ -81,7 +90,7 @@ class SelectDrink extends Component {
 
     return (
       <div className="row Drinks col-md-12">
-        <h3 className="row">Choose Drink</h3>
+        <h3 className="row">{this.state.chooseDrinkWithName}</h3>
         <div className="row">
           {drinksList}
         </div>

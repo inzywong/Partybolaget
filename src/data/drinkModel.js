@@ -123,7 +123,7 @@ const drinkModel = function () {
   var chosenDrinkTypeThreshold = "";
   var chosenDrinkTypeamount = "";
 
-  var drinkType = [
+  var drinkTypesChosenByGuests = [
     {
       type: "beer",
       code: "4%2C6%2C7%2C8%2C16%2C17%2C19",
@@ -279,10 +279,10 @@ const drinkModel = function () {
     var index;
     var indexDrinkType;
     index= drinkMenu.map(function(x) {return x.id; }).indexOf(addDrinkId);
-    indexDrinkType= drinkType.map(function(x) {return x.type; }).indexOf(chosenDrinkType);
+    indexDrinkType= drinkTypesChosenByGuests.map(function(x) {return x.type; }).indexOf(chosenDrinkType);
     drinkMenu[index].amount = drinkMenu[index].amount + 1;
     chosenDrinkTypeamount=chosenDrinkTypeamount+drinkMenu[index].amount*(drinkMenu[index].alcohol/10);
-    drinkType[indexDrinkType].amount = chosenDrinkTypeamount;
+    drinkTypesChosenByGuests[indexDrinkType].amount = chosenDrinkTypeamount;
     notifyObservers();
   }
 
@@ -290,29 +290,34 @@ const drinkModel = function () {
     var index;
     var indexDrinkType;
     index= drinkMenu.map(function(x) {return x.id; }).indexOf(minusDrinkId);
-    indexDrinkType= drinkType.map(function(x) {return x.type; }).indexOf(chosenDrinkType);
+    indexDrinkType= drinkTypesChosenByGuests.map(function(x) {return x.type; }).indexOf(chosenDrinkType);
     if (drinkMenu[index].amount<=0){
       drinkMenu[index].amount = drinkMenu[index].amount;
     } else {
       drinkMenu[index].amount = drinkMenu[index].amount - 1;
       chosenDrinkTypeamount=chosenDrinkTypeamount-drinkMenu[index].amount*(drinkMenu[index].alcohol/10);
-      drinkType[indexDrinkType].amount = chosenDrinkTypeamount;
+      drinkTypesChosenByGuests[indexDrinkType].amount = chosenDrinkTypeamount;
     }
     notifyObservers();
   }
 
   this.getDrinkType = function (){
-    return drinkType;
+    return drinkTypesChosenByGuests;
+  }
+
+  // Return the name of type of drink chosen by User
+  this.getDrinkTypeName = function (){
+    return chosenDrinkType;
   }
 
   this.setDrinkTypeToSearch = function (drink){
     chosenDrinkTypeamount=0;
-    for (var i = 0; i < drinkType.length; i++) {
-      if (drink==drinkType[i].type){
-        chosenDrinkType = drinkType[i].type;
-        chosenDrinkTypeCode=drinkType[i].code;
-        chosenDrinkTypeThreshold=drinkType[i].threshold;
-        chosenDrinkTypeamount=drinkType[i].amount;
+    for (var i = 0; i < drinkTypesChosenByGuests.length; i++) {
+      if (drink==drinkTypesChosenByGuests[i].type){
+        chosenDrinkType = drinkTypesChosenByGuests[i].type;
+        chosenDrinkTypeCode=drinkTypesChosenByGuests[i].code;
+        chosenDrinkTypeThreshold=drinkTypesChosenByGuests[i].threshold;
+        chosenDrinkTypeamount=drinkTypesChosenByGuests[i].amount;
       }
     }
     notifyObservers();
@@ -349,7 +354,7 @@ const drinkModel = function () {
       url +="&order_by="+ searchType;
     }
     if(chosenDrinkTypeCode !== "") {
-      url +="&tag="+ chosenDrinkTypeCode;console.log(url);
+      url +="&tag="+ chosenDrinkTypeCode;
     }
 
     return fetch(url, httpOptions)

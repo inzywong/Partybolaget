@@ -9,12 +9,16 @@ class FilterDrink extends Component {
       filterDrink: 'Filter Drink',
       drinkPrice: 'Drink Price',
       alcoholPercentage: 'Alcohol Percentage',
-      sort:'Sort by'
+      sort:'Sort by',
+      partyName : 'Name of The Party: ' + this.props.model.getPartyName(),
+      numberOfGuests : 'Number Of Guests: ' + this.props.model.getNumberOfGuests() + ' People',
+      partyDuration : 'Name of The Party: ' + this.props.model.getPartyDuration() + ' Hours'
     }
   }
 
   update() {
   this.setState({
+    partyNameFromModel: this.props.model.getPartyName()
   })
 }
 
@@ -42,15 +46,28 @@ class FilterDrink extends Component {
     return (
       <div className="FilterDrink row">
         <h4>{this.state.filterDrink}</h4>
+        <div className="partyDetail row">
+          <p className="col">{this.state.partyName}</p>
+          <p className="col">{this.state.numberOfGuests}</p>
+          <p className="col">{this.state.partyDuration}</p>
+        </div>
         <div className="drinkPrice col">
           <p>{this.state.drinkPrice}</p>
-          <input type="number" onChange={this.onMinPriceTextChanged} placeholder="Minimal Price"/>
-          <input type="number" onChange={this.onMaxPriceTextChanged} placeholder="Maximal Price"/>
+          <label>
+            <input type="number" onChange={this.onMinPriceTextChanged} placeholder="Minimal Price"/>kr
+          </label>
+          <label>
+            <input type="number" onChange={this.onMaxPriceTextChanged} placeholder="Maximal Price"/>kr
+          </label>
         </div>
         <div className="alcoholPercentage col">
           <p>{this.state.alcoholPercentage}</p>
-          <input type="number" onChange={this.onMinAlcoholTextChanged} placeholder="Minimal Alcohol Percentage"/>
-          <input type="number" onChange={this.onMaxAlcoholTextChanged} placeholder="Maximal Alcohol Percentage"/>
+          <label>
+            <input type="number" onChange={this.onMinAlcoholTextChanged} placeholder="Minimal Alcohol Percentage"/> %
+          </label>
+          <label>
+            <input type="number" onChange={this.onMaxAlcoholTextChanged} placeholder="Maximal Alcohol Percentage"/> %
+          </label>
         </div>
         <div className="col">
           <p>{this.state.sort}</p>
