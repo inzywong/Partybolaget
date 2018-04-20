@@ -277,20 +277,26 @@ const drinkModel = function () {
 
   this.setAddDrinkAmount = function(){
     var index;
+    var indexDrinkType;
     index= drinkMenu.map(function(x) {return x.id; }).indexOf(addDrinkId);
+    indexDrinkType= drinkType.map(function(x) {return x.type; }).indexOf(chosenDrinkType);
     drinkMenu[index].amount = drinkMenu[index].amount + 1;
     chosenDrinkTypeamount=chosenDrinkTypeamount+drinkMenu[index].amount*(drinkMenu[index].alcohol/10);
+    drinkType[indexDrinkType].amount = chosenDrinkTypeamount;
     notifyObservers();
   }
 
   this.setMinusDrinkAmount = function(){
     var index;
+    var indexDrinkType;
     index= drinkMenu.map(function(x) {return x.id; }).indexOf(minusDrinkId);
+    indexDrinkType= drinkType.map(function(x) {return x.type; }).indexOf(chosenDrinkType);
     if (drinkMenu[index].amount<=0){
       drinkMenu[index].amount = drinkMenu[index].amount;
     } else {
       drinkMenu[index].amount = drinkMenu[index].amount - 1;
       chosenDrinkTypeamount=chosenDrinkTypeamount-drinkMenu[index].amount*(drinkMenu[index].alcohol/10);
+      drinkType[indexDrinkType].amount = chosenDrinkTypeamount;
     }
     notifyObservers();
   }
@@ -300,8 +306,10 @@ const drinkModel = function () {
   }
 
   this.setDrinkTypeToSearch = function (drink){
+    chosenDrinkTypeamount=0;
     for (var i = 0; i < drinkType.length; i++) {
       if (drink==drinkType[i].type){
+        chosenDrinkType = drinkType[i].type;
         chosenDrinkTypeCode=drinkType[i].code;
         chosenDrinkTypeThreshold=drinkType[i].threshold;
         chosenDrinkTypeamount=drinkType[i].amount;
