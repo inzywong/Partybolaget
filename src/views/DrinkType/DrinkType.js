@@ -22,13 +22,17 @@ class DrinkType extends Component {
 
   render() {
     let drinkType = null;
+		
+		{/* Go through all the drinks selected by the guests */}
     drinkType = this.state.nameOfDrinkType.map((drink) =>
-      <div key={drink.type} className="row">
+      <div key={drink.type} className="row"> {/* Print a button for each drink */}
         <button value={drink.type} onClick={this.onDrinkTypeClicked}>
           {drink.type}
         </button>
       </div>
     )
+		
+		
     return (
       <div className="FilterDrink">
         <h3>{this.state.drinkType}</h3>
