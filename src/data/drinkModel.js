@@ -8,6 +8,8 @@ const httpOptions = {
 
 
 const drinkModel = function () {
+	
+	// VARIABLES ------------------------------------------------------------
 	var partyName = "";
 	var partyDuration = 0;
 	var numberOfGuests = 0;
@@ -25,6 +27,108 @@ const drinkModel = function () {
 			saved: false
 		},
 */
+
+  // Variables for the search view model
+  let drinkMinPrice = "";
+  let drinkMaxPrice = "";
+  let drinkFilter = "";
+
+  let drinkMinAlcoholPercentage = "";
+  let drinkMaxAlcoholPercentage = "";
+
+  let searchType="";
+
+  var drinkMenu = [];
+
+  var addDrinkId = "";
+  var minusDrinkId = "";
+
+  var chosenDrinkType = "";
+  var chosenDrinkTypeCode = "";
+  var chosenDrinkTypeThreshold = "";
+  var chosenDrinkTypeamount = "";
+	
+	// Each drink type in the API is identified by a code. Below are the codes for each type
+	//  our app might be using.
+	var apiDrinkTypeCode = {
+		"beer": "4%2C6%2C7%2C8%2C16%2C17%2C19",
+		"wine": "20%2C23%2C30",
+		"champagne": "32%2C34%2C35",
+		"hardliquor": "1%2C3%2C5%2C8%2C12%2C14%2C18",
+		"liquor": "2%2C6%2C10%2C11%2C15"
+	}
+		
+
+	// 
+  var drinkTypesChosenByGuests = [];
+	/* drinkTypesChosenByGuests will look like this:
+    {
+      type: "beer",
+      code: "4%2C6%2C7%2C8%2C16%2C17%2C19",
+      threshold : 40,
+      amount : 0
+    },
+    {
+      type: "wine",
+      code: "20%2C23%2C30",
+      minimumAlcoholVolume : 60,
+      currentAlchoholVolume : 0
+    },
+    {
+      type: "champagne",
+      code: "32%2C34%2C35",
+      threshold : 80,
+      amount : 0
+    },
+    {
+      type: "hardliquor",
+      code: "1%2C3%2C5%2C8%2C12%2C14%2C18",
+      threshold : 20,
+      amount : 0
+    },
+    {
+      type: "liquor",
+      code: "2%2C6%2C10%2C11%2C15",
+      threshold : 55,
+      amount : 0
+    }
+  */
+	
+	// -----------------------------------------------------------
+	
+	this.addDrinkType = function(drinkType)
+	{
+		for(var i=0; i<drinkTypesChosenByGuests.length; i++){
+			// If the drink type was already added to the list, let's skip it
+			if(drinkTypesChosenByGuests[i].type == drinkType){
+				return ;
+			}
+		}
+		
+		// If the drink type was not added yet, let's add it
+		drinkTypesChosenByGuests.push({
+			type: drinkType,
+			code: apiDrinkTypeCode[drinkType]
+		});
+	}
+
+	this.createDrinkTypesList = function()
+	{
+		for(var i=0; i<guests.length; i++){ // Loop through all the guests
+			this.addDrinkType(guests[i].preferedDrink);
+		}
+	}
+	
+	this.wereAllProfilesCreated = function()
+	{
+		for(var i=0; i< guests.length; i++ ){
+			if(!guests[i].saved){
+				return false
+			}
+		}
+		return true;
+	}
+	
 
 	this.deleteGuestById = function(id){
 		var index = guests.findIndex(g => g.id === id);
@@ -101,60 +205,6 @@ const drinkModel = function () {
 		console.log(guests);
 		console.log("---------------------------");		*/
 	}
-
-
-  /////////////for search view model
-  let drinkMinPrice = "";
-  let drinkMaxPrice = "";
-  let drinkFilter = "";
-
-  let drinkMinAlcoholPercentage = "";
-  let drinkMaxAlcoholPercentage = "";
-
-  let searchType="";
-
-  var drinkMenu = [];
-
-  var addDrinkId = "";
-  var minusDrinkId = "";
-
-  var chosenDrinkType = "";
-  var chosenDrinkTypeCode = "";
-  var chosenDrinkTypeThreshold = "";
-  var chosenDrinkTypeamount = "";
-
-  var drinkTypesChosenByGuests = [
-    {
-      type: "beer",
-      code: "4%2C6%2C7%2C8%2C16%2C17%2C19",
-      threshold : 40,
-      amount : 0
-    },
-    {
-      type: "wine",
-      code: "20%2C23%2C30",
-      threshold : 60,
-      amount : 0
-    },
-    {
-      type: "champagne",
-      code: "32%2C34%2C35",
-      threshold : 80,
-      amount : 0
-    },
-    {
-      type: "hardliquor",
-      code: "1%2C3%2C5%2C8%2C12%2C14%2C18",
-      threshold : 20,
-      amount : 0
-    },
-    {
-      type: "liquor",
-      code: "2%2C6%2C10%2C11%2C15",
-      threshold : 55,
-      amount : 0
-    }
-  ];
 
 	this.getGuests = function (){
 		return guests;
@@ -301,6 +351,7 @@ const drinkModel = function () {
     notifyObservers();
   }
 
+	// Returns the list of the types of drinks chosen by the guests
   this.getDrinkType = function (){
     return drinkTypesChosenByGuests;
   }
