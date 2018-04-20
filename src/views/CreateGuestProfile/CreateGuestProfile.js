@@ -64,6 +64,7 @@ class CreateGuestProfile extends Component {
 			// If all profiles were properly created, let's redirect to the search drink page
 			if(this.props.model.wereAllProfilesCreated()){
 				
+				
 				// Save the drink types the guests chose
 				this.props.model.createDrinkTypesList();
 				

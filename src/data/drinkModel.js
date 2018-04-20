@@ -98,6 +98,8 @@ const drinkModel = function () {
 	// -----------------------------------------------------------
 	
 	
+	
+	
 	// This function will calculate what is the minimum volume of alcohol needed
 	//  for each type of drink chosen by the guests
 	this.calculateVolumeOfAlcohol = function()
@@ -176,6 +178,8 @@ const drinkModel = function () {
 
 	this.createDrinkTypesList = function()
 	{
+		drinkTypesChosenByGuests = [];
+		
 		for(var i=0; i<guests.length; i++){ // Loop through all the guests
 			this.addDrinkType(guests[i].preferedDrink);
 		}
