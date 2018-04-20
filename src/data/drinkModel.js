@@ -47,8 +47,21 @@ const drinkModel = function () {
   var chosenDrinkTypeCode = "";
   var chosenDrinkTypeThreshold = "";
   var chosenDrinkTypeamount = "";
+	
+	// Each drink type in the API is identified by a code. Below are the codes for each type
+	//  our app might be using.
+	var apiDrinkTypeCode = {
+		"beer": "4%2C6%2C7%2C8%2C16%2C17%2C19",
+		"wine": "20%2C23%2C30",
+		"champagne": "32%2C34%2C35",
+		"hardliquor": "1%2C3%2C5%2C8%2C12%2C14%2C18",
+		"liquor": "2%2C6%2C10%2C11%2C15"
+	}
+		
 
-  var drinkType = [
+	// 
+  var drinkTypesChosenByGuests = [];
+	/* drinkTypesChosenByGuests will look like this:
     {
       type: "beer",
       code: "4%2C6%2C7%2C8%2C16%2C17%2C19",
@@ -58,8 +71,8 @@ const drinkModel = function () {
     {
       type: "wine",
       code: "20%2C23%2C30",
-      threshold : 60,
-      amount : 0
+      minimumAlcoholVolume : 60,
+      currentAlchoholVolume : 0
     },
     {
       type: "champagne",
@@ -79,9 +92,32 @@ const drinkModel = function () {
       threshold : 55,
       amount : 0
     }
-  ];
+  */
 	
 	// -----------------------------------------------------------
+	
+	this.addDrinkType = function(drinkType)
+	{
+		for(var i=0; i<drinkTypesChosenByGuests.length; i++){
+			// If the drink type was already added to the list, let's skip it
+			if(drinkTypesChosenByGuests[i].type == drinkType){
+				return ;
+			}
+		}
+		
+		// If the drink type was not added yet, let's add it
+		drinkTypesChosenByGuests.push({
+			type: drinkType,
+			code: apiDrinkTypeCode[drinkType]
+		});
+	}
+
+	this.createDrinkTypesList = function()
+	{
+		for(var i=0; i<guests.length; i++){ // Loop through all the guests
+			this.addDrinkType(guests[i].preferedDrink);
+		}
+	}
 	
 	this.wereAllProfilesCreated = function()
 	{
@@ -296,10 +332,10 @@ const drinkModel = function () {
     var index;
     var indexDrinkType;
     index= drinkMenu.map(function(x) {return x.id; }).indexOf(addDrinkId);
-    indexDrinkType= drinkType.map(function(x) {return x.type; }).indexOf(chosenDrinkType);
+    indexDrinkType= drinkTypesChosenByGuests.map(function(x) {return x.type; }).indexOf(chosenDrinkType);
     drinkMenu[index].amount = drinkMenu[index].amount + 1;
     chosenDrinkTypeamount=chosenDrinkTypeamount+drinkMenu[index].amount*(drinkMenu[index].alcohol/10);
-    drinkType[indexDrinkType].amount = chosenDrinkTypeamount;
+    drinkTypesChosenByGuests[indexDrinkType].amount = chosenDrinkTypeamount;
     notifyObservers();
   }
 
@@ -307,29 +343,30 @@ const drinkModel = function () {
     var index;
     var indexDrinkType;
     index= drinkMenu.map(function(x) {return x.id; }).indexOf(minusDrinkId);
-    indexDrinkType= drinkType.map(function(x) {return x.type; }).indexOf(chosenDrinkType);
+    indexDrinkType= drinkTypesChosenByGuests.map(function(x) {return x.type; }).indexOf(chosenDrinkType);
     if (drinkMenu[index].amount<=0){
       drinkMenu[index].amount = drinkMenu[index].amount;
     } else {
       drinkMenu[index].amount = drinkMenu[index].amount - 1;
       chosenDrinkTypeamount=chosenDrinkTypeamount-drinkMenu[index].amount*(drinkMenu[index].alcohol/10);
-      drinkType[indexDrinkType].amount = chosenDrinkTypeamount;
+      drinkTypesChosenByGuests[indexDrinkType].amount = chosenDrinkTypeamount;
     }
     notifyObservers();
   }
 
+	// Returns the list of the types of drinks chosen by the guests
   this.getDrinkType = function (){
-    return drinkType;
+    return drinkTypesChosenByGuests;
   }
 
   this.setDrinkTypeToSearch = function (drink){
     chosenDrinkTypeamount=0;
-    for (var i = 0; i < drinkType.length; i++) {
-      if (drink==drinkType[i].type){
-        chosenDrinkType = drinkType[i].type;
-        chosenDrinkTypeCode=drinkType[i].code;
-        chosenDrinkTypeThreshold=drinkType[i].threshold;
-        chosenDrinkTypeamount=drinkType[i].amount;
+    for (var i = 0; i < drinkTypesChosenByGuests.length; i++) {
+      if (drink==drinkTypesChosenByGuests[i].type){
+        chosenDrinkType = drinkTypesChosenByGuests[i].type;
+        chosenDrinkTypeCode=drinkTypesChosenByGuests[i].code;
+        chosenDrinkTypeThreshold=drinkTypesChosenByGuests[i].threshold;
+        chosenDrinkTypeamount=drinkTypesChosenByGuests[i].amount;
       }
     }
     notifyObservers();

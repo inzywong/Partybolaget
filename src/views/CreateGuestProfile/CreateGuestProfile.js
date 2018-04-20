@@ -55,18 +55,26 @@ class CreateGuestProfile extends Component {
 	
 	
 	onPlanDrinksClicked  = () =>
-	{
-	
-		// Check if there is at least one Guest on the list
+	{	
+		// GUEST LIST IS NOT EMPTY
 		if(this.props.model.getNumberOfGuests() > 0){
 			// Check if all profiles were created
 						
+			// REDIRECT TO Search drink
 			// If all profiles were properly created, let's redirect to the search drink page
 			if(this.props.model.wereAllProfilesCreated()){
+				
+				// Save the drink types the guests chose
+				this.props.model.createDrinkTypesList();
+				//console.log(this.props.model.getDrinkType());
+				
+				// Calculate 
+				
 				this.setState({
 					redirectToSearchDrink: true
 				})				
 			}
+			// GUEST LIST IS EMPTY
 			else{ // In case the user didn't save/create all the profiles
 				alert("Please create and save all the profiles before planning the drinks");
 			}
@@ -75,7 +83,6 @@ class CreateGuestProfile extends Component {
 		{
 			alert("I'm sorry but you can't have a party without guests");
 		}
-		
 	}
 
   render() {
@@ -94,7 +101,6 @@ class CreateGuestProfile extends Component {
 		
 		// REDIRECT TO SEARCH DRINK PAGE
 		if(this.state.redirectToSearchDrink){
-			console.log("redirecting to search drink page");
 		  return <Redirect push to="/searchdrink" />;
 		}
 		
