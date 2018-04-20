@@ -8,7 +8,7 @@ const httpOptions = {
 
 
 const drinkModel = function () {
-	
+
 	// VARIABLES ------------------------------------------------------------
 	var partyName = "";
 	var partyDuration = 0;
@@ -48,7 +48,7 @@ const drinkModel = function () {
   var chosenDrinkTypeCode = "";
   var chosenDrinkTypeThreshold = 0;
   var chosenDrinkTypeamount = "";
-	
+
 	// Each drink type in the API is identified by a code. Below are the codes for each type
 	//  our app might be using.
 	var apiDrinkTypeCode = {
@@ -58,15 +58,15 @@ const drinkModel = function () {
 		"hardliquor": "1%2C3%2C5%2C8%2C12%2C14%2C18",
 		"liquor": "2%2C6%2C10%2C11%2C15"
 	}
-		
 
-	// 
+
+	//
   var drinkTypesChosenByGuests = [];
 	/* drinkTypesChosenByGuests will look like this:
     {
       type: "beer",
       code: "4%2C6%2C7%2C8%2C16%2C17%2C19",
-      minimumAlcoholVolume: 40,
+      minimumAlcoholVolume : 40,
       currentAlchoholVolume : 0
     },
     {
@@ -78,86 +78,83 @@ const drinkModel = function () {
     {
       type: "champagne",
       code: "32%2C34%2C35",
-      minimumAlcoholVolume: 80,
-      currentAlchoholVolume: 0
+      minimumAlcoholVolume : 80,
+      currentAlchoholVolume : 0
     },
     {
       type: "hardliquor",
       code: "1%2C3%2C5%2C8%2C12%2C14%2C18",
-      minimumAlcoholVolume: 20,
-      currentAlchoholVolume: 0
+      minimumAlcoholVolume : 20,
+      currentAlchoholVolume : 0
     },
     {
       type: "liquor",
       code: "2%2C6%2C10%2C11%2C15",
-      minimumAlcoholVolume: 55,
-      currentAlchoholVolume: 0
+      minimumAlcoholVolume : 55,
+      currentAlchoholVolume : 0
     }
   */
-	
+
 	// -----------------------------------------------------------
-	
-	
-	
-	
+
 	// This function will calculate what is the minimum volume of alcohol needed
 	//  for each type of drink chosen by the guests
 	this.calculateVolumeOfAlcohol = function()
 	{
 		// This variable represents the minimum amount of alcohol in ml in order to get
-		//  a 60kg, male, ligh drinker  drunk. We use this value to calculate the amount 
+		//  a 60kg, male, ligh drinker  drunk. We use this value to calculate the amount
 		//    needed to get other people drunk.
 		var a_per_hour = 70;
-		
+
 		// This dictionary represents the weight in the formula each drinking skills has.
 		var drinkSkillsMap = {
 			"light": 1,
 			"medium": 2,
 			"heavy": 3
 		}
-		
+
 		// This dictionary represents the weight in the formula each drinking skills has.
 		var genderMap = {
 			"m": 1,
 			"f": 0.7
-		}		
-		
+		}
+
 		// Make all the minimumAlcoholVolume equals to zero
-		for(var j=0; j<drinkTypesChosenByGuests.length; j++){		
+		for(var j=0; j<drinkTypesChosenByGuests.length; j++){
 			drinkTypesChosenByGuests[j].minimumAlcoholVolume = 0;
-		}	
-		
-		
+		}
+
+
 		// Loop through guests
 		for(var i=0; i<guests.length; i++){
 			//console.log("Analyzing Guest " + guests[i].name);
-			
-			
+
+
 			// Calculate the volume of alcohol this guest will need
-			var volumeOfAlcohol = (0.01*guests[i].weight + 0.04)* 
+			var volumeOfAlcohol = (0.01*guests[i].weight + 0.04)*
 														drinkSkillsMap[guests[i].drinkingSkills]*
 														genderMap[guests[i].sex]*
 														a_per_hour*
 														partyDuration;
-			
+
 			//console.log("Alcohol needed: " + volumeOfAlcohol);
 			//console.log("Type of Drink: " + guests[i].preferedDrink);
-			
-			// Add this value to its drink type 
+
+			// Add this value to its drink type
 			for(var j=0; j<drinkTypesChosenByGuests.length; j++){
 				//console.log("Guest drinkType: " + guests[j].preferedDrink);
 				//console.log("Guest drinkType: " + guests[j].preferedDrink);
-										
+
 				if(drinkTypesChosenByGuests[j]['type'] === guests[i].preferedDrink){
 					//console.log("Adding the volume to: " + drinkTypesChosenByGuests[j].type);
 					drinkTypesChosenByGuests[j].minimumAlcoholVolume += volumeOfAlcohol;
 				}
-			}		
-			
+			}
+
 		}
 	}
-	
-	
+
+
 	this.addDrinkType = function(drinkType)
 	{
 		for(var i=0; i<drinkTypesChosenByGuests.length; i++){
@@ -166,7 +163,7 @@ const drinkModel = function () {
 				return ;
 			}
 		}
-		
+
 		// If the drink type was not added yet, let's add it
 		drinkTypesChosenByGuests.push({
 			type: drinkType,
@@ -184,7 +181,7 @@ const drinkModel = function () {
 			this.addDrinkType(guests[i].preferedDrink);
 		}
 	}
-	
+
 	this.wereAllProfilesCreated = function()
 	{
 		for(var i=0; i< guests.length; i++ ){
@@ -194,7 +191,7 @@ const drinkModel = function () {
 		}
 		return true;
 	}
-	
+
 
 	this.deleteGuestById = function(id){
 		var index = guests.findIndex(g => g.id === id);
@@ -366,7 +363,7 @@ const drinkModel = function () {
     }{
       drinkMenu.push(drink);
     }
-    notifyObservers();
+    notifyObservers('amountchange');
   }
 
   this.getChosenDrink = function (){
@@ -398,8 +395,8 @@ const drinkModel = function () {
     indexDrinkType= drinkTypesChosenByGuests.map(function(x) {return x.type; }).indexOf(chosenDrinkType);
     drinkMenu[index].amount = drinkMenu[index].amount + 1;
     chosenDrinkTypeamount=chosenDrinkTypeamount+drinkMenu[index].amount*(drinkMenu[index].alcohol/10);
-    drinkTypesChosenByGuests[indexDrinkType].amount = chosenDrinkTypeamount;
-    notifyObservers();
+    drinkTypesChosenByGuests[indexDrinkType].currentAlchoholVolume = chosenDrinkTypeamount;
+    notifyObservers('amountchange');
   }
 
   this.setMinusDrinkAmount = function(){
@@ -412,9 +409,9 @@ const drinkModel = function () {
     } else {
       drinkMenu[index].amount = drinkMenu[index].amount - 1;
       chosenDrinkTypeamount=chosenDrinkTypeamount-drinkMenu[index].amount*(drinkMenu[index].alcohol/10);
-      drinkTypesChosenByGuests[indexDrinkType].amount = chosenDrinkTypeamount;
+      drinkTypesChosenByGuests[indexDrinkType].currentAlchoholVolume = chosenDrinkTypeamount;
     }
-    notifyObservers();
+    notifyObservers('amountchange');
   }
 
 	// Returns the list of the types of drinks chosen by the guests
@@ -429,16 +426,16 @@ const drinkModel = function () {
 
   this.setDrinkTypeToSearch = function (drink){
     chosenDrinkTypeamount=0;
-		
+
 		// Go throught the types chosen
     for (var i = 0; i < drinkTypesChosenByGuests.length; i++) {
-			
+
       if (drink==drinkTypesChosenByGuests[i].type){
-				
+
         chosenDrinkType = drinkTypesChosenByGuests[i].type;
         chosenDrinkTypeCode=drinkTypesChosenByGuests[i].code;
         chosenDrinkTypeThreshold=drinkTypesChosenByGuests[i].minimumAlcoholVolume;
-        chosenDrinkTypeamount=drinkTypesChosenByGuests[i].amount;
+        chosenDrinkTypeamount=drinkTypesChosenByGuests[i].currentAlchoholVolume;
       }
     }
     notifyObservers();
@@ -512,8 +509,8 @@ const drinkModel = function () {
     observers = observers.filter(o => o !== observer);
   };
 
-  const notifyObservers = function () {
-    observers.forEach(o => o.update());
+  const notifyObservers = function (obj) {
+    observers.forEach(o => o.update(obj));
   };
 
 };
