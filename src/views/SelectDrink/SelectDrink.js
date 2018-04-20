@@ -33,22 +33,32 @@ class SelectDrink extends Component {
 
   }
 
-  update() {
-    this.setState({
-      status: 'INITIAL',
-    })
+  update(obj) {
+    switch (obj){
+      case 'amountchange':
+        this.setState({
+          status: 'CHANGEOFAMOUNT',
+          status: 'LOADED'
+        })
+        break;
+      default:
+        this.setState({
+          status: 'INITIAL',
+        })
 
-    this.props.model.getAllDrinks().then(drinks => {
-      this.setState({
-        status: 'LOADED',
-        drinks: drinks,
-        chooseDrinkWithName : 'Choose ' + this.props.model.getDrinkTypeName()
-      })
-    }).catch(() => {
-      this.setState({
-        status: 'ERROR'
-      })
-    })
+        this.props.model.getAllDrinks().then(drinks => {
+          this.setState({
+            status: 'LOADED',
+            drinks: drinks,
+            chooseDrinkWithName : 'Choose ' + this.props.model.getDrinkTypeName()
+          })
+        }).catch(() => {
+          this.setState({
+            status: 'ERROR'
+          })
+        })
+        break;
+    }
   }
 
   onDrinkClicked = (e) => {
@@ -82,6 +92,8 @@ class SelectDrink extends Component {
             </button>
           </div>
         )
+        break;
+      case 'CHANGEOFAMOUNT':
         break;
       default:
         drinksList = <b>Failed to load data, please try again</b>

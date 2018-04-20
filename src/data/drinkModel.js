@@ -8,7 +8,7 @@ const httpOptions = {
 
 
 const drinkModel = function () {
-	
+
 	// VARIABLES ------------------------------------------------------------
 	var partyName = "";
 	var partyDuration = 0;
@@ -47,7 +47,7 @@ const drinkModel = function () {
   var chosenDrinkTypeCode = "";
   var chosenDrinkTypeThreshold = "";
   var chosenDrinkTypeamount = "";
-	
+
 	// Each drink type in the API is identified by a code. Below are the codes for each type
 	//  our app might be using.
 	var apiDrinkTypeCode = {
@@ -57,16 +57,21 @@ const drinkModel = function () {
 		"hardliquor": "1%2C3%2C5%2C8%2C12%2C14%2C18",
 		"liquor": "2%2C6%2C10%2C11%2C15"
 	}
-		
 
-	// 
-  var drinkTypesChosenByGuests = [];
+
+	//
+  var drinkTypesChosenByGuests = [{
+    type: "wine",
+    code: "20%2C23%2C30",
+    minimumAlcoholVolume : 60,
+    currentAlchoholVolume : 0
+  }];
 	/* drinkTypesChosenByGuests will look like this:
     {
       type: "beer",
       code: "4%2C6%2C7%2C8%2C16%2C17%2C19",
-      threshold : 40,
-      amount : 0
+      minimumAlcoholVolume : 40,
+      currentAlchoholVolume : 0
     },
     {
       type: "wine",
@@ -77,25 +82,25 @@ const drinkModel = function () {
     {
       type: "champagne",
       code: "32%2C34%2C35",
-      threshold : 80,
-      amount : 0
+      minimumAlcoholVolume : 80,
+      currentAlchoholVolume : 0
     },
     {
       type: "hardliquor",
       code: "1%2C3%2C5%2C8%2C12%2C14%2C18",
-      threshold : 20,
-      amount : 0
+      minimumAlcoholVolume : 20,
+      currentAlchoholVolume : 0
     },
     {
       type: "liquor",
       code: "2%2C6%2C10%2C11%2C15",
-      threshold : 55,
-      amount : 0
+      minimumAlcoholVolume : 55,
+      currentAlchoholVolume : 0
     }
   */
-	
+
 	// -----------------------------------------------------------
-	
+
 	this.addDrinkType = function(drinkType)
 	{
 		for(var i=0; i<drinkTypesChosenByGuests.length; i++){
@@ -104,7 +109,7 @@ const drinkModel = function () {
 				return ;
 			}
 		}
-		
+
 		// If the drink type was not added yet, let's add it
 		drinkTypesChosenByGuests.push({
 			type: drinkType,
@@ -118,7 +123,7 @@ const drinkModel = function () {
 			this.addDrinkType(guests[i].preferedDrink);
 		}
 	}
-	
+
 	this.wereAllProfilesCreated = function()
 	{
 		for(var i=0; i< guests.length; i++ ){
@@ -128,7 +133,7 @@ const drinkModel = function () {
 		}
 		return true;
 	}
-	
+
 
 	this.deleteGuestById = function(id){
 		var index = guests.findIndex(g => g.id === id);
@@ -300,7 +305,7 @@ const drinkModel = function () {
     }{
       drinkMenu.push(drink);
     }
-    notifyObservers();
+    notifyObservers('amountchange');
   }
 
   this.getChosenDrink = function (){
@@ -332,8 +337,8 @@ const drinkModel = function () {
     indexDrinkType= drinkTypesChosenByGuests.map(function(x) {return x.type; }).indexOf(chosenDrinkType);
     drinkMenu[index].amount = drinkMenu[index].amount + 1;
     chosenDrinkTypeamount=chosenDrinkTypeamount+drinkMenu[index].amount*(drinkMenu[index].alcohol/10);
-    drinkTypesChosenByGuests[indexDrinkType].amount = chosenDrinkTypeamount;
-    notifyObservers();
+    drinkTypesChosenByGuests[indexDrinkType].currentAlchoholVolume = chosenDrinkTypeamount;
+    notifyObservers('amountchange');
   }
 
   this.setMinusDrinkAmount = function(){
@@ -346,9 +351,9 @@ const drinkModel = function () {
     } else {
       drinkMenu[index].amount = drinkMenu[index].amount - 1;
       chosenDrinkTypeamount=chosenDrinkTypeamount-drinkMenu[index].amount*(drinkMenu[index].alcohol/10);
-      drinkTypesChosenByGuests[indexDrinkType].amount = chosenDrinkTypeamount;
+      drinkTypesChosenByGuests[indexDrinkType].currentAlchoholVolume = chosenDrinkTypeamount;
     }
-    notifyObservers();
+    notifyObservers('amountchange');
   }
 
 	// Returns the list of the types of drinks chosen by the guests
@@ -367,8 +372,8 @@ const drinkModel = function () {
       if (drink==drinkTypesChosenByGuests[i].type){
         chosenDrinkType = drinkTypesChosenByGuests[i].type;
         chosenDrinkTypeCode=drinkTypesChosenByGuests[i].code;
-        chosenDrinkTypeThreshold=drinkTypesChosenByGuests[i].threshold;
-        chosenDrinkTypeamount=drinkTypesChosenByGuests[i].amount;
+        chosenDrinkTypeThreshold=drinkTypesChosenByGuests[i].minimumAlcoholVolume;
+        chosenDrinkTypeamount=drinkTypesChosenByGuests[i].currentAlchoholVolume;
       }
     }
     notifyObservers();
@@ -442,8 +447,8 @@ const drinkModel = function () {
     observers = observers.filter(o => o !== observer);
   };
 
-  const notifyObservers = function () {
-    observers.forEach(o => o.update());
+  const notifyObservers = function (obj) {
+    observers.forEach(o => o.update(obj));
   };
 
 };
