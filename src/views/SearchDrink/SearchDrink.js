@@ -38,6 +38,8 @@ class SearchDrink extends Component {
 
 
   render() {
+		
+		
     switch (this.state.status) {
       case 'INITIAL':
       return (
@@ -64,7 +66,7 @@ class SearchDrink extends Component {
             </div>
           </div>
           <div className="alcometer col-md-2">
-            <Alcometer model={this.props.model} />
+            <Alcometer  model={this.props.model} />
           </div>
         </div>
       );

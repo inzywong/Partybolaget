@@ -86,6 +86,13 @@ class CreateGuestProfile extends Component {
 			alert("I'm sorry but you can't have a party without guests");
 		}
 	}
+	
+	onBackToEditParty = () =>
+	{
+		this.setState({
+			returnToEditParty: true
+		})			
+	}
 
   render() {
 
@@ -109,7 +116,7 @@ class CreateGuestProfile extends Component {
 		// REDIRECT TO PLAN PARTY PAGE
 		else if(this.state.returnToEditParty)
 		{
-
+				return <Redirect push to="/" />;
 		}
 		else{
 			return (
@@ -128,6 +135,10 @@ class CreateGuestProfile extends Component {
 					<button onClick={this.onPlanDrinksClicked}>
 							Plan Drinks
 					</button>
+		
+					<button onClick={this.onBackToEditParty}>
+							Back To Edit Party
+					</button>		
 
 				</div>
 			);
