@@ -12,7 +12,7 @@ class FilterDrink extends Component {
       sort:'Sort by',
       partyName : 'Name of The Party: ' + this.props.model.getPartyName(),
       numberOfGuests : 'Number Of Guests: ' + this.props.model.getNumberOfGuests() + ' People',
-      partyDuration : 'Name of The Party: ' + this.props.model.getPartyDuration() + ' Hours'
+      partyDuration : 'Party Duration: ' + this.props.model.getPartyDuration() + ' Hours'
     }
   }
 

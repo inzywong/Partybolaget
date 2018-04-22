@@ -7,7 +7,7 @@ class Alcometer extends Component {
     super(props)
     this.state = {
       alcometer: 'Alcometer',
-			drinkType: ''
+			drinkType: this.props.model.getDrinkTypeName()
     }
   }
 
@@ -16,23 +16,23 @@ class Alcometer extends Component {
   componentDidMount() {
 		
 		// setState causes the component to re-render
-    this.setState({
-			drinkType: ''
-		})
-		
-    
+    //this.setState({
+		//	drinkType: ''
+		//})
+    this.props.model.addObserver(this);				
   }
 	
 	
   update() {
   this.setState({
+		drinkType: this.props.model.getDrinkTypeName()
   })
 }
 
   render() {
     return (
       <div className="FilterDrink">
-        <h3> Alcometer for {this.state.alcometer}</h3>
+        <h3> Alcometer for {this.state.drinkType}</h3>
         <p>{this.props.model.getDrinkTypeThreshold()+"%"}</p>
         <p>{this.props.model.getDrinkTypeAmount()}</p>
         <p>{this.props.model.checkThreshold()}</p>

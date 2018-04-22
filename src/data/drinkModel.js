@@ -43,8 +43,8 @@ const drinkModel = function () {
   var addDrinkId = "";
   var minusDrinkId = "";
 
-	var chosenDrinkTypeNumber = 0; // This is the index of the drink type on the drinkTypesChosenByGuests arrayn being highlithed on the SearchDrink view.
-  var chosenDrinkType;
+
+  var chosenDrinkType="beer";
   var chosenDrinkTypeCode = "";
   var chosenDrinkTypeThreshold = 0;
   var chosenDrinkTypeamount = "";
@@ -67,31 +67,35 @@ const drinkModel = function () {
       type: "beer",
       code: "4%2C6%2C7%2C8%2C16%2C17%2C19",
       minimumAlcoholVolume : 40,
-      currentAlchoholVolume : 0
-    },
+      currentAlchoholVolume : 0,
+			status: // can be 'reachedThreshold' or 'didNotReachThreshold'
     {
       type: "wine",
       code: "20%2C23%2C30",
       minimumAlcoholVolume: 60,
-      currentAlchoholVolume: 0
+      currentAlchoholVolume: 0,
+			status: // can be 'reachedThreshold' or 'didNotReachThreshold'			
     },
     {
       type: "champagne",
       code: "32%2C34%2C35",
       minimumAlcoholVolume : 80,
-      currentAlchoholVolume : 0
+      currentAlchoholVolume : 0,
+			status: // can be 'reachedThreshold' or 'didNotReachThreshold'			
     },
     {
       type: "hardliquor",
       code: "1%2C3%2C5%2C8%2C12%2C14%2C18",
       minimumAlcoholVolume : 20,
       currentAlchoholVolume : 0
+			status: // can be 'reachedThreshold' or 'didNotReachThreshold'			
     },
     {
       type: "liquor",
       code: "2%2C6%2C10%2C11%2C15",
       minimumAlcoholVolume : 55,
-      currentAlchoholVolume : 0
+      currentAlchoholVolume : 0,
+			status: // can be 'reachedThreshold' or 'didNotReachThreshold'			
     }
   */
 
@@ -169,10 +173,12 @@ const drinkModel = function () {
 			type: drinkType,
 			code: apiDrinkTypeCode[drinkType],
 			minimumAlcoholVolume: 0,
-      currentAlchoholVolume: 0
+      currentAlchoholVolume: 0,
+			status: 'didNotReachThreshold'			
 		});
 	}
 
+	// Creates the drinkTypesChosenByGuests list
 	this.createDrinkTypesList = function()
 	{
 		drinkTypesChosenByGuests = [];
@@ -414,16 +420,17 @@ const drinkModel = function () {
     notifyObservers('amountchange');
   }
 
-	// Returns the list of the types of drinks chosen by the guests
+	// Returns the list of the drinks type chosen by the guests
   this.getDrinkType = function (){
     return drinkTypesChosenByGuests;
   }
 
-  // Return the name of type of drink chosen by User
+  // Return the name of the drink  type on focus on the menu
   this.getDrinkTypeName = function (){
     return chosenDrinkType;
   }
 
+	// Sets what's the drink currently on focus
   this.setDrinkTypeToSearch = function (drink){
     chosenDrinkTypeamount=0;
 
@@ -438,6 +445,7 @@ const drinkModel = function () {
         chosenDrinkTypeamount=drinkTypesChosenByGuests[i].currentAlchoholVolume;
       }
     }
+		
     notifyObservers();
   }
 

@@ -11,16 +11,24 @@ class SearchDrink extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      status: 'INITIAL',
+      status: 'INITIAL',			
     }
     // we put on state the properties we want to use and modify in the component
   }
 
   componentDidMount = () => {
-    this.props.model.addObserver(this)
-    this.setState({
+		
+		// Get the name of the first drink type on the menu so that we can highlight it.
+		var drinkOnFocus = this.props.model.getDrinkType()[0].type;
+		
+		// Setting the first drink on the Menu as the drink to be on focus
+		this.props.model.setDrinkTypeToSearch(drinkOnFocus);
+		
+		this.setState({
       status: 'LOADED',
     })
+		
+    this.props.model.addObserver(this);		
   }
 
 
