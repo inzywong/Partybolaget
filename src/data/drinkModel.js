@@ -49,6 +49,8 @@ const drinkModel = function () {
   var chosenDrinkTypeThreshold = 0;
   var chosenDrinkTypeamount = "";
 
+  var addMoreDrink = 10000;
+
 	// Each drink type in the API is identified by a code. Below are the codes for each type
 	//  our app might be using.
 	var apiDrinkTypeCode = {
@@ -483,8 +485,15 @@ const drinkModel = function () {
     return notify;
   }
 
+  //function to add more drink to the select drink view
+  this.loadMoreDrink = function (){
+    addMoreDrink = addMoreDrink + 20;
+    notifyObservers();
+  }
+
   this.getAllDrinks = function () {
-    let url = 'https://karlroos-systemet.p.mashape.com/product?'
+    //let url = 'https://karlroos-systemet.p.mashape.com/product?'
+    let url = 'https://karlroos-systemet.p.mashape.com/product?limit=' + addMoreDrink;
 
     if(drinkMinPrice !== "" && drinkMaxPrice !== "") {
       url +="&price_from="+ drinkMinPrice + "&price_to="+ drinkMaxPrice;
@@ -498,6 +507,10 @@ const drinkModel = function () {
     if(chosenDrinkTypeCode !== "") {
       url +="&tag="+ chosenDrinkTypeCode;
     }
+
+    console.log(url)
+
+
 
     return fetch(url, httpOptions)
       .then(processResponse)
@@ -516,10 +529,10 @@ const drinkModel = function () {
   const handleError = function (error) {
     if (error.json) {
       error.json().then(error => {
-        console.error('getAllDishes() API Error:', error.message || error)
+        console.error('getAllDrinks() API Error:', error.message || error)
       })
     } else {
-      console.error('getAllDishes() API Error:', error.message || error)
+      console.error('getAllDrinks() API Error:', error.message || error)
     }
   }
 

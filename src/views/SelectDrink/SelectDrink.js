@@ -47,6 +47,7 @@ class SelectDrink extends Component {
         })
 
         this.props.model.getAllDrinks().then(drinks => {
+          console.log(drinks.length)
           this.setState({
             status: 'LOADED',
             drinks: drinks,
