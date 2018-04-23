@@ -8,11 +8,13 @@ import './App.css';
 import Welcome from './views/Welcome/Welcome';
 import CreateGuestProfile from './views/CreateGuestProfile/CreateGuestProfile';
 
-import FilterDrink from "./views/FilterDrink/FilterDrink";
-import SelectDrink from "./views/SelectDrink/SelectDrink";
-import SearchDrink from "./views/SearchDrink/SearchDrink";
-import GuestProfile from "./views/GuestProfile/GuestProfile";
-import SummaryPage from "./views/SummaryPage/SummaryPage";
+import FilterDrink 		 from "./views/FilterDrink/FilterDrink";
+import SelectDrink 		 from "./views/SelectDrink/SelectDrink";
+import SearchDrink 		 from "./views/SearchDrink/SearchDrink";
+import GuestProfile 	 from "./views/GuestProfile/GuestProfile";
+import SummaryPage 		 from "./views/SummaryPage/SummaryPage";
+import DrinkTypeButton from "./views/DrinkTypeButton/DrinkTypeButton";
+
 /*--------------------------------------------------------------*/
 
 

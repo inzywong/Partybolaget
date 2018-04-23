@@ -1,0 +1,13 @@
+
+.selected{
+	border: 5px solid black;
+}
+
+
+.reachedThreshold{
+	background-color: lightgreen;
+}
+
+.didNotReachThreshold{
+	background-color: red;		
+}
