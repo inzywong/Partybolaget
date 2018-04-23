@@ -74,28 +74,28 @@ const drinkModel = function () {
       code: "20%2C23%2C30",
       minimumAlcoholVolume: 60,
       currentAlchoholVolume: 0,
-			status: // can be 'reachedThreshold' or 'didNotReachThreshold'			
+			status: // can be 'reachedThreshold' or 'didNotReachThreshold'
     },
     {
       type: "champagne",
       code: "32%2C34%2C35",
       minimumAlcoholVolume : 80,
       currentAlchoholVolume : 0,
-			status: // can be 'reachedThreshold' or 'didNotReachThreshold'			
+			status: // can be 'reachedThreshold' or 'didNotReachThreshold'
     },
     {
       type: "hardliquor",
       code: "1%2C3%2C5%2C8%2C12%2C14%2C18",
       minimumAlcoholVolume : 20,
       currentAlchoholVolume : 0
-			status: // can be 'reachedThreshold' or 'didNotReachThreshold'			
+			status: // can be 'reachedThreshold' or 'didNotReachThreshold'
     },
     {
       type: "liquor",
       code: "2%2C6%2C10%2C11%2C15",
       minimumAlcoholVolume : 55,
       currentAlchoholVolume : 0,
-			status: // can be 'reachedThreshold' or 'didNotReachThreshold'			
+			status: // can be 'reachedThreshold' or 'didNotReachThreshold'
     }
   */
 
@@ -174,23 +174,24 @@ const drinkModel = function () {
 			code: apiDrinkTypeCode[drinkType],
 			minimumAlcoholVolume: 0,
       currentAlchoholVolume: 0,
-			status: 'didNotReachThreshold'			
+			status: 'didNotReachThreshold'
 		});
 	}
 
 	// Creates the drinkTypesChosenByGuests list
-	// This method makes usage of the data created in the createGuestProfile.js 
-	//  (which was stored in the guests[] lists present in the model) to create the  
+	// This method makes usage of the data created in the createGuestProfile.js
+	//  (which was stored in the guests[] lists present in the model) to create the
 	//  drinkTypesChosenByGuests list by using the addDrinkType(drinkType) function described above.
 	this.createDrinkTypesList = function()
 	{
 		drinkTypesChosenByGuests = [];
-		
+
 		for(var i=0; i<guests.length; i++){ // Loop through all the guests
 			this.addDrinkType(guests[i].preferedDrink);
 		}
 	}
 
+	
 	// This method simply checks whether all profiles were created.  
 	// It is used by the CreateGuestProfile.js in order to prevent the user 
 	//  to go to the SearchDrink.js view before creating all the guests profiles.
@@ -461,7 +462,7 @@ const drinkModel = function () {
         chosenDrinkTypeamount=drinkTypesChosenByGuests[i].currentAlchoholVolume;
       }
     }
-		
+
     notifyObservers();
   }
 
