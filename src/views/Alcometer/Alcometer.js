@@ -34,7 +34,7 @@ class Alcometer extends Component {
       <div className="FilterDrink">
         <h3> Alcometer for {this.state.drinkType}</h3>
         <p> You need <b>{Math.floor(this.props.model.getDrinkTypeThreshold())} </b> ml of Alcohol </p>
-        <p> You have <b>{this.props.model.getDrinkTypeAmount()} </b> mls</p>
+        <p> You have <b>{this.props.model.getDrinkTypeAmount()} </b> ml </p>
         <p>{this.props.model.checkThreshold(this.state.drinkType)}</p>
       </div>
     );
