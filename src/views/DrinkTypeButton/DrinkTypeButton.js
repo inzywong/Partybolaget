@@ -5,9 +5,9 @@ class DrinkTypeButton extends Component {
 
   constructor(props) {
     super(props)
+
     this.state = {
-   		
-    }
+		}    
   }
 
   update() {

@@ -3,7 +3,7 @@ import uuid from 'uuid'; // This is being used to generate unique keys for the g
 
 
 const httpOptions = {
-  headers: {'X-Mashape-Key': 'Qu9grxVNWpmshA4Kl9pTwyiJxVGUp1lKzrZjsnghQMkFkfA4LB'}
+  headers: {'X-Mashape-Key': 'yQGhLMovOZmshmc8KpVqld49sMt2p1IY502jsn5GsnnM6V7Vqz'} //'Qu9grxVNWpmshA4Kl9pTwyiJxVGUp1lKzrZjsnghQMkFkfA4LB'}
 };
 
 
@@ -101,7 +101,7 @@ const drinkModel = function () {
 
 	// -----------------------------------------------------------
 
-	// This function will calculate what is the minimum volume of alcohol needed
+	// This function calculates what is the minimum volume of alcohol needed
 	//  for each type of drink chosen by the guests
 	this.calculateVolumeOfAlcohol = function()
 	{
@@ -179,6 +179,9 @@ const drinkModel = function () {
 	}
 
 	// Creates the drinkTypesChosenByGuests list
+	// This method makes usage of the data created in the createGuestProfile.js 
+	//  (which was stored in the guests[] lists present in the model) to create the  
+	//  drinkTypesChosenByGuests list by using the addDrinkType(drinkType) function described above.
 	this.createDrinkTypesList = function()
 	{
 		drinkTypesChosenByGuests = [];
@@ -188,6 +191,9 @@ const drinkModel = function () {
 		}
 	}
 
+	// This method simply check whether all profiles were created.  
+	// It is used by the CreateGuestProfile.js in order to prevent the user 
+	//  to go to the SearchDrink.js view before creating all the guests profiles.
 	this.wereAllProfilesCreated = function()
 	{
 		for(var i=0; i< guests.length; i++ ){
@@ -198,7 +204,7 @@ const drinkModel = function () {
 		return true;
 	}
 
-
+	// This method removes a guest by its ID. It is used in  CreateGuestProfile.js.
 	this.deleteGuestById = function(id){
 		var index = guests.findIndex(g => g.id === id);
 
@@ -216,6 +222,7 @@ const drinkModel = function () {
 		console.log("---------------------------");		*/
 	}
 
+	// Removes the last guest added. It is used in  Welcome.js.
 	this.deleteLastGuestsAdded = function (n){
 		// Deleting guests
 		for(var i=0; i<n; i++)
@@ -233,13 +240,14 @@ const drinkModel = function () {
 		console.log("---------------------------");		*/
 	}
 
-	// Returns the guest object
+	// Returns a guest object by its ID. It is used in GuestProfile.js
 	this.getGuestById = function(id){
 		var index = guests.findIndex(g => g.id === id);
 
 		return guests[index];
 	}
 
+	// Adds the guest passed as the parameter to the guests list.
 	this.saveGuest = function(guest){
 		var index = guests.findIndex(g => g.id === guest.id);
 
@@ -247,6 +255,7 @@ const drinkModel = function () {
 		notifyObservers();
 	}
 
+	// Creates n guests objects and add them to the guests list.
 	this.createGuests = function(n){
 
 		// Creating the guests
@@ -275,15 +284,18 @@ const drinkModel = function () {
 		console.log("---------------------------");		*/
 	}
 
+	// Returns the guests list.
 	this.getGuests = function (){
 		return guests;
 	}
 
+	// Sets the numberOfGuests variable to num
   this.setNumberOfGuests = function (num) {
       numberOfGuests = num;
       notifyObservers();
   }
 
+	// Returns  numberOfGuests
   this.getNumberOfGuests = function () {
   	return numberOfGuests;
   }
@@ -292,20 +304,24 @@ const drinkModel = function () {
     return drinkMenu;
   }
 
+	// Sets the duration of the party.
   this.setPartyDuration = function (num) {
 		partyDuration = num;
     notifyObservers();
   }
 
+	// Returns partyDuration
   this.getPartyDuration = function () {
   	return partyDuration;
   }
 
+	// Sets the partyName variable.
 	this.setPartyName = function(name) {
 		partyName = name;
 		notifyObservers();
 	}
 
+	// Returns the partyName variable.
 	this.getPartyName = function(name) {
 		return partyName;
 	}

@@ -1,3 +1,5 @@
+// This component is responsible for showing a form or the guests profile. 
+// Here is where the user actually edits the guests profile.
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './GuestProfile.css';

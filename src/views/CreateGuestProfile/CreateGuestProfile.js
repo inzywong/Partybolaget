@@ -1,3 +1,6 @@
+// This component is esponsible for creating and editing the guests profile. 
+// It’s also possible to delete and add guests in this view.
+
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './CreateGuestProfile.css';
