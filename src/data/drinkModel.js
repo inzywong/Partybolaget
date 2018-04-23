@@ -191,7 +191,7 @@ const drinkModel = function () {
 		}
 	}
 
-	// This method simply check whether all profiles were created.  
+	// This method simply checks whether all profiles were created.  
 	// It is used by the CreateGuestProfile.js in order to prevent the user 
 	//  to go to the SearchDrink.js view before creating all the guests profiles.
 	this.wereAllProfilesCreated = function()
