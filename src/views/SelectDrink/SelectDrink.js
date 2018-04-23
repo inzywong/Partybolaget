@@ -6,7 +6,8 @@ class SelectDrink extends Component {
     super(props);
     this.state = {
       status: 'INITIAL',
-      chooseDrinkWithName : 'Choose ' + this.props.model.getDrinkTypeName()
+      chooseDrinkWithName : 'Choose ' + this.props.model.getDrinkTypeName(),
+			type: this.props.model.getDrinkTypeName()
     }
   }
 
@@ -15,10 +16,12 @@ class SelectDrink extends Component {
     this.props.model.addObserver(this)
 
     this.props.model.getAllDrinks().then(drinks => {
+		
       this.setState({
         status: 'LOADED',
         drinks: drinks,
-        chooseDrinkWithName : 'Choose ' + this.props.model.getDrinkTypeName()
+        chooseDrinkWithName : 'Choose ' + this.props.model.getDrinkTypeName(),
+				
       })
     }).catch(() => {
       this.setState({
@@ -38,19 +41,22 @@ class SelectDrink extends Component {
       case 'amountchange':
         this.setState({
           status: 'CHANGEOFAMOUNT',
-          status: 'LOADED'
+          status: 'LOADED',
+					type: this.props.model.getDrinkTypeName()
         })
         break;
       default:
         this.setState({
           status: 'INITIAL',
+					type: this.props.model.getDrinkTypeName()
         })
 
         this.props.model.getAllDrinks().then(drinks => {
           this.setState({
             status: 'LOADED',
             drinks: drinks,
-            chooseDrinkWithName : 'Choose ' + this.props.model.getDrinkTypeName()
+            chooseDrinkWithName : 'Choose ' + this.props.model.getDrinkTypeName(),
+						type: this.props.model.getDrinkTypeName()
           })
         }).catch(() => {
           this.setState({
@@ -61,21 +67,23 @@ class SelectDrink extends Component {
     }
   }
 
-  onDrinkClicked = (e) => {
+  onAddClicked = (e) => {		
     var d = {
-      id: e.target.value,
-      name: e.target.attributes.getNamedItem("data-value").value,
+      id: e.target.attributes.getNamedItem("drink_id").value,
+      name: e.target.attributes.getNamedItem("drink_name").value,
       amount: 0,
-      alcohol :e.target.attributes.getNamedItem("data-value1").value,
-      volume:e.target.attributes.getNamedItem("data-value2").value,
-      price:e.target.attributes.getNamedItem("data-value3").value
+      alcohol: e.target.attributes.getNamedItem("drink_alcohol").value,
+      volume: e.target.attributes.getNamedItem("drink_volume").value,
+      price: e.target.attributes.getNamedItem("drink_price").value,
+			type: this.state.type
     }
-    this.props.model.setChosenDrink(d)
+		
+    this.props.model.addDrinkToMenu(d)
   }
 
   render() {
     let drinksList = null;
-
+		
     switch (this.state.status) {
       case 'INITIAL':
         drinksList = <p>Loading...</p>
@@ -87,7 +95,7 @@ class SelectDrink extends Component {
             <p>{Math.round(drink.alcohol*100)} %</p>
             <p>{drink.volume*1000} mL</p>
             <p>{drink.price} kr</p>
-            <button value={drink.id} data-value={drink.name} data-value1={drink.alcohol*100} data-value2={drink.volume*1000} data-value3={drink.price} onClick={this.onDrinkClicked}>
+            <button drink_id={drink.id} drink_name={drink.name} drink_alcohol={drink.alcohol*100} drink_volume={drink.volume*1000} drink_price={drink.price} onClick={this.onAddClicked}>
               Add
             </button>
           </div>

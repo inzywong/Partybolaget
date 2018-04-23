@@ -35,7 +35,7 @@ class Alcometer extends Component {
         <h3> Alcometer for {this.state.drinkType}</h3>
         <p>{this.props.model.getDrinkTypeThreshold()+"%"}</p>
         <p>{this.props.model.getDrinkTypeAmount()}</p>
-        <p>{this.props.model.checkThreshold()}</p>
+        <p>{this.props.model.checkThreshold(this.state.drinkType)}</p>
       </div>
     );
   }

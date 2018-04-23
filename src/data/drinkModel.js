@@ -39,6 +39,17 @@ const drinkModel = function () {
   let searchType="";
 
   var drinkMenu = [];
+	/* drinkMenu is a list of objects that looks like this:
+	{
+	    id: e.target.attributes.getNamedItem("drink_id").value,
+      name: e.target.attributes.getNamedItem("drink_name").value,
+      amount: 0,
+      alcohol: e.target.attributes.getNamedItem("drink_alcohol").value,
+      volume: e.target.attributes.getNamedItem("drink_volume").value,
+      price: e.target.attributes.getNamedItem("drink_price").value,
+			type: this.state.type
+	}
+	*/
 
   var addDrinkId = "";
   var minusDrinkId = "";
@@ -373,19 +384,20 @@ const drinkModel = function () {
     return searchType;
   };
 
-  this.setChosenDrink = function (drink){
-    var value=0;
-    for(var i=0; i<drinkMenu.length; i++)
-    {
-      if(drinkMenu[i].id==drink.id){
-        value=value+1;
+	
+  this.addDrinkToMenu = function (drink){
+
+		// If the drink was already added on the menu, 
+		//  we should not add it again.
+    for(var i=0; i<drinkMenu.length; i++) {
+      if(drinkMenu[i].id == drink.id)	{
+				//console.log("This drink was already added!");
+        return ;
       }
     }
-    if (value > 0){
-      return;
-    }{
-      drinkMenu.push(drink);
-    }
+
+		drinkMenu.push(drink);
+		
     notifyObservers('amountchange');
   }
 
@@ -421,7 +433,54 @@ const drinkModel = function () {
     drinkTypesChosenByGuests[indexDrinkType].currentAlchoholVolume = chosenDrinkTypeamount;
     notifyObservers('amountchange');
   }
+	
+	// This function adds or removes one unit of a drink that was added on the 'Chosen Drink Menu' section.
+	// s =  1 if we are adding a drink. 
+	// s = -1 if we are removing a drink.
+	this.add_removeOneDrinkUnit = function(drink_id, s){
+		
+		// ADD A UNIT ----------------------------------------------------------------------
+		// find the index of this drink in the menu
+		var index= drinkMenu.map(function(x) {return x.id; }).indexOf(drink_id);
 
+		//console.log("index: " + index);
+		drinkMenu[index].amount += s;
+		if(drinkMenu[index].amount < 0)
+		{
+			drinkMenu[index].amount = 0;
+		}
+		// ---------------------------------------------------------------------------------
+		
+		
+		// ADD ALCOHOL AMOUNT ON drinkTypesChosenByGuests ----------------------------------
+		// 'alcoholVolume' is the volume of alcohol in ml
+		var alcoholVolume = (drinkMenu[index].alcohol/100)*drinkMenu[index].volume;
+		//console.log("We just added this amount of alcohol: " + alcoholVolume);
+		
+		// Find the index of this type of drink in the drinkTypesChosenByGuests
+		var indexDrinkType= drinkTypesChosenByGuests.map(function(x) {return x.type; }).indexOf(drinkMenu[index].type);
+		
+		drinkTypesChosenByGuests[indexDrinkType].currentAlchoholVolume += s*alcoholVolume;
+		
+		if(drinkTypesChosenByGuests[indexDrinkType].currentAlchoholVolume<0){
+			drinkTypesChosenByGuests[indexDrinkType].currentAlchoholVolume = 0;
+		}
+		// ---------------------------------------------------------------------------------
+		
+		// Checking if the status of the button should be changed (if it reached the threshold) ---
+		if(drinkTypesChosenByGuests[indexDrinkType].currentAlchoholVolume > drinkTypesChosenByGuests[indexDrinkType].minimumAlcoholVolume){
+			 drinkTypesChosenByGuests[indexDrinkType].status = 'reachedThreshold';
+		}
+		else{
+			 drinkTypesChosenByGuests[indexDrinkType].status = 'didNotReachThreshold';		
+		}				
+		// ----------------------------------------------------------------------------------------
+
+	
+		notifyObservers('amountchange');
+	}	
+
+	
   this.setMinusDrinkAmount = function(){
     var index;
     var indexDrinkType;
@@ -471,16 +530,30 @@ const drinkModel = function () {
   }
 
   this.getDrinkTypeAmount = function (){
-    return chosenDrinkTypeamount;
+    //return chosenDrinkTypeamount;
+		for(var i=0; i<drinkTypesChosenByGuests.length; i++)
+		{
+			if(drinkTypesChosenByGuests[i].type == chosenDrinkType)
+			{
+				 return drinkTypesChosenByGuests[i].currentAlchoholVolume;
+			}
+		}
   }
 
-  this.checkThreshold = function(){
+  this.checkThreshold = function(type){
+		
     var notify="";
-    if (chosenDrinkTypeamount>chosenDrinkTypeThreshold){
-      notify = "You Have Enough Drinks";
-    } else {
-      notify = "";
-    }
+		
+		// Find the index of this drink in the drinkTypesChosenByGuests list
+		var index= drinkTypesChosenByGuests.map(function(x) {return x.type; }).indexOf(type);		
+		if(drinkTypesChosenByGuests[index].currentAlchoholVolume > drinkTypesChosenByGuests[index].minimumAlcoholVolume)
+		{
+			 notify = "You Have Enough Drinks";
+		}
+		else{
+      notify = "You need to Add more drinks";			
+		}		
+		
     return notify;
   }
 
