@@ -52,11 +52,11 @@ const drinkModel = function () {
 	// Each drink type in the API is identified by a code. Below are the codes for each type
 	//  our app might be using.
 	var apiDrinkTypeCode = {
-		"beer": "4%2C6%2C7%2C8%2C16%2C17%2C19",
-		"wine": "20%2C23%2C30",
-		"champagne": "32%2C34%2C35",
-		"hardliquor": "1%2C3%2C5%2C8%2C12%2C14%2C18",
-		"liquor": "2%2C6%2C10%2C11%2C15"
+		"beer": "4%2C6%2C7%2C8%2C16%2C19",
+		"wine": "20%2C23%2C30%2C25",
+		"champagne": "32",
+		"hardliquor": "1%2C3%2C5%2C12%2C14%2C18",
+		"liquor": "2%2C10%2C11%2C15"
 	}
 
 
