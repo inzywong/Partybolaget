@@ -3,7 +3,7 @@ import uuid from 'uuid'; // This is being used to generate unique keys for the g
 
 
 const httpOptions = {
-  headers: {'X-Mashape-Key': 'Qu9grxVNWpmshA4Kl9pTwyiJxVGUp1lKzrZjsnghQMkFkfA4LB'}
+  headers: {'X-Mashape-Key': 'yQGhLMovOZmshmc8KpVqld49sMt2p1IY502jsn5GsnnM6V7Vqz'}
 };
 
 
