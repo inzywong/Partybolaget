@@ -266,6 +266,14 @@ const drinkModel = function () {
 		guests[index] = guest;
 		notifyObservers();
 	}
+	
+	// 
+	this.setGuestState = function(guest){
+		var index = guests.findIndex(g => g.id === guest.id);
+
+		guests[index] = guest;
+		notifyObservers();
+	}	
 
 	// Creates n guests objects and add them to the guests list.
 	this.createGuests = function(n){

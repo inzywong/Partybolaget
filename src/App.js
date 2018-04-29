@@ -14,7 +14,7 @@ import SearchDrink 		 from "./views/SearchDrink/SearchDrink";
 import GuestProfile 	 from "./views/GuestProfile/GuestProfile";
 import SummaryPage 		 from "./views/SummaryPage/SummaryPage";
 import DrinkTypeButton from "./views/DrinkTypeButton/DrinkTypeButton";
-
+import FinalPage 			 from "./views/FinalPage/FinalPage";
 /*--------------------------------------------------------------*/
 
 
@@ -36,8 +36,9 @@ class App extends Component {
 
 						<Route path="/createguestprofile"  render={() => <CreateGuestProfile model={modelInstance}/>}/>
 
-            <Route path="/searchdrink" render={(props) => <SearchDrink info={props} model={modelInstance}/>}/>
+            <Route path="/searchdrink"  render={(props) => <SearchDrink info={props} model={modelInstance}/>}/>
 						<Route path="/summarypage"  render={() => <SummaryPage model={modelInstance}/>}/>
+						<Route path="/FinalPage"  	render={() => <FinalPage model={modelInstance}/>}/>
 
 					</div>
 					{/* END OF CONTENT ------------------------------------------- */}

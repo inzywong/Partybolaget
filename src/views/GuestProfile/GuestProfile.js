@@ -30,11 +30,11 @@ class GuestProfile extends Component {
   componentDidMount() {
 		//console.log(this.props.guestId);
 
-    this.props.model.addObserver(this)
+    this.props.model.addObserver(this);
   }
 	// Called by React when the component is removed from the DOM
   componentWillUnmount() {
-    this.props.model.removeObserver(this)
+    this.props.model.removeObserver(this);
   }
 
 
@@ -74,10 +74,8 @@ class GuestProfile extends Component {
 
 			this.props.model.saveGuest(guestProf);
 		}
-
 		e.preventDefault(); // preventing from submitting the form
 	}
-
 
 	onWeightChanged = (increment) =>{
 		var w = this.state.weight + increment;
@@ -91,9 +89,6 @@ class GuestProfile extends Component {
 			weight: w
 		});
 	}
-
-
-
 
 	editProfile = () =>{
 		this.setState({saved: false});
