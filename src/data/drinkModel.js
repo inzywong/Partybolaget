@@ -38,18 +38,19 @@ const drinkModel = function () {
 
   let searchType="";
 
+  //array of drinks pick or added by the user
   var drinkMenu = [];
 
   var addDrinkId = "";
   var minusDrinkId = "";
 
 
-  var chosenDrinkType="beer";
+  var chosenDrinkType="";
   var chosenDrinkTypeCode = "";
   var chosenDrinkTypeThreshold = 0;
   var chosenDrinkTypeamount = "";
 
-  var addMoreDrink = 10000;
+  var addMoreDrink = 200;
 
 	// Each drink type in the API is identified by a code. Below are the codes for each type
 	//  our app might be using.
@@ -193,9 +194,9 @@ const drinkModel = function () {
 		}
 	}
 
-	
-	// This method simply checks whether all profiles were created.  
-	// It is used by the CreateGuestProfile.js in order to prevent the user 
+
+	// This method simply checks whether all profiles were created.
+	// It is used by the CreateGuestProfile.js in order to prevent the user
 	//  to go to the SearchDrink.js view before creating all the guests profiles.
 	this.wereAllProfilesCreated = function()
 	{

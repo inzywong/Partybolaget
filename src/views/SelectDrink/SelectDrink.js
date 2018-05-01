@@ -15,16 +15,17 @@ class SelectDrink extends Component {
     this.props.model.addObserver(this)
 
     this.props.model.getAllDrinks().then(drinks => {
-      this.setState({
-        status: 'LOADED',
-        drinks: drinks,
-        chooseDrinkWithName : 'Choose ' + this.props.model.getDrinkTypeName()
-      })
-    }).catch(() => {
-      this.setState({
-        status: 'ERROR'
-      })
+        this.setState({
+          status: 'LOADED',
+          drinks: drinks,
+          chooseDrinkWithName : 'Choose ' + this.props.model.getDrinkTypeName()
+        })
+        }).catch(() => {
+            this.setState({
+            status: 'ERROR'
+            })
     })
+
   }
 
 // Called by React when the component is removed from the DOM
@@ -47,7 +48,7 @@ class SelectDrink extends Component {
         })
 
         this.props.model.getAllDrinks().then(drinks => {
-          console.log(drinks.length)
+
           this.setState({
             status: 'LOADED',
             drinks: drinks,
