@@ -4,13 +4,6 @@ body, h1 {font-family: "Raleway", sans-serif}
 
 */
 body {
-
-  background-image: url('../../images/bg.jpg');
-  background-position: center;
-  background-size: 100%;
-  background-repeat: no-repeat;
-  color: #ffffff;
-
 }
 
 html, body {}
