@@ -67,7 +67,11 @@ class SelectDrink extends Component {
     }
   }
 
+<<<<<<< HEAD
   onAddClicked = (e) => {
+=======
+  onAddClicked = (e) => {
+>>>>>>> 0e616b1e7dbf4f74d7d6526da72525a5766cfe19
     var d = {
       id: e.target.attributes.getNamedItem("drink_id").value,
       name: e.target.attributes.getNamedItem("drink_name").value,
@@ -77,7 +81,11 @@ class SelectDrink extends Component {
       price: e.target.attributes.getNamedItem("drink_price").value,
 			type: this.state.type
     }
+<<<<<<< HEAD
 
+=======
+
+>>>>>>> 0e616b1e7dbf4f74d7d6526da72525a5766cfe19
     this.props.model.addDrinkToMenu(d)
   }
 

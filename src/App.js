@@ -23,29 +23,31 @@ class App extends Component {
     return (
       <div className="App">
 
-					{/* HEADER --------------------------------------------------- */}
-					<div className="row myHeader col-lg-12 col-sm-12">
-						<center><h1><b>Partybolaget</b></h1></center>
-					</div>
-					{/* END OF HEADER -------------------------------------------- */}
+        {/* HEADER --------------------------------------------------- */}
+        <div className="row myHeader col-lg-12 col-sm-12">
 
-					{/* CONTENT -------------------------------------------------- */}
-					<div className="row appContent container-fluid col-lg-12 col-sm-12">
-						{/* We render different components based on the path */}
-						<Route exact path="/" render={() => <Welcome model={modelInstance}/>}/> {/* This brings us to the Welcome view */}
+          <center><h1><img src="./images/logo.png" ></img>
+            <b>Partybolaget</b></h1></center>
+        </div>
+        {/* END OF HEADER -------------------------------------------- */}
 
-						<Route path="/createguestprofile"  render={() => <CreateGuestProfile model={modelInstance}/>}/>
+        {/* CONTENT -------------------------------------------------- */}
+        <div className="row appContent container-fluid col-lg-12 col-sm-12">
+          {/* We render different components based on the path */}
+          <Route exact path="/" render={() => <Welcome model={modelInstance}/>}/> {/* This brings us to the Welcome view */}
 
-            <Route path="/searchdrink"  render={(props) => <SearchDrink info={props} model={modelInstance}/>}/>
-						<Route path="/summarypage"  render={() => <SummaryPage model={modelInstance}/>}/>
-						<Route path="/FinalPage"  	render={() => <FinalPage model={modelInstance}/>}/>
+          <Route path="/createguestprofile"  render={() => <CreateGuestProfile model={modelInstance}/>}/>
 
-					</div>
-					{/* END OF CONTENT ------------------------------------------- */}
+          <Route path="/searchdrink"  render={(props) => <SearchDrink info={props} model={modelInstance}/>}/>
+          <Route path="/summarypage"  render={() => <SummaryPage model={modelInstance}/>}/>
+          <Route path="/FinalPage"  	render={() => <FinalPage model={modelInstance}/>}/>
+
+        </div>
+        {/* END OF CONTENT ------------------------------------------- */}
 
 
-					{/* FOOTER --------------------------------------------------- */}
-					<div className="row myFooter">
+        {/* FOOTER --------------------------------------------------- */}
+        <div className="row myFooter col-lg-12 col-sm-12">
 							<center><p> @2018 KTH</p></center>
 					</div>
 					{/* END OF FOOTER -------------------------------------------- */}
