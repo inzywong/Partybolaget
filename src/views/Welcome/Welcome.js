@@ -58,7 +58,7 @@ class Welcome extends Component {
 		}
 
 		//this.props.model.setNumberOfGuests(nGuests);
-		
+
 		// Creating the guests
 		if(increment > 0){
 			this.props.model.createGuests(increment);
@@ -97,7 +97,7 @@ class Welcome extends Component {
 		{
 			alert("I'm sorry but the party needs to be at least 1 hour long");
 		}
-		
+
 		// In case the form was filled correctly, we can create the party.
 		else {
 			this.props.model.setPartyName(this.refs.partyName.value)
@@ -151,7 +151,7 @@ class Welcome extends Component {
 						<br/> <br/>
 					</div>
 
-					<input type="submit" value="Plan Party!"/>
+					<input type="submit" value="Plan Party!" className="btn btn-primary"/>
 
 				</form>
 

@@ -1,0 +1,25 @@
+
+/*
+body, h1 {font-family: "Raleway", sans-serif}
+
+*/
+body {
+
+  background-image: url('../../images/bg.jpg');
+  background-position: center;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  color: #ffffff;
+
+}
+
+html, body {}
+
+.Welcome {
+  text-align: center;
+  height: 80vh;
+  position: center;
+  vertical-align: middle;
+  padding-top: 10vh;
+  /*background-color: #ff0000;*/
+}
