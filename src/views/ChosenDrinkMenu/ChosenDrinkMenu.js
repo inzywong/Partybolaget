@@ -29,14 +29,18 @@ class ChosenDrinkMenu extends Component {
     })
   }
 
-  onAddDrink = (e) => {
-    this.props.model.setAddDrink(e.target.value)
-    this.props.model.setAddDrinkAmount()
+  onPlusButtonClicked = (e) => {
+    //this.props.model.setAddDrink(e.target.value);
+    //this.props.model.setAddDrinkAmount();
+		
+		this.props.model.add_removeOneDrinkUnit(e.target.value, 1);
   }
 
-  onMinusDrink = (e) => {
-    this.props.model.setMinusDrink(e.target.value)
-    this.props.model.setMinusDrinkAmount()
+  onMinusButtonClicked = (e) => {
+    //this.props.model.setMinusDrink(e.target.value)
+    //this.props.model.setMinusDrinkAmount()
+		
+		this.props.model.add_removeOneDrinkUnit(e.target.value, -1);
   }
 	
 	onConfirmClick = () => {
@@ -70,15 +74,19 @@ class ChosenDrinkMenu extends Component {
 		{
 			let chosenDrinksList = null;
 
+			
+			//console.log(this.state.nameOfChosenDrink);
+			
+			
 			chosenDrinksList=this.state.nameOfChosenDrink.map((drink) =>
 					<div className="row" key={drink.id}>
 						<div className="row">
 							<p className="col">{drink.name}</p>
 						</div>
 						<div className="row">
-							<button className="col-md-4" value={drink.id} onClick={this.onAddDrink}>+</button>
+							<button className="col-md-4" value={drink.id} drink_type={drink.type} onClick={this.onPlusButtonClicked}>+</button>
 							<p className="col-md-4">{drink.amount}</p>
-							<button className="col-md-4" value={drink.id} onClick={this.onMinusDrink}>-</button>
+							<button className="col-md-4" value={drink.id} drink_type={drink.type} onClick={this.onMinusButtonClicked}>-</button>
 						</div>
 					</div>
 				)

@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './SummaryPage.css';
+import { Redirect } from 'react-router';
+
+
 
 
 class SummaryPage extends Component {
@@ -10,7 +13,13 @@ class SummaryPage extends Component {
 
     // We put on state the properties we want to use and modify in the component
     this.state = {
-			drinkMenu: this.props.model.getDrinkMenu()
+			drinkMenu: this.props.model.getDrinkMenu(),
+      partyName: this.props.model.getPartyName(),
+      numberOfGuests: this.props.model.getNumberOfGuests(),
+      partyDuration: this.props.model.getPartyDuration(),
+			returnToEditParty: false,
+			returnToEditGuestsProfile: false,
+			redirectToConfirm: false
 		}
 	}
 
@@ -27,28 +36,82 @@ class SummaryPage extends Component {
   // cause the component to re-render
   update() {
 		this.setState({
-			drinkMenu: this.props.model.getDrinkMenu
+			drinkMenu: this.props.model.getDrinkMenu(),
+      partyName: this.props.model.getPartyName(),
+      numberOfGuests: this.props.model.getNumberOfGuests(),
+      partyDuration: this.props.model.getPartyDuration() 	
 		})
   }
 
+	onBackToEditParty = () =>
+	{
+		this.setState({
+			returnToEditParty: true
+		})			
+	}
+	
+	onBackToEditGuestsProfile = () =>
+	{
+		this.setState({
+			returnToEditGuestsProfile: true
+		})			
+	}	
+
+	
 
   render() {
-		let drinkList=null;
-		drinkList = this.state.drinkMenu.map((drink) =>
-          <div key={drink.id} className="drinkCard drinkList col-sm-4">
-            <p>{drink.name}</p>
-            <p>{Math.round(drink.alcohol*100)} %</p>
-            <p>{drink.volume*1000} mL</p>
-            <p>{drink.price} kr</p>
-          </div>
-				)
 
-    return (
-      <div className="col-lg-12">
-			<h1>Summary</h1>
-			{drinkList}
-      </div>
-    );
+		// REDIRECT TO PLAN PARTY PAGE
+		if(this.state.returnToEditParty)
+		{
+				return <Redirect push to="/" />;
+		}
+		else if (this.state.returnToEditGuestsProfile)
+		{
+				return <Redirect push to="/createguestprofile" />;						 
+		}
+		else
+		{
+			let drinkList=null;
+			drinkList = this.state.drinkMenu.map((drink) =>
+						<div key={drink.id} className="drinkCard drinkList col-sm-4">
+							<p>{drink.name}</p>
+							<p>{Math.round(drink.alcohol*100)} %</p>
+							<p>{drink.volume*1000} mL</p>
+							<p>{drink.price} kr</p>
+						</div>
+					)
+
+			return (
+				<div className="col-lg-12">
+					<h1>Summary</h1>
+					<h2> Party Name: {this.state.partyName} </h2>
+					<h2> Party Duration: {this.state.partyDuration} hrs </h2>
+					<h2> Number of Guests: {this.state.numberOfGuests} Guests </h2>
+									
+					<button onClick={this.onBackToEditParty}>
+						Back To Edit Party
+					</button>		
+
+					<button onClick={this.onBackToEditGuestsProfile}>
+						Back To Edit Guests Profile
+					</button>		
+				
+				
+					<h2> - List of Drinks in your basket  - </h2>
+				
+					{drinkList}
+				
+				
+					<button className="btn btn-success" value="SummaryPage" >
+						Confirm
+						<Redirect push to="/finalpage" />
+					</button>
+				
+				</div>
+			);			
+		}
+
   }
 }
 

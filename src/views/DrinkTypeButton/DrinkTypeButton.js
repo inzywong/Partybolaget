@@ -11,8 +11,19 @@ class DrinkTypeButton extends Component {
   }
 
   update() {
-
   }
+	
+	// Called by React when the component is shown to the user (mounted to DOM)
+  componentDidMount() {
+    this.props.model.addObserver(this);
+  }
+	
+	// Called by React when the component is removed from the DOM
+  componentWillUnmount() {
+    this.props.model.removeObserver(this);
+  }
+
+	
 
   onDrinkTypeClicked = () => {
 		this.props.model.setDrinkTypeToSearch(this.props.drinkName);

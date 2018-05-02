@@ -18,10 +18,27 @@ class DrinkType extends Component {
     }
   }
 
-  update() {
-    this.setState({
-    })
+  update(obj) {
+		if(obj == 'amountchange')
+		{
+			this.setState({
+						drinksToBuy: this.props.model.getDrinkType(), // Returns the list of the drinks type chosen by the guests
+			})	
+		}
   }
+	
+	// Called by React when the component is shown to the user (mounted to DOM)
+  componentDidMount() {
+    this.props.model.addObserver(this);
+  }
+	
+	// Called by React when the component is removed from the DOM
+  componentWillUnmount() {
+    this.props.model.removeObserver(this);
+  }
+
+	
+	
 
   render() {
     let drinkType = []; //null
