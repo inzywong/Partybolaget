@@ -32,52 +32,52 @@ class ChosenDrinkMenu extends Component {
   onPlusButtonClicked = (e) => {
     //this.props.model.setAddDrink(e.target.value);
     //this.props.model.setAddDrinkAmount();
-		
+
 		this.props.model.add_removeOneDrinkUnit(e.target.value, 1);
   }
 
   onMinusButtonClicked = (e) => {
     //this.props.model.setMinusDrink(e.target.value)
     //this.props.model.setMinusDrinkAmount()
-		
+
 		this.props.model.add_removeOneDrinkUnit(e.target.value, -1);
   }
-	
+
 	onConfirmClick = () => {
 		// Check if all the drinks reached the thershold
 		// If not, we cannot go to the Summary page.
-		
+
 		// Get the drinkTypesChosenByGuests list
 		var  drinkList = this.props.model.getDrinkType();
-		
+
 		for(var i=0; i<drinkList.length; i++){
 			if(drinkList[i].status == 'didNotReachThreshold'){
 				alert("You did not add enough " + drinkList[i].type + " to the basket." );
-				return 
+				return
 			}
 		}
-		
+
 		this.setState({
 			redirectToSummary: true
 		})
 	}
 
-	
-	
+
+
   render() {
-			
+
 		if(this.state.redirectToSummary)
 		{
-    	return <Redirect push to="/SummaryPage" />;
+    	return <Redirect push to="/summaryPage" />;
 		}
 		else
 		{
 			let chosenDrinksList = null;
 
-			
+
 			//console.log(this.state.nameOfChosenDrink);
-			
-			
+
+
 			chosenDrinksList=this.state.nameOfChosenDrink.map((drink) =>
 					<div className="row" key={drink.id}>
 						<div className="row">
@@ -97,7 +97,7 @@ class ChosenDrinkMenu extends Component {
 					{chosenDrinksList}
 						<button className="btn btn-success" value="SummaryPage" onClick={this.onConfirmClick}>Confirm</button>
 				</div>
-			);			
+			);
 		}
 
   }

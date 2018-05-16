@@ -16,17 +16,18 @@ class SelectDrink extends Component {
     this.props.model.addObserver(this)
 
     this.props.model.getAllDrinks().then(drinks => {
-        this.setState({
-          status: 'LOADED',
-          drinks: drinks,
-          chooseDrinkWithName : 'Choose ' + this.props.model.getDrinkTypeName()
-        })
-        }).catch(() => {
-            this.setState({
-            status: 'ERROR'
-            })
+		
+      this.setState({
+        status: 'LOADED',
+        drinks: drinks,
+        chooseDrinkWithName : 'Choose ' + this.props.model.getDrinkTypeName(),
+				
+      })
+    }).catch(() => {
+      this.setState({
+        status: 'ERROR'
+      })
     })
-
   }
 
 // Called by React when the component is removed from the DOM
@@ -51,7 +52,6 @@ class SelectDrink extends Component {
         })
 
         this.props.model.getAllDrinks().then(drinks => {
-
           this.setState({
             status: 'LOADED',
             drinks: drinks,
@@ -67,11 +67,7 @@ class SelectDrink extends Component {
     }
   }
 
-<<<<<<< HEAD
-  onAddClicked = (e) => {
-=======
-  onAddClicked = (e) => {
->>>>>>> 0e616b1e7dbf4f74d7d6526da72525a5766cfe19
+  onAddClicked = (e) => {		
     var d = {
       id: e.target.attributes.getNamedItem("drink_id").value,
       name: e.target.attributes.getNamedItem("drink_name").value,
@@ -81,17 +77,13 @@ class SelectDrink extends Component {
       price: e.target.attributes.getNamedItem("drink_price").value,
 			type: this.state.type
     }
-<<<<<<< HEAD
-
-=======
-
->>>>>>> 0e616b1e7dbf4f74d7d6526da72525a5766cfe19
+		
     this.props.model.addDrinkToMenu(d)
   }
 
   render() {
     let drinksList = null;
-
+		
     switch (this.state.status) {
       case 'INITIAL':
         drinksList = <p>Loading...</p>

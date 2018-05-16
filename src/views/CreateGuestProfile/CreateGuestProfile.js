@@ -1,4 +1,4 @@
-// This component is esponsible for creating and editing the guests profile. 
+// This component is esponsible for creating and editing the guests profile.
 // It’s also possible to delete and add guests in this view.
 
 import React, { Component } from 'react';
@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import './CreateGuestProfile.css';
 import { Redirect } from 'react-router';
 
+import fire from '../../firebase/firebase';
 
 
 /* Importing components --------------------------------------- */
@@ -19,6 +20,7 @@ class CreateGuestProfile extends Component {
 
     // We put on state the properties we want to use and modify in the component
     this.state = {
+      name:"",
 			partyName: this.props.model.getPartyName(),
 			numberOfGuests: this.props.model.getNumberOfGuests(),
 			partyDuration: this.props.model.getPartyDuration(),
@@ -32,7 +34,28 @@ class CreateGuestProfile extends Component {
 	// Called by React when the component is shown to the user (mounted to DOM)
   componentDidMount() {
     this.props.model.addObserver(this);
+
+//------------------Read Firebase data-----------------------------------------
+/*
+    var user = fire.auth().currentUser;
+    var database = fire.database();
+
+    var ref = fire.database().ref("users/" + user.uid + "/listOfFriends");
+
+    ref.on('value', snap => {
+      var listData = snap.val();
+      var keys = Object.keys(listData);
+      for (var i = 0; i < keys.length; i++) {
+        var k = keys[i];
+        var name = listData[k];
+        this.setState({
+          name:name
+        });
+      }
+    });
+*/
   }
+
 	// Called by React when the component is removed from the DOM
   componentWillUnmount() {
     this.props.model.removeObserver(this);
@@ -58,7 +81,7 @@ class CreateGuestProfile extends Component {
 
 
 	onPlanDrinksClicked  = () =>
-	{	
+	{
 		// GUEST LIST IS NOT EMPTY
 		if(this.props.model.getNumberOfGuests() > 0){
 			// Check if all profiles were created
@@ -73,8 +96,8 @@ class CreateGuestProfile extends Component {
 
 				// Calculate the mininum amount of alcohol volume for each drink type
 				this.props.model.calculateVolumeOfAlcohol();
-				
-				
+
+
 				this.setState({
 					redirectToSearchDrink: true
 				})
@@ -89,20 +112,20 @@ class CreateGuestProfile extends Component {
 			alert("I'm sorry but you can't have a party without guests");
 		}
 	}
-	
+
 	onBackToEditParty = () =>
 	{
 		this.setState({
 			returnToEditParty: true
-		})			
+		})
 	}
 
   render() {
-
+    console.log(this.state.name)
 		var listOfGuests = null;
 
 		if(this.state.numberOfGuests > 0 ){
-			listOfGuests = this.state.guests.map( guest =>
+			listOfGuests = this.state.guests.map(guest =>
 					<GuestProfile key={guest.id} guestId={guest.id} model={this.props.model}/>
 				);
 		}
@@ -138,10 +161,10 @@ class CreateGuestProfile extends Component {
 					<button onClick={this.onPlanDrinksClicked}>
 							Plan Drinks
 					</button>
-		
+
 					<button onClick={this.onBackToEditParty}>
 							Back To Edit Party
-					</button>		
+					</button>
 
 				</div>
 			);

@@ -6,11 +6,14 @@ import DrinkType from '../DrinkType/DrinkType';
 import Alcometer from '../Alcometer/Alcometer';
 import ChosenDrinkMenu from '../ChosenDrinkMenu/ChosenDrinkMenu';
 
+import fire from '../../firebase/firebase';
+
 class SearchDrink extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
+      drinkType:"",
       status: 'INITIAL',
     }
     // we put on state the properties we want to use and modify in the component
@@ -18,8 +21,27 @@ class SearchDrink extends Component {
 
   componentDidMount = () => {
 
+    var user = fire.auth().currentUser;
+    var database = fire.database();
+    var directory = "users/" + user.uid + "/drinkmenu/" +  this.props.model.getPartyNames() + "/drinkType";
+    var ref = fire.database().ref(directory);
+    var drinkOnFocus="";
+
+    ref.on('value', snap => {
+      var listData = snap.val();
+      var keys = Object.keys(listData);
+      for (var i = 0; i < keys.length; i++) {
+        var k = keys[0];
+        var name = listData[k].type;
+        drinkOnFocus = name;
+        this.setState({
+          drinkType:name
+        });
+      }
+    }, console.log("error"));
+
 		// Get the name of the first drink type on the menu so that we can highlight it.
-		var drinkOnFocus = this.props.model.getDrinkType()[0].type;
+		//var drinkOnFocus = this.props.model.getDrinkType()[0].type;
 
 		// Setting the first drink on the Menu as the drink to be on focus
 		this.props.model.setDrinkTypeToSearch(drinkOnFocus);
@@ -30,7 +52,6 @@ class SearchDrink extends Component {
 
     this.props.model.addObserver(this);
   }
-
 
   update() {
     this.setState({
@@ -44,13 +65,7 @@ class SearchDrink extends Component {
     this.props.model.removeObserver(this)
   }
 
-  onLoadMoreClicked = (e) => {
-    this.props.model.loadMoreDrink()
-  }
-
   render() {
-
-
     switch (this.state.status) {
       case 'INITIAL':
       return (
@@ -74,11 +89,6 @@ class SearchDrink extends Component {
             </div>
             <div className="">
               <SelectDrink model={this.props.model} />
-            </div>
-            <div>
-              <button onClick={this.onLoadMoreClicked}>
-                Load More
-              </button>
             </div>
           </div>
           <div className="alcometer col-md-2">

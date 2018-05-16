@@ -132,7 +132,6 @@ class Welcome extends Component {
 						<button	type="button" className="btn" onClick={() => this.onDurationChanged(-1)}>
 							<span className="glyphicon glyphicon-minus"> </span>
 						</button>
-
 						<button type="button" className="btn" onClick={() => this.onDurationChanged(1)}>
 							<span className="glyphicon glyphicon-plus"> </span>
 						</button>
@@ -148,6 +147,7 @@ class Welcome extends Component {
 						<button type="button" className="btn" onClick={() => this.onNumberOfGuestsChanged(1)} >
 							<span className="glyphicon glyphicon-plus"> </span>
 						</button>
+		{/*<input type="range" min="1" max="10" value="5"></input>*/}
 						<br/> <br/>
 					</div>
 

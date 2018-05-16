@@ -1,6 +1,6 @@
 import uuid from 'uuid'; // This is being used to generate unique keys for the guests objects.
 												 // Take a look at this.createGuests and you'll see how it's being used.
-
+import fire from '../firebase/firebase';
 
 const httpOptions = {
   headers: {'X-Mashape-Key': 'yQGhLMovOZmshmc8KpVqld49sMt2p1IY502jsn5GsnnM6V7Vqz'} //'Qu9grxVNWpmshA4Kl9pTwyiJxVGUp1lKzrZjsnghQMkFkfA4LB'}
@@ -38,7 +38,6 @@ const drinkModel = function () {
 
   let searchType="";
 
-  //array of drinks pick or added by the user
   var drinkMenu = [];
 	/* drinkMenu is a list of objects that looks like this:
 	{
@@ -56,12 +55,13 @@ const drinkModel = function () {
   var minusDrinkId = "";
 
 
-  var chosenDrinkType="";
+  var chosenDrinkType="beer";
   var chosenDrinkTypeCode = "";
   var chosenDrinkTypeThreshold = 0;
   var chosenDrinkTypeamount = "";
 
-  var addMoreDrink = 200;
+  //variable use to sort the item in ascending or Descending
+  var sortStatus= "ASC";
 
 	// Each drink type in the API is identified by a code. Below are the codes for each type
 	//  our app might be using.
@@ -190,7 +190,19 @@ const drinkModel = function () {
       currentAlchoholVolume: 0,
 			status: 'didNotReachThreshold'
 		});
+
+    var user = fire.auth().currentUser;
+    var database = fire.database();
+    fire.database().ref("users/" + user.uid + "/drinkmenu/" + "/" + partyName + "/drinkType").push({
+			type: drinkType,
+			code: apiDrinkTypeCode[drinkType],
+			minimumAlcoholVolume: 0,
+      currentAlchoholVolume: 0,
+			status: 'didNotReachThreshold'
+		});
+
 	}
+
 
 	// Creates the drinkTypesChosenByGuests list
 	// This method makes usage of the data created in the createGuestProfile.js
@@ -267,6 +279,12 @@ const drinkModel = function () {
 		var index = guests.findIndex(g => g.id === guest.id);
 
 		guests[index] = guest;
+
+//-------------------Add number of guests to firebase ----------------------
+    var user = fire.auth().currentUser;
+    var database = fire.database();
+    fire.database().ref("users/" + user.uid + "/listOfFriends").push(guest);
+
 		notifyObservers();
 	}
 
@@ -341,6 +359,19 @@ const drinkModel = function () {
 	// Sets the partyName variable.
 	this.setPartyName = function(name) {
 		partyName = name;
+
+/*
+    var user = fire.auth().currentUser;
+    var database = fire.database();
+
+    if (user != null) {
+    user.providerData.forEach(function (profile) {
+      var uid=profile.uid;
+      var ref = database.ref("/partyName/"+uid);
+      ref.push(partyName);
+    });
+  }
+  */
 		notifyObservers();
 	}
 
@@ -349,6 +380,9 @@ const drinkModel = function () {
 		return partyName;
 	}
 
+  this.getPartyNames = function() {
+		return partyName;
+	}
 
   this.setDrinkMinPrice = function(price) {
     drinkMinPrice = price;
@@ -408,6 +442,11 @@ const drinkModel = function () {
     }
 
 		drinkMenu.push(drink);
+
+    //-------------------Add drink menu to firebase ----------------------
+    var user = fire.auth().currentUser;
+    var database = fire.database();
+    fire.database().ref("users/" + user.uid + "/drinkmenu/" + "/" + partyName+"/drinks").push(drink);
 
     notifyObservers('amountchange');
   }
@@ -568,15 +607,20 @@ const drinkModel = function () {
     return notify;
   }
 
-  //function to add more drink to the select drink view
-  this.loadMoreDrink = function (){
-    addMoreDrink = addMoreDrink + 20;
-    notifyObservers();
-  }
+  //function to set the sort system are ascending or Descending
+    this.setSortBy = function (status){
+      sortStatus = status;
+      notifyObservers();
+    }
+
+  //function to sned status to view what type of sort user using right now
+    this.getSortStatus = function(){
+      return sortStatus;
+      notifyObservers();
+    }
 
   this.getAllDrinks = function () {
-    //let url = 'https://karlroos-systemet.p.mashape.com/product?'
-    let url = 'https://karlroos-systemet.p.mashape.com/product?limit=' + addMoreDrink;
+    let url = 'https://karlroos-systemet.p.mashape.com/product?'
 
     if(drinkMinPrice !== "" && drinkMaxPrice !== "") {
       url +="&price_from="+ drinkMinPrice + "&price_to="+ drinkMaxPrice;
@@ -590,10 +634,6 @@ const drinkModel = function () {
     if(chosenDrinkTypeCode !== "") {
       url +="&tag="+ chosenDrinkTypeCode;
     }
-
-    console.log(url)
-
-
 
     return fetch(url, httpOptions)
       .then(processResponse)
@@ -612,10 +652,10 @@ const drinkModel = function () {
   const handleError = function (error) {
     if (error.json) {
       error.json().then(error => {
-        console.error('getAllDrinks() API Error:', error.message || error)
+        console.error('getAllDishes() API Error:', error.message || error)
       })
     } else {
-      console.error('getAllDrinks() API Error:', error.message || error)
+      console.error('getAllDishes() API Error:', error.message || error)
     }
   }
 

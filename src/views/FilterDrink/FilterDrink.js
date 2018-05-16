@@ -6,6 +6,7 @@ class FilterDrink extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      message:<p>&#8595; Ascending</p>,
       filterDrink: 'Filter Drink',
       drinkPrice: 'Drink Price',
       alcoholPercentage: 'Alcohol Percentage',
@@ -16,11 +17,16 @@ class FilterDrink extends Component {
     }
   }
 
+  componentDidMount = () => {
+      // Get the name of the first drink type on the menu so that we can highlight it.
+    this.props.model.addObserver(this);
+  }
+
   update() {
-  this.setState({
-    partyNameFromModel: this.props.model.getPartyName()
-  })
-}
+    this.setState({
+      partyNameFromModel: this.props.model.getPartyName()
+    })
+  }
 
   onMinPriceTextChanged = (e) => {
     this.props.model.setDrinkMinPrice(e.target.value)
@@ -42,6 +48,16 @@ class FilterDrink extends Component {
     this.props.model.setSearchType(e.target.value)
   }
 
+  onSortClicked = (e) => {
+      if (this.props.model.getSortStatus()=="DESC"){
+        this.props.model.setSortBy("ASC");
+        this.state.message = <p>&#8595; Ascending</p>;
+      } else if(this.props.model.getSortStatus()=="ASC"){
+        this.props.model.setSortBy("DESC");
+        this.state.message = <p>&#8593; Descending</p>;
+      }
+  }
+
   render() {
     return (
       <div className="FilterDrink row">
@@ -51,7 +67,7 @@ class FilterDrink extends Component {
           <p className="col">{this.state.numberOfGuests}</p>
           <p className="col">{this.state.partyDuration}</p>
         </div>
-        <div className="drinkPrice col">
+        <div className="drinkPrice row">
           <p>{this.state.drinkPrice}</p>
           <label>
             <input type="number" onChange={this.onMinPriceTextChanged} placeholder="Minimal Price"/>kr
@@ -60,7 +76,7 @@ class FilterDrink extends Component {
             <input type="number" onChange={this.onMaxPriceTextChanged} placeholder="Maximal Price"/>kr
           </label>
         </div>
-        <div className="alcoholPercentage col">
+        <div className="alcoholPercentage row">
           <p>{this.state.alcoholPercentage}</p>
           <label>
             <input type="number" onChange={this.onMinAlcoholTextChanged} placeholder="Minimal Alcohol Percentage"/> %
@@ -69,7 +85,7 @@ class FilterDrink extends Component {
             <input type="number" onChange={this.onMaxAlcoholTextChanged} placeholder="Maximal Alcohol Percentage"/> %
           </label>
         </div>
-        <div className="col">
+        <div className="row">
           <p>{this.state.sort}</p>
           <select className="col-sm-2" onChange={this.onSearchTypeChanged}>
             <option value="">All</option>
@@ -77,6 +93,11 @@ class FilterDrink extends Component {
             <option value="price">Price</option>
             <option value="alcohol">Alcohol Percentage</option>
           </select>
+          <div>
+            <button value={this.state.sortStatus} onClick={this.onSortClicked}>
+              {this.state.message}
+            </button>
+          </div>
         </div>
       </div>
     );
