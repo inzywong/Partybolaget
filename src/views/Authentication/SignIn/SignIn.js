@@ -39,7 +39,7 @@ class SignIn extends Component {
         return (
             <div className="SignIn row">
 
-                <div className="col-md-6">
+              <div className="col-md-6 formSignIn">
                     <form>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Email address</label>
