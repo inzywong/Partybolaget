@@ -10,9 +10,12 @@
 
 
 .square{
-	width: 200px;
-	height: 400px;
 	float: left;
-	
+	border-radius: 10px;
 	margin-left: 30px;
+}
+
+.GuestProfile {
+  color: #000000;
+  padding: 10px;
 }

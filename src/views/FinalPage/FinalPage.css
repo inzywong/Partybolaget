@@ -1,0 +1,8 @@
+.final {
+  text-align: center;
+  height: 80vh;
+  position: center;
+  vertical-align: middle;
+  padding-top: 30vh; 
+  display: flex;
+}

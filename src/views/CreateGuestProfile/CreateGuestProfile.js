@@ -1,4 +1,4 @@
-// This component is esponsible for creating and editing the guests profile. 
+// This component is esponsible for creating and editing the guests profile.
 // It’s also possible to delete and add guests in this view.
 
 import React, { Component } from 'react';
@@ -58,7 +58,7 @@ class CreateGuestProfile extends Component {
 
 
 	onPlanDrinksClicked  = () =>
-	{	
+	{
 		// GUEST LIST IS NOT EMPTY
 		if(this.props.model.getNumberOfGuests() > 0){
 			// Check if all profiles were created
@@ -73,8 +73,8 @@ class CreateGuestProfile extends Component {
 
 				// Calculate the mininum amount of alcohol volume for each drink type
 				this.props.model.calculateVolumeOfAlcohol();
-				
-				
+
+
 				this.setState({
 					redirectToSearchDrink: true
 				})
@@ -89,12 +89,12 @@ class CreateGuestProfile extends Component {
 			alert("I'm sorry but you can't have a party without guests");
 		}
 	}
-	
+
 	onBackToEditParty = () =>
 	{
 		this.setState({
 			returnToEditParty: true
-		})			
+		})
 	}
 
   render() {
@@ -135,13 +135,13 @@ class CreateGuestProfile extends Component {
 					</div>
 
 
-					<button onClick={this.onPlanDrinksClicked}>
-							Plan Drinks
+					<button onClick={this.onPlanDrinksClicked} className="btn btn-primary">
+            Plan Drinks
 					</button>
-		
-					<button onClick={this.onBackToEditParty}>
+          &nbsp;
+					<button onClick={this.onBackToEditParty} className="btn btn-primary">
 							Back To Edit Party
-					</button>		
+					</button>
 
 				</div>
 			);

@@ -24,10 +24,10 @@ class FinalPage extends Component {
   render() {
 
 		return (
-			<div className="col-lg-12">
+			<div className="col-lg-12 final">
 				<h1> Congratulations, You'll receive your list of drinks by e-mail, good luck with your shop! </h1>
 			</div>
-		);			
+		);
 	}
 
 }

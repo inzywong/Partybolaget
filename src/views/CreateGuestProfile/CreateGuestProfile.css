@@ -1,7 +1,14 @@
-
+.CreateGuestProfile {
+	text-align: center;
+  height: 80vh;
+  position: center;
+  vertical-align: middle;
+  padding-top: 10vh;
+  /*background-color: #ff0000;*/
+	display: table;
+}
 
 
 .red {
 	background-color: red;
 }
-
