@@ -16,17 +16,12 @@ class Welcome extends Component {
 
     // We put on state the properties we want to use and modify in the component
     this.state = {
-			numberOfGuests: this.props.model.getNumberOfGuests(),
-			partyDuration: this.props.model.getPartyDuration(),
-			redirect: false
-		}
       numberOfGuests: this.props.model.getNumberOfGuests(),
       partyDuration: this.props.model.getPartyDuration(),
       redirect: false
     }
   }
 
-	// Called by React when the component is shown to the user (mounted to DOM)
   // Called by React when the component is shown to the user (mounted to DOM)
   componentDidMount() {
     this.props.model.addObserver(this)
@@ -51,7 +46,6 @@ class Welcome extends Component {
       }
     });*/
   }
-	// Called by React when the component is removed from the DOM
   // Called by React when the component is removed from the DOM
   componentWillUnmount() {
     this.props.model.removeObserver(this)
@@ -61,9 +55,6 @@ class Welcome extends Component {
   update() {
     // setState causes the component to re-render
     this.setState({
-			numberOfGuests: this.props.model.getNumberOfGuests(),
-			partyDuration: this.props.model.getPartyDuration()
-		})
       numberOfGuests: this.props.model.getNumberOfGuests(),
       partyDuration: this.props.model.getPartyDuration()
     })

@@ -196,6 +196,7 @@ const drinkModel = function () {
     var user = fire.auth().currentUser;
     var database = fire.database();
     fire.database().ref("users/" + user.uid + "/drinkmenu/" + "/" + partyName + "/drinkType").push({
+    fire.database().ref("users/" + user.uid + "/listOfParty/" + "/" + partyName + "/listOfDrinkType").push({
 			type: drinkType,
 			code: apiDrinkTypeCode[drinkType],
 			minimumAlcoholVolume: 0,
