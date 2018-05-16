@@ -36,7 +36,6 @@ class CreateGuestProfile extends Component {
     this.props.model.addObserver(this);
 
 //------------------Read Firebase data-----------------------------------------
-
     var user = fire.auth().currentUser;
     var database = fire.database();
 
