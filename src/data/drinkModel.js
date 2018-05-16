@@ -63,6 +63,8 @@ const drinkModel = function () {
   //variable use to sort the item in ascending or Descending
   var sortStatus= "ASC";
 
+  var partyDetail = [];
+
 	// Each drink type in the API is identified by a code. Below are the codes for each type
 	//  our app might be using.
 	var apiDrinkTypeCode = {
@@ -359,19 +361,6 @@ const drinkModel = function () {
 	// Sets the partyName variable.
 	this.setPartyName = function(name) {
 		partyName = name;
-
-/*
-    var user = fire.auth().currentUser;
-    var database = fire.database();
-
-    if (user != null) {
-    user.providerData.forEach(function (profile) {
-      var uid=profile.uid;
-      var ref = database.ref("/partyName/"+uid);
-      ref.push(partyName);
-    });
-  }
-  */
 		notifyObservers();
 	}
 
@@ -383,6 +372,19 @@ const drinkModel = function () {
   this.getPartyNames = function() {
 		return partyName;
 	}
+
+  this.setPartyDetail = function(){
+
+    var user = fire.auth().currentUser;
+    var database = fire.database();
+    fire.database().ref("users/" + user.uid + "/listOfParty/" + partyName).push({
+      name: partyName,
+      duration: partyDuration,
+      totalGuest: numberOfGuests
+    });
+
+    notifyObservers();
+  }
 
   this.setDrinkMinPrice = function(price) {
     drinkMinPrice = price;
@@ -446,7 +448,7 @@ const drinkModel = function () {
     //-------------------Add drink menu to firebase ----------------------
     var user = fire.auth().currentUser;
     var database = fire.database();
-    fire.database().ref("users/" + user.uid + "/drinkmenu/" + "/" + partyName+"/drinks").push(drink);
+    fire.database().ref("users/" + user.uid + "/listOfParty/" + "/" + partyName+"/listOfdrinks").push(drink);
 
     notifyObservers('amountchange');
   }
