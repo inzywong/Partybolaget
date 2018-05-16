@@ -36,7 +36,7 @@ class CreateGuestProfile extends Component {
     this.props.model.addObserver(this);
 
 //------------------Read Firebase data-----------------------------------------
-/*
+
     var user = fire.auth().currentUser;
     var database = fire.database();
 
@@ -47,13 +47,13 @@ class CreateGuestProfile extends Component {
       var keys = Object.keys(listData);
       for (var i = 0; i < keys.length; i++) {
         var k = keys[i];
-        var name = listData[k];
+        var name = listData[k].name;
         this.setState({
           name:name
         });
       }
     });
-*/
+
   }
 
 	// Called by React when the component is removed from the DOM
