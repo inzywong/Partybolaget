@@ -10,6 +10,27 @@ body {
   color: #ffffff;
 }
 
+/* Header */
+.myHeader {
+  background-color: #ffffff;
+  width: 110%;
+  color: #000000;
+  display: block;
+  align-items: center;
+  text-align: center;
+}
+
+/* Footer */
+.myFooter {
+  background-color: #ffffff;
+  height: 40px;
+  vertical-align: middle;
+  color: #000000;
+  padding-top: 10px;
+  width: 110%;
+}
+
+
 /* Authentication page */
 .SignIn {
   height: 80vh;
@@ -34,3 +55,18 @@ body {
 }
 
 /* Welcome page */
+.Welcome input {
+  color: #000000;
+}
+
+.Welcome button {
+  color: #000000;
+}
+
+.Welcome .btn-primary {
+  color: #ffffff;
+}
+
+.txtParty {
+  width: 200px;
+}

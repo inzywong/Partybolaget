@@ -123,7 +123,7 @@ class Welcome extends Component {
 					{/*  PARTY NAME  */}
 					<div>
 						<p> Name of the Party: </p>
-						<input type="text" ref="partyName" /> <br/> <br/>
+						<input type="text" ref="partyName" className="txtParty" /> <br/> <br/>
 					</div>
 
 					{/*  DURATION  */}
@@ -147,7 +147,7 @@ class Welcome extends Component {
 						<button type="button" className="btn" onClick={() => this.onNumberOfGuestsChanged(1)} >
 							<span className="glyphicon glyphicon-plus"> </span>
 						</button>
-		{/*<input type="range" min="1" max="10" value="5"></input>*/}
+            {/*<input type="range" min="1" max="10" value="5"></input>*/}
 						<br/> <br/>
 					</div>
 
