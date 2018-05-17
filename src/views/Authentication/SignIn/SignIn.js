@@ -38,8 +38,8 @@ class SignIn extends Component {
   render() {
     return (
       <div className="SignIn row">
-        
-        <div className="col-md-6 formSignIn">
+        <div className="col-md-4"> </div>
+        <div className="col-md-4 formSignIn">
           <form>
             <div class="form-group">
               <label for="exampleInputEmail1">Email address</label>

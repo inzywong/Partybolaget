@@ -19,6 +19,7 @@ import SignIn          from "./views/Authentication/SignIn/SignIn";
 import SignOut         from "./views/Authentication/SignOut/SignOut";
 
 import fire from './firebase/firebase';
+import SignUp from './views/Authentication/SignUp/SignUp';
 /*--------------------------------------------------------------*/
 
 
@@ -54,9 +55,9 @@ class App extends Component {
         {/* HEADER --------------------------------------------------- */}
         <div className="row myHeader col-lg-12 col-sm-12">
 
-          <center><h1><img src="./images/logo.png" ></img>
+          <center><h1><img style={{height: "20px", width: "20px"}} src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Emoji_u1f378.svg/2000px-Emoji_u1f378.svg.png" ></img>
             <b>Partybolaget</b></h1></center>
-            <SignOut  model={this.props.model} />
+          {this.state.user  ?  (<SignOut  model={this.props.model} />) : (SignUp)}
         </div>
         {/* END OF HEADER -------------------------------------------- */}
 
