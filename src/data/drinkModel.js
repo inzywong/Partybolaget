@@ -115,6 +115,38 @@ const drinkModel = function () {
     }
   */
 
+var getPartyNameForWelcome = [];
+
+this.readPartyDetailFromFirebase = function(){
+  var partyName="";
+
+  //------------------Read Firebase data-----------------------------------------
+  fire.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      var ref =  fire.database().ref("users/" + user.uid + "/listOfParty/");
+      ref.on('value', function(snap){
+        var listData = snap.val();
+        var keys = Object.keys(listData);
+        for (var i = 0; i < keys.length; i++) {
+          var k = keys[i];
+          partyName = listData[k].partyDetail;
+          var keys1 = Object.keys(partyName);
+          for (var j = 0; j < keys1.length; j++) {
+            var l = keys1[j];
+            getPartyNameForWelcome.push(partyName[l].name);
+          }
+        }
+      }, console.log("error"));
+    } else {
+      // No user is signed in.
+    }
+  });
+  notifyObservers();
+}
+
+this.getPartyDetail = function(){
+  return getPartyNameForWelcome;
+}
 	// -----------------------------------------------------------
 	// This function calculates what is the minimum volume of alcohol needed
 	//  for each type of drink chosen by the guests

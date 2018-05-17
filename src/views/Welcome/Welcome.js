@@ -13,10 +13,9 @@ class Welcome extends Component {
 
   constructor(props) {
     super(props)
-
     // We put on state the properties we want to use and modify in the component
     this.state = {
-      name:[],
+      name:this.props.model.getPartyDetail(),
       numberOfGuests: this.props.model.getNumberOfGuests(),
       partyDuration: this.props.model.getPartyDuration(),
       redirect: false
@@ -27,6 +26,12 @@ class Welcome extends Component {
   componentDidMount() {
     this.props.model.addObserver(this)
 
+    this.props.model.readPartyDetailFromFirebase();
+    this.setState({
+      name:this.props.model.getPartyDetail()
+    });
+
+/*
     var partyName="";
     var getPartyNameForWelcome = [];
     //------------------Read Firebase data-----------------------------------------
@@ -53,8 +58,10 @@ class Welcome extends Component {
         name:getPartyNameForWelcome
       })
     });
-      console.log(getPartyNameForWelcome)
+      console.log(this.state.name)
+      */
   }
+
   // Called by React when the component is removed from the DOM
   componentWillUnmount() {
     this.props.model.removeObserver(this)
@@ -64,6 +71,7 @@ class Welcome extends Component {
   update() {
     // setState causes the component to re-render
     this.setState({
+      name:this.props.model.getPartyDetail(),
       numberOfGuests: this.props.model.getNumberOfGuests(),
       partyDuration: this.props.model.getPartyDuration()
     })
@@ -121,16 +129,11 @@ class Welcome extends Component {
   }
 
   render() {
-    console.log(this.state.name)
-    let listItems = this.state.name.map((number) =>
-      <li>{number}</li>
-      );
-
     if (this.state.redirect) {
       return <Redirect push to="/createguestprofile" />;
     }
+    let listItems =this.state.name.map((partyName)=><div><p>{partyName}</p></div>);
     return (
-
       <div className="Welcome col-12">
         <h1> Create your party now </h1>
         <form onSubmit={this.handleSubmit.bind(this)}> {/*you have to bind this in order to 'handleSubmit' access the refs*/}
@@ -169,7 +172,6 @@ class Welcome extends Component {
           <h1>My Party History</h1>
           {listItems}
         </div>
-        >>>>>>> 39ba009326482fed7017e3233daa7037f4af76ef
       </div>
     );
   }
