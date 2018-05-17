@@ -518,7 +518,6 @@ this.getListOfFriendsFromFirebase = function (){
     }
 
 		drinkMenu.push(drink);
-    console.log(drinkMenu)
 
     //-------------------Add drink menu to firebase ----------------------
     var user = fire.auth().currentUser;
@@ -691,6 +690,17 @@ this.getListOfFriendsFromFirebase = function (){
   //function to sned status to view what type of sort user using right now
     this.getSortStatus = function(){
       return sortStatus;
+      notifyObservers();
+    }
+
+
+    this.getPrice = function(){
+      var price=0;
+      for (var i = 0; i < drinkMenu.length; i++) {
+        var prices = drinkMenu[i].price;
+        price = price*1 + prices*1;
+      }
+      return price;
       notifyObservers();
     }
 

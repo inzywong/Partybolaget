@@ -15,6 +15,7 @@ class SummaryPage extends Component {
       partyName: this.props.model.getPartyName(),
       numberOfGuests: this.props.model.getNumberOfGuests(),
       partyDuration: this.props.model.getPartyDuration(),
+      price: this.props.model.getPrice(),
 			returnToEditParty: false,
 			returnToEditGuestsProfile: false,
 			redirectToConfirm: false
@@ -37,7 +38,8 @@ class SummaryPage extends Component {
 			drinkMenu: this.props.model.getDrinkMenu(),
       partyName: this.props.model.getPartyName(),
       numberOfGuests: this.props.model.getNumberOfGuests(),
-      partyDuration: this.props.model.getPartyDuration()
+      partyDuration: this.props.model.getPartyDuration(),
+      price: this.props.model.getPrice(),
 		})
   }
 
@@ -84,7 +86,8 @@ class SummaryPage extends Component {
   							<p><b>{drink.name}</b></p>
   							<p>{Math.round(drink.alcohol)} %</p>
   							<p>{drink.volume} mL</p>
-  							<p>{drink.price} kr</p>
+                <p>Amount: {drink.amount}</p>
+  							<p>Total:{drink.price*drink.amount} kr</p>
   						</div>
   					);
 
@@ -96,6 +99,7 @@ class SummaryPage extends Component {
               <p>Party Name: {this.state.partyName}</p>
               <p>Party Duration: {this.state.partyDuration} hrs</p>
               <p>Number of Guests: {this.state.numberOfGuests} Guests</p>
+              <p>Total Price: {this.state.price} kr </p>
 
               <p className="listOfDrink"> - List of Drinks in your basket  - </p>
               <div className="row divDrinkList">
