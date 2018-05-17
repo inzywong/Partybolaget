@@ -115,37 +115,72 @@ const drinkModel = function () {
     }
   */
 
-var getPartyNameForWelcome = [];
+//------------------Read Firebase data-----------------------------------------
 
-this.readPartyDetailFromFirebase = function(){
-  var partyName="";
+  var getPartyNameForWelcome = [];
+  var listOfFriends = [];
 
-  //------------------Read Firebase data-----------------------------------------
+  this.readPartyDetailFromFirebase = function(){
+    var partyName="";
+
+    fire.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        var ref =  fire.database().ref("users/" + user.uid + "/listOfParty/");
+        ref.on('value', function(snap){
+          var listData = snap.val();
+          if (listData == null){
+
+          }else{
+          var keys = Object.keys(listData);
+          for (var i = 0; i < keys.length; i++) {
+            var k = keys[i];
+            partyName = listData[k].partyDetail;
+            var keys1 = Object.keys(partyName);
+            for (var j = 0; j < keys1.length; j++) {
+              var l = keys1[j];
+              getPartyNameForWelcome.push(partyName[l]);
+            }
+          }
+        }
+        }, console.log("error"));
+      } else {
+        // No user is signed in.
+      }
+    });
+    notifyObservers();
+  }
+
+  this.getPartyDetail = function(){
+    return getPartyNameForWelcome;
+  }
+
+  this.readListOfFriends = function(){
+
   fire.auth().onAuthStateChanged(function(user) {
-    if (user) {
-      var ref =  fire.database().ref("users/" + user.uid + "/listOfParty/");
-      ref.on('value', function(snap){
+    if(user){
+      var ref = fire.database().ref("users/" + user.uid + "/listOfFriends");
+
+      ref.on('value', snap => {
         var listData = snap.val();
+        if (listData == null){
+
+        }else{
         var keys = Object.keys(listData);
         for (var i = 0; i < keys.length; i++) {
           var k = keys[i];
-          partyName = listData[k].partyDetail;
-          var keys1 = Object.keys(partyName);
-          for (var j = 0; j < keys1.length; j++) {
-            var l = keys1[j];
-            getPartyNameForWelcome.push(partyName[l]);
-          }
+          listOfFriends.push(listData[k]);
         }
-      }, console.log("error"));
-    } else {
-      // No user is signed in.
+      }
+      });
+    }else{
+
     }
   });
-  notifyObservers();
+
 }
 
-this.getPartyDetail = function(){
-  return getPartyNameForWelcome;
+this.getListOfFriendsFromFirebase = function (){
+  return listOfFriends
 }
 	// -----------------------------------------------------------
 	// This function calculates what is the minimum volume of alcohol needed
@@ -474,6 +509,7 @@ this.getPartyDetail = function(){
     }
 
 		drinkMenu.push(drink);
+    console.log(drinkMenu)
 
     //-------------------Add drink menu to firebase ----------------------
     var user = fire.auth().currentUser;
@@ -520,7 +556,7 @@ this.getPartyDetail = function(){
 	// s =  1 if we are adding a drink.
 	// s = -1 if we are removing a drink.
 	this.add_removeOneDrinkUnit = function(drink_id, s){
-
+    console.log(drinkMenu)
 		// ADD A UNIT ----------------------------------------------------------------------
 		// find the index of this drink in the menu
 		var index= drinkMenu.map(function(x) {return x.id; }).indexOf(drink_id);

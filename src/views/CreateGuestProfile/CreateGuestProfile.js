@@ -20,7 +20,7 @@ class CreateGuestProfile extends Component {
 
     // We put on state the properties we want to use and modify in the component
     this.state = {
-      name:"",
+      friends:this.props.model.getListOfFriendsFromFirebase(),
 			partyName: this.props.model.getPartyName(),
 			numberOfGuests: this.props.model.getNumberOfGuests(),
 			partyDuration: this.props.model.getPartyDuration(),
@@ -35,23 +35,11 @@ class CreateGuestProfile extends Component {
   componentDidMount() {
     this.props.model.addObserver(this);
 
-//------------------Read Firebase data-----------------------------------------
-  /*  var user = fire.auth().currentUser;
-    var database = fire.database();
-
-    var ref = fire.database().ref("users/" + user.uid + "/listOfFriends");
-
-    ref.on('value', snap => {
-      var listData = snap.val();
-      var keys = Object.keys(listData);
-      for (var i = 0; i < keys.length; i++) {
-        var k = keys[i];
-        var name = listData[k].name;
-        this.setState({
-          name:name
-        });
-      }
-    }); */
+    //------------------Read Firebase data-----------------------------------------
+    this.props.model.readListOfFriends();
+    this.setState({
+      friends:this.props.model.getListOfFriendsFromFirebase()
+    });
 
   }
 
@@ -67,6 +55,7 @@ class CreateGuestProfile extends Component {
 
 		// setState causes the component to re-render
     this.setState({
+      friends:this.props.model.getListOfFriendsFromFirebase(),
 			partyName: this.props.model.getPartyName(),
 			numberOfGuests: this.props.model.getNumberOfGuests(),
 			partyDuration: this.props.model.getPartyDuration()
@@ -120,8 +109,16 @@ class CreateGuestProfile extends Component {
 	}
 
   render() {
-    console.log(this.state.name)
+    var listOfFriendsHaveBeenInvited = null;
 		var listOfGuests = null;
+
+    console.log(this.state.friends)
+
+    listOfFriendsHaveBeenInvited = this.state.friends.map((friend)=>{
+      <div className= "col-sm-2">
+        <p>{friend.name}</p>
+      </div>
+    });
 
 		if(this.state.numberOfGuests > 0 ){
 			listOfGuests = this.state.guests.map(guest =>
@@ -131,7 +128,6 @@ class CreateGuestProfile extends Component {
 	  else{
 			listOfGuests = "You don't have guests"
 		}
-
 
 		// REDIRECT TO SEARCH DRINK PAGE
 		if(this.state.redirectToSearchDrink){
@@ -145,25 +141,30 @@ class CreateGuestProfile extends Component {
 		}
 		else{
 			return (
-				<div className="CreateGuestProfile col-12">
-					<h1> Create the Guests Profile for: {this.state.partyName}</h1>
-					<h3> Number of Guests: {this.state.numberOfGuests}</h3>
-					<button type="button" className="btn btn-secondary" onClick={() => this.addGuest()}>
-						Add 1 Guest
-					</button>
+				<div className="row">
+          <div className="CreateGuestProfile col-10">
+  					<h1> Create the Guests Profile for: {this.state.partyName}</h1>
+  					<h3> Number of Guests: {this.state.numberOfGuests}</h3>
+  					<button type="button" className="btn btn-secondary" onClick={() => this.addGuest()}>
+  						Add 1 Guest
+  					</button>
 
-					<div>
-						{listOfGuests}
-					</div>
+  					<div>
+  						{listOfGuests}
+  					</div>
 
+  					<button onClick={this.onPlanDrinksClicked} className="btn btn-success">
+              Plan Drinks
+  					</button>
 
-					<button onClick={this.onPlanDrinksClicked} className="btn btn-success">
-            Plan Drinks
-					</button>
+  					<button onClick={this.onBackToEditParty} className="btn btn-secondary">
+  							Back To Edit Party
+  					</button>
+          </div>
 
-					<button onClick={this.onBackToEditParty} className="btn btn-secondary">
-							Back To Edit Party
-					</button>
+          <div className=" col-2">
+            {listOfFriendsHaveBeenInvited}
+          </div>
 
 				</div>
 			);
