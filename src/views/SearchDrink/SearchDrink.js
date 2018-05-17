@@ -21,26 +21,6 @@ class SearchDrink extends Component {
 
   componentDidMount = () => {
 
-/*
-    var user = fire.auth().currentUser;
-    var database = fire.database();
-    var directory = "users/" + user.uid + "/listOfParty/"+this.props.model.getPartyName()+ "/listOfDrinkType";
-    var ref = fire.database().ref(directory);
-    var drinkOnFocus="";
-
-    ref.on('value', snap => {
-      var listData = snap.val();
-      var keys = Object.keys(listData);
-      for (var i = 0; i < keys.length; i++) {
-        var k = keys[0];
-        var name = listData[k].type;
-        //drinkOnFocus = name;
-        this.setState({
-          drinkType:name
-        });
-      }
-    }, console.log("error"));*/
-
 		// Get the name of the first drink type on the menu so that we can highlight it.
 		var drinkOnFocus = this.props.model.getDrinkType()[0].type;
 

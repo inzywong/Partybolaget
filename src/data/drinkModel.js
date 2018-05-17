@@ -119,9 +119,11 @@ const drinkModel = function () {
 
   var getPartyNameForWelcome = [];
   var listOfFriends = [];
+  var check = 0;
 
   this.readPartyDetailFromFirebase = function(){
     var partyName="";
+
 
     fire.auth().onAuthStateChanged(function(user) {
       if (user) {
@@ -131,23 +133,30 @@ const drinkModel = function () {
           if (listData == null){
 
           }else{
-          var keys = Object.keys(listData);
-          for (var i = 0; i < keys.length; i++) {
-            var k = keys[i];
-            partyName = listData[k].partyDetail;
-            var keys1 = Object.keys(partyName);
-            for (var j = 0; j < keys1.length; j++) {
-              var l = keys1[j];
-              getPartyNameForWelcome.push(partyName[l]);
+            if(check==0){
+              var keys = Object.keys(listData);
+              for (var i = 0; i < keys.length; i++) {
+                var k = keys[i];
+                partyName = listData[k].partyDetail;
+                var keys1 = Object.keys(partyName);
+                for (var j = 0; j < keys1.length; j++) {
+                  var l = keys1[j];
+                  getPartyNameForWelcome.push(partyName[l]);
+                }
+              }
+              check=check+1;
+            }else{
+
             }
-          }
         }
-        }, console.log("error"));
+      });
       } else {
         // No user is signed in.
       }
     });
+
     notifyObservers();
+
   }
 
   this.getPartyDetail = function(){
