@@ -97,7 +97,7 @@ class ChosenDrinkMenu extends Component {
 				<div className="chosenDrink col-md-12">
 					<h3>{this.state.drinkMenu}</h3>
 					{chosenDrinksList}
-						<button className="btn btn-success" value="SummaryPage" onClick={this.onConfirmClick}>Confirm</button>
+          <button className="btn btn-success" value="SummaryPage" onClick={this.onConfirmClick}>Confirm</button>
 				</div>
 			);
 		}

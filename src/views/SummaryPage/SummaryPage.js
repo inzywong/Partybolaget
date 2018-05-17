@@ -80,8 +80,8 @@ class SummaryPage extends Component {
   		{
   			let drinkList=null;
   			drinkList = this.state.drinkMenu.map((drink) =>
-  						<div key={drink.id} className="drinkCard drinkList col-sm-4">
-  							<p>{drink.name}</p>
+  						<div key={drink.id} className="drinkList col-sm-2">
+  							<p><b>{drink.name}</b></p>
   							<p>{Math.round(drink.alcohol)} %</p>
   							<p>{drink.volume} mL</p>
   							<p>{drink.price} kr</p>
@@ -89,25 +89,33 @@ class SummaryPage extends Component {
   					);
 
   			return (
-  				<div className="col-lg-12">
-  					<h1>Summary</h1>
-  					<h2> Party Name: {this.state.partyName} </h2>
-  					<h2> Party Duration: {this.state.partyDuration} hrs </h2>
-  					<h2> Number of Guests: {this.state.numberOfGuests} Guests </h2>
+  				<div className="Summary">
+            <div className="SummaryInside">
+              <h1>Summary</h1>
 
-  					<button onClick={this.onBackToEditParty}>
-  						Back To Edit Party
-  					</button>
+              <p>Party Name: {this.state.partyName}</p>
+              <p>Party Duration: {this.state.partyDuration} hrs</p>
+              <p>Number of Guests: {this.state.numberOfGuests} Guests</p>
 
-  					<button onClick={this.onBackToEditGuestsProfile}>
-  						Back To Edit Guests Profile
-  					</button>
+              <p className="listOfDrink"> - List of Drinks in your basket  - </p>
+              <div className="row divDrinkList">
+                {drinkList}
+              </div>
 
-  					<h2> - List of Drinks in your basket  - </h2>
-  					{drinkList}
-  					<button className="btn btn-success" value="SummaryPage" onClick={this.onclick} >
-  						Confirm
-  					</button>
+              <div className="row">
+                <button onClick={this.onBackToEditParty} className="btn btn-secondary">
+                  Back To Edit Party
+                </button>
+                &nbsp;&nbsp;
+                <button onClick={this.onBackToEditGuestsProfile} className="btn btn-secondary">
+                  Back To Edit Guests Profile
+                </button>
+                &nbsp;&nbsp;
+                <button className="btn btn-success" value="SummaryPage" onClick={this.onclick} >
+                  Confirm
+                </button>
+              </div>
+            </div>
   				</div>
   			);
   		}

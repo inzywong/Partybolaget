@@ -72,6 +72,15 @@ body {
   width: 200px;
 }
 
+.partyHistory {
+  background-color: #9999ff;
+  color:grey;
+  border-top-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  padding:10px;
+  color: white;
+}
+
 /* Create Guest page */
 .CreateGuestProfile {
   height: 80vh;
@@ -92,9 +101,70 @@ body {
    border-radius: 10px;
    padding-top: 10px;
    background-color: #333366;
+   margin:5px;
 }
 
 .FilterDrink {
   border-bottom: 5px double #ffffff;
   padding-left:0;
+}
+
+.FilterDrink input {
+  color: #000000;
+}
+
+.chosenDrink button {
+  color: #000000;
+}
+
+.chosenDrink .btn {
+  color: #ffffff;
+}
+
+/* Summary page */
+.Summary {
+  height: 80vh;
+  text-align: center;
+  padding-top: 20px;
+
+
+}
+
+.SummaryInside {
+  background-color: white;
+  color: black;
+  border-radius: 20px;
+    padding:20px;
+    display:inline-block;
+  width: 50%;
+
+}
+
+.SummaryInside h1{
+  border-bottom: 2px double black;
+  margin-bottom: 30px;
+  margin-top:0;
+}
+
+.SummaryInside .listOfDrink {
+  font-size: 15pt;
+  margin-top:20px;
+}
+
+.Summary .divDrinkList {
+  text-align: center;
+}
+
+.drinkList {
+  border-radius: 10px;
+  padding-top: 10px;
+  background-color: #333366;
+  color: white;
+}
+
+/* Final page */
+.Final {
+  height: 80vh;
+  text-align: center;
+  margin-top:20%;
 }
