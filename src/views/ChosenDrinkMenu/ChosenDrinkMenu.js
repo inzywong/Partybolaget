@@ -32,14 +32,12 @@ class ChosenDrinkMenu extends Component {
   onPlusButtonClicked = (e) => {
     //this.props.model.setAddDrink(e.target.value);
     //this.props.model.setAddDrinkAmount();
-
 		this.props.model.add_removeOneDrinkUnit(e.target.value, 1);
   }
 
   onMinusButtonClicked = (e) => {
     //this.props.model.setMinusDrink(e.target.value)
     //this.props.model.setMinusDrinkAmount()
-
 		this.props.model.add_removeOneDrinkUnit(e.target.value, -1);
   }
 
@@ -84,11 +82,13 @@ class ChosenDrinkMenu extends Component {
 							<p className="col">{drink.name} : {drink.amount}</p>
 						</div>
 						<div className="row">
-							<button   value={drink.id} drink_type={drink.type} onClick={this.onPlusButtonClicked}>
-                <span className="glyphicon glyphicon-plus"> </span></button>
+							<button value={drink.id} drink_type={drink.type} onClick={this.onPlusButtonClicked}>
+                +
+              </button>
 
-							<button   value={drink.id} drink_type={drink.type} onClick={this.onMinusButtonClicked}>
-                            <span className="glyphicon glyphicon-minus"> </span></button>
+							<button value={drink.id} drink_type={drink.type} onClick={this.onMinusButtonClicked}>
+                -
+              </button>
 						</div>
 					</div>
 				)

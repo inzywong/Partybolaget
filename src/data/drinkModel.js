@@ -556,11 +556,9 @@ this.getListOfFriendsFromFirebase = function (){
 	// s =  1 if we are adding a drink.
 	// s = -1 if we are removing a drink.
 	this.add_removeOneDrinkUnit = function(drink_id, s){
-    console.log(drinkMenu)
 		// ADD A UNIT ----------------------------------------------------------------------
 		// find the index of this drink in the menu
 		var index= drinkMenu.map(function(x) {return x.id; }).indexOf(drink_id);
-
 		//console.log("index: " + index);
 		drinkMenu[index].amount += s;
 		if(drinkMenu[index].amount < 0)
