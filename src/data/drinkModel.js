@@ -116,7 +116,6 @@ const drinkModel = function () {
   */
 
 	// -----------------------------------------------------------
-
 	// This function calculates what is the minimum volume of alcohol needed
 	//  for each type of drink chosen by the guests
 	this.calculateVolumeOfAlcohol = function()
@@ -195,7 +194,7 @@ const drinkModel = function () {
 
     var user = fire.auth().currentUser;
     var database = fire.database();
-    fire.database().ref("users/" + user.uid + "/listOfParty/" + "/" + partyName + "/listOfDrinkType").push({
+    fire.database().ref("users/" + user.uid + "/listOfParty/"  +partyName+ "/listOfDrinkType").push({
 			type: drinkType,
 			code: apiDrinkTypeCode[drinkType],
 			minimumAlcoholVolume: 0,
@@ -376,8 +375,7 @@ const drinkModel = function () {
   this.setPartyDetail = function(){
 
     var user = fire.auth().currentUser;
-    var database = fire.database();
-    fire.database().ref("users/" + user.uid + "/listOfParty/" + partyName).push({
+    var database = fire.database().ref("users/" + user.uid + "/listOfParty/"+partyName+"/partyDetail").push({
       name: partyName,
       duration: partyDuration,
       totalGuest: numberOfGuests
@@ -448,7 +446,7 @@ const drinkModel = function () {
     //-------------------Add drink menu to firebase ----------------------
     var user = fire.auth().currentUser;
     var database = fire.database();
-    fire.database().ref("users/" + user.uid + "/listOfParty/" + "/" + partyName+"/listOfdrinks").push(drink);
+    fire.database().ref("users/" + user.uid + "/listOfParty/" +partyName+ "/listOfdrinks").push(drink);
 
     notifyObservers('amountchange');
   }

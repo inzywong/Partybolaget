@@ -23,7 +23,7 @@ class SearchDrink extends Component {
 
     var user = fire.auth().currentUser;
     var database = fire.database();
-    var directory = "users/" + user.uid + "/listOfParty/" +  this.props.model.getPartyNames() + "/listOfDrinkType";
+    var directory = "users/" + user.uid + "/listOfParty/"+this.props.model.getPartyName()+ "/listOfDrinkType";
     var ref = fire.database().ref(directory);
     var drinkOnFocus="";
 

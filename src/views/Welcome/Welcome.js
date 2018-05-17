@@ -16,6 +16,7 @@ class Welcome extends Component {
 
     // We put on state the properties we want to use and modify in the component
     this.state = {
+      name:[],
       numberOfGuests: this.props.model.getNumberOfGuests(),
       partyDuration: this.props.model.getPartyDuration(),
       redirect: false
@@ -26,25 +27,33 @@ class Welcome extends Component {
   componentDidMount() {
     this.props.model.addObserver(this)
 
+    var partyName="";
+    var getPartyNameForWelcome = [];
     //------------------Read Firebase data-----------------------------------------
-
-/*
-    var user = fire.auth().currentUser;
-    var database = fire.database();
-
-    //var ref = fire.database().ref("users/" + user.uid + "/listOfFriends");
-
-    ref.on('value', snap => {
-      var listData = snap.val();
-      var keys = Object.keys(listData);
-      for (var i = 0; i < keys.length; i++) {
-        var k = keys[i];
-        var name = listData[k].name;
-        this.setState({
-          name:name
-        });
+    fire.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        var ref =  fire.database().ref("users/" + user.uid + "/listOfParty/");
+        ref.on('value', function(snap){
+          var listData = snap.val();
+          var keys = Object.keys(listData);
+          for (var i = 0; i < keys.length; i++) {
+            var k = keys[i];
+            partyName = listData[k].partyDetail;
+            var keys1 = Object.keys(partyName);
+            for (var j = 0; j < keys1.length; j++) {
+              var l = keys1[j];
+              getPartyNameForWelcome.push(partyName[l].name);
+            }
+          }
+        }, console.log("error"));
+      } else {
+        // No user is signed in.
       }
-    });*/
+      this.setState({
+        name:getPartyNameForWelcome
+      })
+    });
+      console.log(getPartyNameForWelcome)
   }
   // Called by React when the component is removed from the DOM
   componentWillUnmount() {
@@ -112,10 +121,16 @@ class Welcome extends Component {
   }
 
   render() {
+    console.log(this.state.name)
+    let listItems = this.state.name.map((number) =>
+      <li>{number}</li>
+      );
+
     if (this.state.redirect) {
       return <Redirect push to="/createguestprofile" />;
     }
     return (
+
       <div className="Welcome col-12">
         <h1> Create your party now </h1>
         <form onSubmit={this.handleSubmit.bind(this)}> {/*you have to bind this in order to 'handleSubmit' access the refs*/}
@@ -152,7 +167,7 @@ class Welcome extends Component {
         </form>
         <div>
           <h1>My Party History</h1>
-
+          {listItems}
         </div>
       </div>
     );
