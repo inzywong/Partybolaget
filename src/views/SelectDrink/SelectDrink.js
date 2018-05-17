@@ -16,12 +16,12 @@ class SelectDrink extends Component {
     this.props.model.addObserver(this)
 
     this.props.model.getAllDrinks().then(drinks => {
-		
+
       this.setState({
         status: 'LOADED',
         drinks: drinks,
         chooseDrinkWithName : 'Choose ' + this.props.model.getDrinkTypeName(),
-				
+
       })
     }).catch(() => {
       this.setState({
@@ -67,7 +67,7 @@ class SelectDrink extends Component {
     }
   }
 
-  onAddClicked = (e) => {		
+  onAddClicked = (e) => {
     var d = {
       id: e.target.attributes.getNamedItem("drink_id").value,
       name: e.target.attributes.getNamedItem("drink_name").value,
@@ -77,13 +77,13 @@ class SelectDrink extends Component {
       price: e.target.attributes.getNamedItem("drink_price").value,
 			type: this.state.type
     }
-		
+
     this.props.model.addDrinkToMenu(d)
   }
 
   render() {
     let drinksList = null;
-		
+
     switch (this.state.status) {
       case 'INITIAL':
         drinksList = <p>Loading...</p>
@@ -91,11 +91,14 @@ class SelectDrink extends Component {
       case 'LOADED':
         drinksList = this.state.drinks.map((drink) =>
           <div key={drink.id} className="drinkCard drinkList col-sm-2">
-            <p>{drink.name}</p>
+            <p><b>{drink.name}</b></p>
             <p>{Math.round(drink.alcohol*100)} %</p>
             <p>{drink.volume*1000} mL</p>
             <p>{drink.price} kr</p>
-            <button drink_id={drink.id} drink_name={drink.name} drink_alcohol={drink.alcohol*100} drink_volume={drink.volume*1000} drink_price={drink.price} onClick={this.onAddClicked}>
+            <button drink_id={drink.id} drink_name={drink.name}
+              drink_alcohol={drink.alcohol*100} drink_volume={drink.volume*1000}
+              drink_price={drink.price} onClick={this.onAddClicked}
+            className="btn btn-secondary">
               Add
             </button>
           </div>

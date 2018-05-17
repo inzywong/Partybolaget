@@ -1,4 +1,4 @@
-// This component is responsible for showing a form or the guests profile. 
+// This component is responsible for showing a form or the guests profile.
 // Here is where the user actually edits the guests profile.
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
@@ -156,11 +156,11 @@ class GuestProfile extends Component {
 					</div>
 					{/*------------------------------------------*/}
 
-					<button type="button" className="btn" onClick={() => this.editProfile()}>
+					<button type="button" className="btn btn-primary" onClick={() => this.editProfile()}>
 						Edit Profile
 					</button>
 
-					<button type="button" className="btn" onClick={() => this.deleteGuest()}>
+					<button type="button" className="btn btn-danger" onClick={() => this.deleteGuest()}>
 						Delete Guest
 					</button>
 				</div>
@@ -235,12 +235,12 @@ class GuestProfile extends Component {
 						{/*------------------------------------------*/}
 
 
-						<input type="submit" value="Create Profile"/>
+						<input type="submit" value="Create Profile" className="btn btn-primary"/>
 
 					</form>
 
 					{/* DELETE PROFILE */}
-					<button type="button" className="btn" onClick={() => this.deleteGuest()}>
+					<button type="button" className="btn btn-danger" onClick={() => this.deleteGuest()}>
 						Delete Guest
 					</button>
 				</div>

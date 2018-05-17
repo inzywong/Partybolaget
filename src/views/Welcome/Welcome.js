@@ -169,6 +169,7 @@ class Welcome extends Component {
           <h1>My Party History</h1>
           {listItems}
         </div>
+        >>>>>>> 39ba009326482fed7017e3233daa7037f4af76ef
       </div>
     );
   }

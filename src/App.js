@@ -43,7 +43,7 @@ class App extends Component {
       }else{
         this.setState({user:null});
         //localStorage.removeItem('user');
-  
+
       }
       });
   }
@@ -63,7 +63,7 @@ class App extends Component {
         {/* CONTENT -------------------------------------------------- */}
         <div className="row appContent container-fluid col-lg-12 col-sm-12">
           {this.state.user  ? (<Welcome model={modelInstance}/>) : (<SignIn/>)}
-          {/* We render different components based on the path 
+          {/* We render different components based on the path
           <Route exact path="/" render={() => <Welcome model={modelInstance}/>}/> */}{/* This brings us to the Welcome view */}
 
           <Route path="/createguestprofile"  render={() => <CreateGuestProfile model={modelInstance}/>}/>

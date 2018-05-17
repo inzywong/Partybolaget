@@ -36,7 +36,7 @@ class CreateGuestProfile extends Component {
     this.props.model.addObserver(this);
 
 //------------------Read Firebase data-----------------------------------------
-    var user = fire.auth().currentUser;
+  /*  var user = fire.auth().currentUser;
     var database = fire.database();
 
     var ref = fire.database().ref("users/" + user.uid + "/listOfFriends");
@@ -51,7 +51,7 @@ class CreateGuestProfile extends Component {
           name:name
         });
       }
-    });
+    }); */
 
   }
 
@@ -148,7 +148,7 @@ class CreateGuestProfile extends Component {
 				<div className="CreateGuestProfile col-12">
 					<h1> Create the Guests Profile for: {this.state.partyName}</h1>
 					<h3> Number of Guests: {this.state.numberOfGuests}</h3>
-					<button type="button" className="btn" onClick={() => this.addGuest()}>
+					<button type="button" className="btn btn-secondary" onClick={() => this.addGuest()}>
 						Add 1 Guest
 					</button>
 
@@ -157,11 +157,11 @@ class CreateGuestProfile extends Component {
 					</div>
 
 
-					<button onClick={this.onPlanDrinksClicked}>
-							Plan Drinks
+					<button onClick={this.onPlanDrinksClicked} className="btn btn-success">
+            Plan Drinks
 					</button>
 
-					<button onClick={this.onBackToEditParty}>
+					<button onClick={this.onBackToEditParty} className="btn btn-secondary">
 							Back To Edit Party
 					</button>
 
