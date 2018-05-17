@@ -105,7 +105,7 @@ class Welcome extends Component {
 
     let listofParty =this.state.name.map((partyName)=>
       <div className= "partyHistory col-sm-2">
-        <p>{partyName.name}</p>
+        <p><b>{partyName.name}</b></p>
         <p>{partyName.duration} Hours</p>
         <p>{partyName.totalGuest} Friends</p>
       </div>
