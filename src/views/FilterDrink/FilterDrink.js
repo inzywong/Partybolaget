@@ -94,7 +94,7 @@ class FilterDrink extends Component {
             <option value="alcohol">Alcohol Percentage</option>
           </select>
           <div>
-            <button value={this.state.sortStatus} onClick={this.onSortClicked}>
+            <button value={this.state.sortStatus} onClick={this.onSortClicked} className="btn btn-primary">
               {this.state.message}
             </button>
           </div>

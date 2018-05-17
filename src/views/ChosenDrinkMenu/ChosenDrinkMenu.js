@@ -81,12 +81,14 @@ class ChosenDrinkMenu extends Component {
 			chosenDrinksList=this.state.nameOfChosenDrink.map((drink) =>
 					<div className="row" key={drink.id}>
 						<div className="row">
-							<p className="col">{drink.name}</p>
+							<p className="col">{drink.name} : {drink.amount}</p>
 						</div>
 						<div className="row">
-							<button className="col-md-4" value={drink.id} drink_type={drink.type} onClick={this.onPlusButtonClicked}>+</button>
-							<p className="col-md-4">{drink.amount}</p>
-							<button className="col-md-4" value={drink.id} drink_type={drink.type} onClick={this.onMinusButtonClicked}>-</button>
+							<button   value={drink.id} drink_type={drink.type} onClick={this.onPlusButtonClicked}>
+                <span className="glyphicon glyphicon-plus"> </span></button>
+
+							<button   value={drink.id} drink_type={drink.type} onClick={this.onMinusButtonClicked}>
+                            <span className="glyphicon glyphicon-minus"> </span></button>
 						</div>
 					</div>
 				)

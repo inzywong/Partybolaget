@@ -12,6 +12,8 @@ body {
 
 .btn-primary { color: #ffffff;}
 .btn-secondary { color: #000000;}
+.btn-success{ color:#ffffff;  }
+
 
 /* Header */
 .myHeader {
@@ -79,11 +81,6 @@ body {
   height: 80vh;
 }
 
-
-.CreateGuestProfile .btn-success{
-  color:#ffffff;
-}
-
 .GuestProfile {
   color: #000000;
   padding:20px;
@@ -92,4 +89,16 @@ body {
 
 .GuestProfile .btn-danger {
   color:#ffffff;
+}
+
+/* Select Drink page */
+.drinkCard {
+   border-radius: 10px;
+   padding-top: 10px;
+   background-color: #333366;
+}
+
+.FilterDrink {
+  border-bottom: 5px double #ffffff;
+  padding-left:0;
 }
