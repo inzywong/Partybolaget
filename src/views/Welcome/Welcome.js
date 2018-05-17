@@ -30,36 +30,6 @@ class Welcome extends Component {
     this.setState({
       name:this.props.model.getPartyDetail()
     });
-
-/*
-    var partyName="";
-    var getPartyNameForWelcome = [];
-    //------------------Read Firebase data-----------------------------------------
-    fire.auth().onAuthStateChanged(function(user) {
-      if (user) {
-        var ref =  fire.database().ref("users/" + user.uid + "/listOfParty/");
-        ref.on('value', function(snap){
-          var listData = snap.val();
-          var keys = Object.keys(listData);
-          for (var i = 0; i < keys.length; i++) {
-            var k = keys[i];
-            partyName = listData[k].partyDetail;
-            var keys1 = Object.keys(partyName);
-            for (var j = 0; j < keys1.length; j++) {
-              var l = keys1[j];
-              getPartyNameForWelcome.push(partyName[l].name);
-            }
-          }
-        }, console.log("error"));
-      } else {
-        // No user is signed in.
-      }
-      this.setState({
-        name:getPartyNameForWelcome
-      })
-    });
-      console.log(this.state.name)
-      */
   }
 
   // Called by React when the component is removed from the DOM
@@ -132,7 +102,15 @@ class Welcome extends Component {
     if (this.state.redirect) {
       return <Redirect push to="/createguestprofile" />;
     }
-    let listItems =this.state.name.map((partyName)=><div><p>{partyName}</p></div>);
+
+    let listofParty =this.state.name.map((partyName)=>
+      <div className= "partyHistory col-sm-2">
+        <p>{partyName.name}</p>
+        <p>{partyName.duration} Hours</p>
+        <p>{partyName.totalGuest} Friends</p>
+      </div>
+    );
+
     return (
       <div className="Welcome col-12">
         <h1> Create your party now </h1>
@@ -170,7 +148,7 @@ class Welcome extends Component {
         </form>
         <div>
           <h1>My Party History</h1>
-          {listItems}
+          {listofParty}
         </div>
       </div>
     );

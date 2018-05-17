@@ -133,7 +133,7 @@ this.readPartyDetailFromFirebase = function(){
           var keys1 = Object.keys(partyName);
           for (var j = 0; j < keys1.length; j++) {
             var l = keys1[j];
-            getPartyNameForWelcome.push(partyName[l].name);
+            getPartyNameForWelcome.push(partyName[l]);
           }
         }
       }, console.log("error"));
