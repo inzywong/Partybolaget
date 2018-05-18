@@ -9,25 +9,13 @@
     "react-dom": "^16.3.1",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.4",
-    "uuid": "^3.2.1"
+    "uuid": "^3.2.1",
+    "webpack": "^3.11.0"
   },
   "scripts": {
     "start": "react-scripts start node server.js",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  },
-  "description": "1- Short description of your project: Partybolaget is an app which will use the Systemet API(https://market.mashape.com/karlroos/systemet), which is an API based on open source data from Systembolaget (State own alcohol monopoly in Sweden). The app will help users to plan the amount of drinks they need to serve during a party or an event by calculating the average alcohol consumption and price depending on drinks chosen. Based on the duration of the event and on the guests profiles (gender, weight, gender, prefered drinks), the app will calculate the amount of alcohol the event planner will need.",
-  "main": "server.js",
-  "devDependencies": {},
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/inzywong/Partybolaget.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/inzywong/Partybolaget/issues"
-  },
-  "homepage": "https://github.com/inzywong/Partybolaget#readme"
+  }
 }
