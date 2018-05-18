@@ -112,6 +112,7 @@ class Welcome extends Component {
           <button	type="button" className="btn" onClick={this.goToBuildParty}>
             Build Party
           </button>
+          <input type="range" min="1" max="100"   />
         </div>
       );
     }

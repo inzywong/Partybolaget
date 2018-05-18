@@ -107,6 +107,7 @@ body {
 .FilterDrink {
   border-bottom: 5px double #ffffff;
   padding-left:0;
+
 }
 
 .FilterDrink input {
@@ -120,6 +121,14 @@ body {
 .chosenDrink .btn {
   color: #ffffff;
 }
+
+.partyDetail {
+  border-bottom: 5px double #ffffff;
+  background-color: grey;
+  margin-top: 10px;
+  font-size: 20px;
+}
+
 
 /* Summary page */
 .Summary {
