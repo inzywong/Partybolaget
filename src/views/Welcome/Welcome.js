@@ -105,6 +105,7 @@ class Welcome extends Component {
     if (this.state.redirect) {
       return <Redirect push to="/createguestprofile" />;
     }
+
     if(this.state.condition){
       return(
         <div className="WelcomeOne col-12">
@@ -152,6 +153,7 @@ class Welcome extends Component {
             <input type="submit" value="Plan Party!" className="btn btn-primary"/>
 
           </form>
+        
           <div>
             <h1>My Party History</h1>
             {this.state.name.map((partyName)=>

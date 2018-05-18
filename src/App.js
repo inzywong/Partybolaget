@@ -76,7 +76,7 @@ class App extends Component {
         {/* HEADER --------------------------------------------------- */}
         <div className="row myHeader ">
           <div className="col-sm-3 navigationDiv">
-            
+
 
           </div>
           <div className="col-sm-6">
@@ -91,7 +91,7 @@ class App extends Component {
 
         {/* CONTENT -------------------------------------------------- */}
         <div className="row appContent container-fluid">
-          {this.state.user  ? (<Route path="/"  render={() =><Welcome model={modelInstance}/>}/>) : (<SignIn/>)}
+          {this.state.user  ? (<Route exact path="/"  render={() =><Welcome model={modelInstance}/>}/>) : (<SignIn/>)}
           {/* We render different components based on the path
             <Route exact path="/" render={() => <Welcome model={modelInstance}/>}/> */}{/* This brings us to the Welcome view */}
 
