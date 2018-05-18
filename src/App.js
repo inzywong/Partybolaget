@@ -91,9 +91,10 @@ class App extends Component {
 
         {/* CONTENT -------------------------------------------------- */}
         <div className="row appContent container-fluid">
-          {this.state.user  ? (<Welcome model={modelInstance}/>) : (<SignIn/>)}
+          {this.state.user  ? (<Route path="/"  render={() =><Welcome model={modelInstance}/>}/>) : (<SignIn/>)}
           {/* We render different components based on the path
             <Route exact path="/" render={() => <Welcome model={modelInstance}/>}/> */}{/* This brings us to the Welcome view */}
+
 
             <Route path="/createguestprofile"  render={() => <CreateGuestProfile model={modelInstance}/>}/>
 
