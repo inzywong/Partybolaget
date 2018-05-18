@@ -7,29 +7,28 @@ class DrinkTypeButton extends Component {
     super(props)
 
     this.state = {
-		}    
+		}
   }
 
   update() {
   }
-	
+
 	// Called by React when the component is shown to the user (mounted to DOM)
   componentDidMount() {
     this.props.model.addObserver(this);
   }
-	
+
 	// Called by React when the component is removed from the DOM
   componentWillUnmount() {
     this.props.model.removeObserver(this);
   }
 
-	
 
   onDrinkTypeClicked = () => {
 		this.props.model.setDrinkTypeToSearch(this.props.drinkName);
   }
 
-  render() { 		
+  render() {
     return (
       <div className="row"> {/* Print a button for each drink */}
         <button className={this.props.classes} onClick={this.onDrinkTypeClicked}>

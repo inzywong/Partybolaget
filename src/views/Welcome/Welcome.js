@@ -22,6 +22,7 @@ class Welcome extends Component {
       condition : true,
     }
     this.props.model.readPartyDetailFromFirebase();
+    this.props.model.readListOfFriends();
     this.goToBuildParty = this.goToBuildParty.bind(this);
   }
 
