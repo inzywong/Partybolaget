@@ -20,9 +20,10 @@ class SearchDrink extends Component {
   }
 
   componentDidMount = () => {
-
+    var drinkOnFocus;
+    drinkOnFocus = this.props.model.getDrinkType()[0].type;
 		// Get the name of the first drink type on the menu so that we can highlight it.
-		var drinkOnFocus = this.props.model.getDrinkType()[0].type;
+
 
 		// Setting the first drink on the Menu as the drink to be on focus
 		this.props.model.setDrinkTypeToSearch(drinkOnFocus);

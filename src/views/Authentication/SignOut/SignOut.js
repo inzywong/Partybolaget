@@ -25,9 +25,11 @@ class SignOut extends Component {
 
         //console.log("  Email: " + profile.email);
       });
+      localStorage.setItem("akun", email);
       this.setState({
-        akun:email
+        akun:localStorage.getItem("akun")
       });
+
     }
   }
 
@@ -38,13 +40,14 @@ class SignOut extends Component {
     })
   }
   render() {
+    var userName = localStorage.getItem("akun");
     if(this.state.toWelcome)
     {
       return <Redirect push to="/welcome" />;
     }
     return (
       <div>
-      <p>{this.state.akun}</p>
+      <p>{userName}</p>
       <button type="submit" onClick={this.signOut} class="btn btn-primary">Logout</button>
       </div>
   );

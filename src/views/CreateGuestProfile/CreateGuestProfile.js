@@ -133,17 +133,17 @@ class CreateGuestProfile extends Component {
             <h1> Create the Guests Profile for: {this.state.partyName}</h1>
             <h3> Number of Guests: {this.state.numberOfGuests}</h3>
             <div className="row">
-              <div className="col-sm-8">
+              <div className="col-md-8">
                 <button type="button" className="btn btn-secondary" onClick={() => this.addGuest()}>
                   Add 1 Guest
                 </button>
               </div>
-              <div className="col-sm-1">
+              <div className="backEdit col-md-1">
                 <button onClick={this.onBackToEditParty} className="btn btn-secondary">
                   Back To Edit Party
                 </button>
               </div>
-              <div className="col-sm-1">
+              <div className="planDrink col-md-1">
                 <button onClick={this.onPlanDrinksClicked} className="btn btn-success">
                   Plan Drinks
                 </button>

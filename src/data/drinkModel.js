@@ -78,6 +78,9 @@ var apiDrinkTypeCode = {
 
 //
 var drinkTypesChosenByGuests = [];
+drinkTypesChosenByGuests= JSON.parse(localStorage.getItem("drinkOnFocus"));
+
+
 /* drinkTypesChosenByGuests will look like this:
 {
 type: "beer",
@@ -173,7 +176,7 @@ this.readListOfFriends = function(){
       ref.on('value', snap => {
         var listData = snap.val();
         if (listData == null){
-          
+
         }else{
           if(check1==0){
             var keys = Object.keys(listData);
@@ -628,7 +631,12 @@ this.setMinusDrinkAmount = function(){
 
 // Returns the list of the drinks type chosen by the guests
 this.getDrinkType = function (){
-  return drinkTypesChosenByGuests;
+  if(drinkTypesChosenByGuests!=null){
+    localStorage.setItem("drinkOnFocus", JSON.stringify(drinkTypesChosenByGuests));
+    return drinkTypesChosenByGuests;
+  }else{
+    return JSON.parse(localStorage.getItem("drinkOnFocus"));
+  }
 }
 
 // Return the name of the drink  type on focus on the menu
