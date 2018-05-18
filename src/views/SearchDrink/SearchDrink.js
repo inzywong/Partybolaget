@@ -22,13 +22,13 @@ class SearchDrink extends Component {
   componentDidMount = () => {
     var drinkOnFocus;
     drinkOnFocus = this.props.model.getDrinkType()[0].type;
-		// Get the name of the first drink type on the menu so that we can highlight it.
+    // Get the name of the first drink type on the menu so that we can highlight it.
 
 
-		// Setting the first drink on the Menu as the drink to be on focus
-		this.props.model.setDrinkTypeToSearch(drinkOnFocus);
+    // Setting the first drink on the Menu as the drink to be on focus
+    this.props.model.setDrinkTypeToSearch(drinkOnFocus);
 
-		this.setState({
+    this.setState({
       status: 'LOADED',
     })
 
@@ -52,8 +52,8 @@ class SearchDrink extends Component {
       case 'INITIAL':
       return (
         <em>.</em>
-        );
-        break;
+      );
+      break;
       case 'LOADED':
       return (
         <div className="searchDrink row">
@@ -78,13 +78,13 @@ class SearchDrink extends Component {
           </div>
         </div>
       );
-        break;
+      break;
       default:
       return (
         <b>Failed to load data, please try again</b>
-        );
-        break;
-      }
+      );
+      break;
     }
   }
+}
 export default SearchDrink;

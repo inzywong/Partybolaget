@@ -135,14 +135,17 @@ this.readPartyDetailFromFirebase = function(){
       ref.on('value', function(snap){
         var listData = snap.val();
         if (listData == null){
-
+          console.log("null")
         }else{
+          console.log("tidak")
           if(check==0){
+            console.log("tidak1")
             var keys = Object.keys(listData);
             for (var i = 0; i < keys.length; i++) {
               var k = keys[i];
               partyName = listData[k].partyDetail;
               var keys1 = Object.keys(partyName);
+              console.log(partyName);
               for (var j = 0; j < keys1.length; j++) {
                 var l = keys1[j];
                 getPartyNameForWelcome.push(partyName[l]);
@@ -277,17 +280,17 @@ this.addDrinkType = function(drinkType)
     status: 'didNotReachThreshold'
   });
 
-/*
+  /*
   var user = fire.auth().currentUser;
   var database = fire.database();
   fire.database().ref("users/" + user.uid + "/listOfParty/"  +partyName+ "/listOfDrinkType").push({
-    type: drinkType,
-    code: apiDrinkTypeCode[drinkType],
-    minimumAlcoholVolume: 0,
-    currentAlchoholVolume: 0,
-    status: 'didNotReachThreshold'
-  });
-  */
+  type: drinkType,
+  code: apiDrinkTypeCode[drinkType],
+  minimumAlcoholVolume: 0,
+  currentAlchoholVolume: 0,
+  status: 'didNotReachThreshold'
+});
+*/
 
 }
 
@@ -373,7 +376,7 @@ this.saveGuest = function(guest){
   var user = fire.auth().currentUser;
   var database = fire.database();
   fire.database().ref("users/" + user.uid + "/listOfFriends").push(guest);
-*/
+  */
   notifyObservers();
 }
 
@@ -462,15 +465,15 @@ this.getPartyNames = function() {
 
 this.setPartyDetail = function(){
 
-/*
+  /*
   var user = fire.auth().currentUser;
   var database = fire.database().ref("users/" + user.uid + "/listOfParty/"+partyName+"/partyDetail").push({
-    name: partyName,
-    duration: partyDuration,
-    totalGuest: numberOfGuests
-  });
+  name: partyName,
+  duration: partyDuration,
+  totalGuest: numberOfGuests
+});
 */
-  notifyObservers();
+notifyObservers();
 }
 
 this.setDrinkMinPrice = function(price) {
@@ -537,7 +540,7 @@ this.addDrinkToMenu = function (drink){
   var user = fire.auth().currentUser;
   var database = fire.database();
   fire.database().ref("users/" + user.uid + "/listOfParty/" +partyName+ "/listOfdrinks").push(drink);
-*/
+  */
   notifyObservers('amountchange');
 }
 
@@ -726,13 +729,13 @@ this.submitDataToFirebase = function (){
   var user = fire.auth().currentUser;
   var database = fire.database();
   for (var i = 0; i < drinkTypesChosenByGuests.length; i++) {
-      fire.database().ref("users/" + user.uid + "/listOfParty/"+partyName+"/listOfDrinkType/").push({
-        code:drinkTypesChosenByGuests[i].code,
-        currentAlchoholVolume:drinkTypesChosenByGuests[i].currentAlchoholVolume,
-        minimumAlcoholVolume:drinkTypesChosenByGuests[i].minimumAlcoholVolume,
-        status:drinkTypesChosenByGuests[i].status,
-        type:drinkTypesChosenByGuests[i].type,
-      });
+    fire.database().ref("users/" + user.uid + "/listOfParty/"+partyName+"/listOfDrinkType/").push({
+      code:drinkTypesChosenByGuests[i].code,
+      currentAlchoholVolume:drinkTypesChosenByGuests[i].currentAlchoholVolume,
+      minimumAlcoholVolume:drinkTypesChosenByGuests[i].minimumAlcoholVolume,
+      status:drinkTypesChosenByGuests[i].status,
+      type:drinkTypesChosenByGuests[i].type,
+    });
   }
 
   fire.database().ref("users/" + user.uid + "/listOfParty/"+partyName+"/partyDetail/").push({

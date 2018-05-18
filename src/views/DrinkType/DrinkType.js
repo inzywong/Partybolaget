@@ -19,20 +19,20 @@ class DrinkType extends Component {
   }
 
   update(obj) {
-		if(obj == 'amountchange')
-		{
-			this.setState({
-						drinksToBuy: this.props.model.getDrinkType(), // Returns the list of the drinks type chosen by the guests
-			})
-		}
+    if(obj == 'amountchange')
+    {
+      this.setState({
+        drinksToBuy: this.props.model.getDrinkType(), // Returns the list of the drinks type chosen by the guests
+      })
+    }
   }
 
-	// Called by React when the component is shown to the user (mounted to DOM)
+  // Called by React when the component is shown to the user (mounted to DOM)
   componentDidMount() {
     this.props.model.addObserver(this);
   }
 
-	// Called by React when the component is removed from the DOM
+  // Called by React when the component is removed from the DOM
   componentWillUnmount() {
     this.props.model.removeObserver(this);
   }
@@ -43,29 +43,29 @@ class DrinkType extends Component {
   render() {
     let drinkType = []; //null
 
-		for(var i=0; i<this.state.drinksToBuy.length; i++)
-		{
-			var drink = this.state.drinksToBuy[i];
+    for(var i=0; i<this.state.drinksToBuy.length; i++)
+    {
+      var drink = this.state.drinksToBuy[i];
 
-			// Preparing the classes name for the buttons -----------
-			var buttonClasses = drink.status;
+      // Preparing the classes name for the buttons -----------
+      var buttonClasses = drink.status;
 
-			// In case we are dealing with the selected drink, we should send this
-			//  information as a class name so that we can style the button in a different way.
-			if(drink.type == this.props.model.getDrinkTypeName())
-			{
-				 buttonClasses += " selected ";
-			}
-			// ------------------------------------------------------
+      // In case we are dealing with the selected drink, we should send this
+      //  information as a class name so that we can style the button in a different way.
+      if(drink.type == this.props.model.getDrinkTypeName())
+      {
+        buttonClasses += " selected ";
+      }
+      // ------------------------------------------------------
 
-			drinkType.push(<DrinkTypeButton key={drink.id} drinkName={drink.type} classes={buttonClasses} model={this.props.model}/>);
-		}
+      drinkType.push(<DrinkTypeButton key={drink.id} drinkName={drink.type} classes={buttonClasses} model={this.props.model}/>);
+    }
 
     return (
-			<div>
-				<h3 className="headline">Drinks To Buy</h3>
-				{drinkType}
-			</div>
+      <div>
+        <h3 className="headline">Drinks To Buy</h3>
+        {drinkType}
+      </div>
     );
   }
 }

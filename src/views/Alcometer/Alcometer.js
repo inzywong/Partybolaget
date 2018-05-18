@@ -7,27 +7,27 @@ class Alcometer extends Component {
     super(props)
     this.state = {
       alcometer: 'Alcometer',
-			drinkType: this.props.model.getDrinkTypeName()
+      drinkType: this.props.model.getDrinkTypeName()
     }
   }
 
 
-	// Called by React when the component is shown to the user (mounted to DOM)
+  // Called by React when the component is shown to the user (mounted to DOM)
   componentDidMount() {
 
-		// setState causes the component to re-render
+    // setState causes the component to re-render
     //this.setState({
-		//	drinkType: ''
-		//})
+    //	drinkType: ''
+    //})
     this.props.model.addObserver(this);
   }
 
 
   update() {
-  this.setState({
-		drinkType: this.props.model.getDrinkTypeName()
-  })
-}
+    this.setState({
+      drinkType: this.props.model.getDrinkTypeName()
+    })
+  }
 
   render() {
     return (

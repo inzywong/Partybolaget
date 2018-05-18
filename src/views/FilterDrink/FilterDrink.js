@@ -52,28 +52,28 @@ class FilterDrink extends Component {
     if (this.props.model.getSortStatus()=="DESC"){
       this.props.model.setSortBy("ASC");
       this.state.message = <p>&#8595; Ascending</p>;
-    } else if(this.props.model.getSortStatus()=="ASC"){
-      this.props.model.setSortBy("DESC");
-      this.state.message = <p>&#8593; Descending</p>;
-    }
-  }
+      } else if(this.props.model.getSortStatus()=="ASC"){
+        this.props.model.setSortBy("DESC");
+        this.state.message = <p>&#8593; Descending</p>;
+        }
+      }
 
-  render() {
-    return (
-      <div className="FilterDrink row">
+      render() {
+        return (
+          <div className="FilterDrink row">
 
-        <div className="partyDetail row">
-          <div className="col-sm-4">{this.state.partyName}</div>
-          <div className="col-sm-4">{this.state.numberOfGuests}</div>
-          <div className="col-sm-4">{this.state.partyDuration}</div>
-        </div>
-        <div className="drinkPrice row">
-          <div className="col-sm-4"><p>{this.state.drinkPrice} (SEK)  </p>
-            <label><input type="number" onChange={this.onMinPriceTextChanged} placeholder="Minimal" /></label>
-            <label><input type="number" onChange={this.onMaxPriceTextChanged} placeholder="Maximal" /></label>
+            <div className="partyDetail row">
+              <div className="col-sm-4">{this.state.partyName}</div>
+              <div className="col-sm-4">{this.state.numberOfGuests}</div>
+              <div className="col-sm-4">{this.state.partyDuration}</div>
+            </div>
+            <div className="drinkPrice row">
+              <div className="col-sm-4"><p>{this.state.drinkPrice} (SEK)  </p>
+              <label><input type="number" onChange={this.onMinPriceTextChanged} placeholder="Minimal" /></label>
+              <label><input type="number" onChange={this.onMaxPriceTextChanged} placeholder="Maximal" /></label>
 
-          </div>
-          <div className="col-sm-4"><p>{this.state.alcoholPercentage} (%)</p>
+            </div>
+            <div className="col-sm-4"><p>{this.state.alcoholPercentage} (%)</p>
             <label>
               <input type="number" onChange={this.onMinAlcoholTextChanged} placeholder="Minimal"/>
             </label>
@@ -100,14 +100,14 @@ class FilterDrink extends Component {
           </div>
 
 
-          </div>
-
-          <div className="row">
-
-          </div>
         </div>
-        );
-        }
-        }
 
-        export default FilterDrink;
+        <div className="row">
+
+        </div>
+      </div>
+    );
+  }
+}
+
+export default FilterDrink;

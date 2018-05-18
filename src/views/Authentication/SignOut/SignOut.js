@@ -13,7 +13,7 @@ class SignOut extends Component {
       akun:""
     }
   }
-
+  
   componentDidMount(){
     var email="";
     var user = fire.auth().currentUser;
@@ -21,7 +21,7 @@ class SignOut extends Component {
     if (user != null) {
       user.providerData.forEach(function (profile) {
 
-          email=profile.email;
+        email=profile.email;
 
         //console.log("  Email: " + profile.email);
       });
@@ -47,10 +47,10 @@ class SignOut extends Component {
     }
     return (
       <div>
-      <p>Welcome....{userName}</p>
-      <button type="submit" onClick={this.signOut} class="btn btn-primary">Logout</button>
+        <p>Welcome....{userName}</p>
+        <button type="submit" onClick={this.signOut} class="btn btn-primary">Logout</button>
       </div>
-  );
+    );
   }
 }
 

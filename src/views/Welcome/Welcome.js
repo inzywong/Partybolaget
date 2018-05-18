@@ -76,7 +76,9 @@ class Welcome extends Component {
   }
 
   goToBuildParty(){
-    this.setState({condition: false});
+    this.setState({
+      condition: false,
+    });
   }
 
   /* CLICKED ON 'PLAN PARTY!' */
@@ -153,7 +155,7 @@ class Welcome extends Component {
             <input type="submit" value="Plan Party!" className="btn btn-primary"/>
 
           </form>
-        
+
           <div>
             <h1>My Party History</h1>
             {this.state.name.map((partyName)=>
