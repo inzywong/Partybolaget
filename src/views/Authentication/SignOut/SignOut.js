@@ -47,7 +47,7 @@ class SignOut extends Component {
     }
     return (
       <div>
-      <p>{userName}</p>
+      <p>Welcome....{userName}</p>
       <button type="submit" onClick={this.signOut} class="btn btn-primary">Logout</button>
       </div>
   );
