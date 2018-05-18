@@ -40,13 +40,13 @@ class App extends Component {
       console.log(user);
       if(user){
         this.setState({user});
-       // localStorage.setItem('user', user.uid);
+        // localStorage.setItem('user', user.uid);
       }else{
         this.setState({user:null});
         //localStorage.removeItem('user');
 
       }
-      });
+    });
   }
 
   render() {
@@ -54,10 +54,14 @@ class App extends Component {
       <div className="App">
         {/* HEADER --------------------------------------------------- */}
         <div className="row myHeader col-lg-12 col-sm-12">
-
-          <center><h1><img style={{height: "20px", width: "20px"}} src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Emoji_u1f378.svg/2000px-Emoji_u1f378.svg.png" ></img>
-            <b>Partybolaget</b></h1></center>
-          {this.state.user  ?  (<SignOut  model={this.props.model} />) : (SignUp)}
+          <div className="col-sm-2"></div>
+          <div className="col-sm-8">
+            <h1><img style={{height: "20px", width: "20px"}} src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Emoji_u1f378.svg/2000px-Emoji_u1f378.svg.png" ></img>
+            <b>Partybolaget</b></h1>
+          </div>
+          <div className="col-sm-2">
+            {this.state.user  ?  (<SignOut  model={this.props.model} />) : (SignUp)}
+          </div>
         </div>
         {/* END OF HEADER -------------------------------------------- */}
 
@@ -65,27 +69,27 @@ class App extends Component {
         <div className="row appContent container-fluid col-lg-12 col-sm-12">
           {this.state.user  ? (<Welcome model={modelInstance}/>) : (<SignIn/>)}
           {/* We render different components based on the path
-          <Route exact path="/" render={() => <Welcome model={modelInstance}/>}/> */}{/* This brings us to the Welcome view */}
+            <Route exact path="/" render={() => <Welcome model={modelInstance}/>}/> */}{/* This brings us to the Welcome view */}
 
-          <Route path="/createguestprofile"  render={() => <CreateGuestProfile model={modelInstance}/>}/>
+            <Route path="/createguestprofile"  render={() => <CreateGuestProfile model={modelInstance}/>}/>
 
-          <Route path="/searchdrink"  render={(props) => <SearchDrink info={props} model={modelInstance}/>}/>
-          <Route path="/summarypage"  render={() => <SummaryPage model={modelInstance}/>}/>
-          <Route path="/FinalPage"  	render={() => <FinalPage model={modelInstance}/>}/>
+            <Route path="/searchdrink"  render={(props) => <SearchDrink info={props} model={modelInstance}/>}/>
+            <Route path="/summarypage"  render={() => <SummaryPage model={modelInstance}/>}/>
+            <Route path="/FinalPage"  	render={() => <FinalPage model={modelInstance}/>}/>
+
+          </div>
+          {/* END OF CONTENT ------------------------------------------- */}
+
+
+          {/* FOOTER --------------------------------------------------- */}
+          <div className="row myFooter col-lg-12 col-sm-12">
+            <center><p> @2018 KTH</p></center>
+          </div>
+          {/* END OF FOOTER -------------------------------------------- */}
 
         </div>
-        {/* END OF CONTENT ------------------------------------------- */}
-
-
-        {/* FOOTER --------------------------------------------------- */}
-        <div className="row myFooter col-lg-12 col-sm-12">
-							<center><p> @2018 KTH</p></center>
-					</div>
-					{/* END OF FOOTER -------------------------------------------- */}
-
-      </div>
-    );
+      );
+    }
   }
-}
 
-export default App;
+  export default App;

@@ -10,6 +10,24 @@ class SignOut extends Component {
     this.signOut = this.signOut.bind(this);
     this.state = {
       toWelcome: false,
+      akun:""
+    }
+  }
+
+  componentDidMount(){
+    var email="";
+    var user = fire.auth().currentUser;
+
+    if (user != null) {
+      user.providerData.forEach(function (profile) {
+
+          email=profile.email;
+
+        //console.log("  Email: " + profile.email);
+      });
+      this.setState({
+        akun:email
+      });
     }
   }
 
@@ -21,12 +39,15 @@ class SignOut extends Component {
   }
   render() {
     if(this.state.toWelcome)
-  		{
-  				return <Redirect push to="/welcome" />;
-  		}
+    {
+      return <Redirect push to="/welcome" />;
+    }
     return (
+      <div>
+      <p>{this.state.akun}</p>
       <button type="submit" onClick={this.signOut} class="btn btn-primary">Logout</button>
-    );
+      </div>
+  );
   }
 }
 
