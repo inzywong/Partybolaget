@@ -122,7 +122,7 @@ class GuestProfile extends Component {
 		{
 
 			return(
-				<div className="GuestProfile row blue square">
+				<div className="GuestProfile col-sm-2">
 					{/*  PARTY NAME  ----------------------------*/}
 					<div>
 						<p> Guest Name: <b> {this.state.name} </b> </p>
@@ -156,13 +156,17 @@ class GuestProfile extends Component {
 					</div>
 					{/*------------------------------------------*/}
 
-					<button type="button" className="btn btn-primary" onClick={() => this.editProfile()}>
-						Edit Profile
-					</button>
-
-					<button type="button" className="btn btn-danger" onClick={() => this.deleteGuest()}>
-						Delete Guest
-					</button>
+          <div className="row buttons">
+            <div className="col-md-7"></div>
+            <div className="col-md-2">
+              <img src="https://png.icons8.com/ultraviolet/30/multi-edit.png" onClick={() => this.editProfile()}  />
+            </div>
+            <div className="col-md-2">
+              {/* DELETE PROFILE */}
+              <img src="https://png.icons8.com/color/30/trash.png" onClick={() => this.deleteGuest()}  />
+            </div>
+          </div>
+          
 				</div>
 			);
 
@@ -171,14 +175,14 @@ class GuestProfile extends Component {
 		else
 		{
 			return (
-				<div className="GuestProfile row blue square">
+				<div className="GuestProfile col-sm-2">
 
 					<form onSubmit={this.handleSubmit.bind(this)}> {/*you have to bind this in order to 'handleSubmit' access the refs*/}
 
 						{/*  PARTY NAME  ----------------------------*/}
 						<div>
 							<p> Guest Name: </p>
-							<input type="text" ref="guestName" />  
+							<input type="text" ref="guestName" />
 						</div>
 						{/*------------------------------------------*/}
 
@@ -227,15 +231,23 @@ class GuestProfile extends Component {
 						</div>
 						{/*------------------------------------------*/}
 
+            <div className="row buttons">
+              <div className="col-md-7"></div>
+              <div className="saveButton col-md-2">
+                <input type="submit" value=""/>
 
-						<input type="submit" value="Create Profile" className="btn btn-primary"/>
+              </div>
+              <div className="col-md-2">
+                {/* DELETE PROFILE */}
+                <img src="https://png.icons8.com/color/30/minus.png" onClick={() => this.deleteGuest()}  />
+              </div>
+            </div>
+
+
 
 					</form>
 
-					{/* DELETE PROFILE */}
-					<button type="button" className="btn btn-danger" onClick={() => this.deleteGuest()}>
-						Delete Guest
-					</button>
+
 				</div>
 			);
 		}

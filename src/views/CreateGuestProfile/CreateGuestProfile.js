@@ -132,27 +132,24 @@ class CreateGuestProfile extends Component {
           <div className="CreateGuestProfile col-sm-10">
             <h1> Create the Guests Profile for: {this.state.partyName}</h1>
             <h3> Number of Guests: {this.state.numberOfGuests}</h3>
-            <div className="row">
-              <div className="col-md-8">
+            <div className="row rowTest">
+              <div >
                 <button type="button" className="btn btn-secondary" onClick={() => this.addGuest()}>
                   Add 1 Guest
-                </button>
-              </div>
-              <div className="backEdit col-md-1">
-                <button onClick={this.onBackToEditParty} className="btn btn-secondary">
-                  Back To Edit Party
-                </button>
-              </div>
-              <div className="planDrink col-md-1">
-                <button onClick={this.onPlanDrinksClicked} className="btn btn-success">
-                  Plan Drinks
                 </button>
               </div>
             </div>
             <div className="cardGuest row">
               {listOfGuests}
             </div>
-
+            <div>
+              <button onClick={this.onBackToEditParty} className="btn btn-secondary">
+                Back To Edit Party
+              </button> &nbsp;&nbsp;
+              <button onClick={this.onPlanDrinksClicked} className="btn btn-success">
+                Plan Drinks
+              </button>
+            </div>
           </div>
           <div className="friendList col-sm-2">
             <h1>List of Friends</h1>

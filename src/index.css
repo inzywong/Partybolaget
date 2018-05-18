@@ -35,6 +35,9 @@ body {
   vertical-align: middle;
   color: #000000;
   padding-top: 10px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 }
 
 
@@ -104,6 +107,25 @@ body {
   color: #000000;
   padding:20px;
   border-radius: 20px;
+  background-color: white;
+  margin-right: 5px;
+}
+
+.GuestProfile img {
+  height: 30px;
+  cursor: pointer;
+}
+
+ .GuestProfile .buttons {
+ }
+
+.GuestProfile .saveButton input {
+
+  background:url(https://png.icons8.com/color/30/ok.png) no-repeat center top;
+  cursor: pointer;
+  height: 30px;
+  width: 30px;
+  border:none;
 }
 
 .GuestProfile .btn-danger {
@@ -114,6 +136,16 @@ body {
   margin-bottom: 5px;
 }
 
+.rowTest {
+  margin-left: 0px;
+}
+
+.cardGuest {
+  margin-bottom: 10px;
+  margin-left: 0px;
+  margin-top: 10px;
+
+}
 
 .friendCard {
   background-color: green;
