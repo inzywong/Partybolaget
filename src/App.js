@@ -75,7 +75,10 @@ class App extends Component {
       <div className="App">
         {/* HEADER --------------------------------------------------- */}
         <div className="row myHeader ">
-          <div className="col-sm-3"></div>
+          <div className="col-sm-3 navigationDiv">
+            
+
+          </div>
           <div className="col-sm-6">
             <h1><img style={{height: "20px", width: "20px"}} src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Emoji_u1f378.svg/2000px-Emoji_u1f378.svg.png" ></img>
             <b>Partybolaget</b></h1>
