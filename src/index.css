@@ -78,7 +78,7 @@ body {
 
 .Welcome .btn-primary {
   color: #ffffff;
-  
+
 }
 
 .txtParty {
@@ -110,6 +110,11 @@ body {
   color:#ffffff;
 }
 
+.GuestProfile div {
+  margin-bottom: 5px;
+}
+
+
 .friendCard {
   background-color: green;
   border-radius: 10px;
@@ -118,6 +123,7 @@ body {
   text-align:center;
   vertical-align: middle;
 }
+
 
 .friendList h1 {
 
