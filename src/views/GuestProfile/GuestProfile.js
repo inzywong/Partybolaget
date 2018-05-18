@@ -197,6 +197,7 @@ class GuestProfile extends Component {
 						{/*  WEIGHT  --------------------------------*/}
 						<div>
 							<p> Weight: {this.state.weight} Kg</p>
+              <input type="range" min="1" max="100" ></input>
 							<button	type="button" className="btn" onClick={() => this.onWeightChanged(-1)}>
 								<span className="glyphicon glyphicon-minus"> </span>
 							</button>

@@ -106,12 +106,11 @@ class Welcome extends Component {
     }
     if(this.state.condition){
       return(
-        <div className="Welcome col-12">
+        <div className="WelcomeOne col-12">
           <h3> Welcome To Partybolaget, a Platform that can manage your party and help you prepare enough drink for the party</h3>
           <button	type="button" className="btn" onClick={this.goToBuildParty}>
             Build Party
           </button>
-          <input type="range" min="1" max="100"   />
         </div>
       );
     }
