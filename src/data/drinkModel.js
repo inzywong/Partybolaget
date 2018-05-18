@@ -391,7 +391,7 @@ this.createGuests = function(n){
     var guest = {
       name: '',
       sex: '',
-      weight: 30,
+      weight: 55,
       drinkingSkills: '',
       preferedDrink: '',
       id: uuid.v4(),
