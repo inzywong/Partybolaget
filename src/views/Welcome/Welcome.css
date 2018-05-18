@@ -1,0 +1,25 @@
+
+/*
+body, h1 {font-family: "Raleway", sans-serif}
+
+*/
+body {
+}
+
+html, body {}
+
+.Welcome {
+  text-align: center;
+  height: 80vh;
+  position: center;
+  vertical-align: middle;
+  padding-top: 10vh;
+  /*background-color: #ff0000;*/
+}
+
+.partyHistory{
+  margin:2px;
+  border: solid 1px;
+  border-radius: 10px;
+  width: 180px;
+}

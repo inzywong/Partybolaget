@@ -1,3 +1,5 @@
+// This component is responsible for showing a form or the guests profile.
+// Here is where the user actually edits the guests profile.
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './GuestProfile.css';
@@ -28,11 +30,11 @@ class GuestProfile extends Component {
   componentDidMount() {
 		//console.log(this.props.guestId);
 
-    this.props.model.addObserver(this)
+    this.props.model.addObserver(this);
   }
 	// Called by React when the component is removed from the DOM
   componentWillUnmount() {
-    this.props.model.removeObserver(this)
+    this.props.model.removeObserver(this);
   }
 
 
@@ -72,11 +74,17 @@ class GuestProfile extends Component {
 
 			this.props.model.saveGuest(guestProf);
 		}
-
 		e.preventDefault(); // preventing from submitting the form
 	}
 
+  handleChange=(e)=>{
 
+ 		this.setState({
+			weight: e.target.value
+ 		});
+ 	}
+
+/*
 	onWeightChanged = (increment) =>{
 		var w = this.state.weight + increment;
 
@@ -89,10 +97,7 @@ class GuestProfile extends Component {
 			weight: w
 		});
 	}
-
-
-
-
+*/
 	editProfile = () =>{
 		this.setState({saved: false});
 	}
@@ -125,7 +130,7 @@ class GuestProfile extends Component {
 		{
 
 			return(
-				<div className="GuestProfile row blue square">
+				<div className="GuestProfile col-sm-2">
 					{/*  PARTY NAME  ----------------------------*/}
 					<div>
 						<p> Guest Name: <b> {this.state.name} </b> </p>
@@ -159,13 +164,17 @@ class GuestProfile extends Component {
 					</div>
 					{/*------------------------------------------*/}
 
-					<button type="button" className="btn" onClick={() => this.editProfile()}>
-						Edit Profile
-					</button>
+          <div className="row buttons">
+            <div className="col-md-7"></div>
+            <div className="col-md-2">
+              <img src="https://png.icons8.com/ultraviolet/30/multi-edit.png" onClick={() => this.editProfile()}  />
+            </div>
+            <div className="col-md-2">
+              {/* DELETE PROFILE */}
+              <img src="https://png.icons8.com/color/30/trash.png" onClick={() => this.deleteGuest()}  />
+            </div>
+          </div>
 
-					<button type="button" className="btn" onClick={() => this.deleteGuest()}>
-						Delete Guest
-					</button>
 				</div>
 			);
 
@@ -174,14 +183,14 @@ class GuestProfile extends Component {
 		else
 		{
 			return (
-				<div className="GuestProfile row blue square">
+				<div className="GuestProfile col-sm-2">
 
 					<form onSubmit={this.handleSubmit.bind(this)}> {/*you have to bind this in order to 'handleSubmit' access the refs*/}
 
 						{/*  PARTY NAME  ----------------------------*/}
 						<div>
 							<p> Guest Name: </p>
-							<input type="text" ref="guestName" /> <br/> <br/>
+							<input type="text" ref="guestName" />
 						</div>
 						{/*------------------------------------------*/}
 
@@ -200,14 +209,7 @@ class GuestProfile extends Component {
 						{/*  WEIGHT  --------------------------------*/}
 						<div>
 							<p> Weight: {this.state.weight} Kg</p>
-							<button	type="button" className="btn" onClick={() => this.onWeightChanged(-1)}>
-								<span className="glyphicon glyphicon-minus"> </span>
-							</button>
-
-							<button type="button" className="btn" onClick={() => this.onWeightChanged(1)}>
-								<span className="glyphicon glyphicon-plus"> </span>
-							</button>
-							<br/> <br/>
+              <input type="range" min="35" max="150" value={this.state.weight} onChange={this.handleChange}></input>
 						</div>
 						{/*------------------------------------------*/}
 
@@ -237,15 +239,23 @@ class GuestProfile extends Component {
 						</div>
 						{/*------------------------------------------*/}
 
+            <div className="row buttons">
+              <div className="col-md-7"></div>
+              <div className="saveButton col-md-2">
+                <input type="submit" value=""/>
 
-						<input type="submit" value="Create Profile"/>
+              </div>
+              <div className="col-md-2">
+                {/* DELETE PROFILE */}
+                <img src="https://png.icons8.com/color/30/minus.png" onClick={() => this.deleteGuest()}  />
+              </div>
+            </div>
+
+
 
 					</form>
 
-					{/* DELETE PROFILE */}
-					<button type="button" className="btn" onClick={() => this.deleteGuest()}>
-						Delete Guest
-					</button>
+
 				</div>
 			);
 		}

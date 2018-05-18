@@ -2,4 +2,273 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  background-image: url('images/bg.jpg');
+  background-size: 100%;
+  background-attachment: scroll;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  color: #ffffff;
+}
+
+.btn-primary { color: #ffffff;}
+.btn-secondary { color: #000000;}
+.btn-success{ color:#ffffff;  }
+
+.headline {
+  background-color: white;
+  color: black;
+  padding:5px;
+  border-radius: 5px;
+}
+
+/* Header */
+.myHeader {
+  background-color: #ffffff;
+  color: #000000;
+  display: block;
+  align-items: center;
+  text-align: center;
+}
+
+.navigationDiv {
+
+}
+
+/* Footer */
+.myFooter {
+  background-color: #ffffff;
+  height: 40px;
+  vertical-align: middle;
+  color: #000000;
+  padding-top: 10px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+
+/* Authentication page */
+.SignIn {
+  height: 80vh;
+
+}
+
+.formSignIn {
+  background-color: #ffffff;
+  border-radius: 30px;
+  padding:30px;
+  display: inline-block;
+  color: #000000;
+  margin-top: 10%;
+}
+
+.form-control {
+  width: 300px;
+}
+
+/* Welcome page */
+.WelcomeOne {
+  height: 85vh;
+  text-align: center;
+ padding-top: 15%;
+}
+
+.Welcome input {
+  color: #000000;
+}
+
+.DivWelcomeDuration {
+  margin-bottom: 10px;
+}
+
+.Welcome button {
+  color: #000000;
+}
+
+.Welcome .btn-primary {
+  color: #ffffff;
+
+}
+
+.txtParty {
+  width: 250px;
+  text-align: center;
+}
+
+.partyHistory {
+  background-color: #9999ff;
+  color:grey;
+  border-top-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  padding:10px;
+  color: white;
+}
+
+/* Create Guest page */
+.CreateGuestProfile {
+  height: 80vh;
+}
+
+.GuestProfile {
+  color: #000000;
+  padding:20px;
+  border-radius: 20px;
+  background-color: white;
+  margin-right: 5px;
+}
+
+.GuestProfile img {
+  height: 30px;
+  cursor: pointer;
+}
+
+ .GuestProfile .buttons {
+ }
+
+.GuestProfile .saveButton input {
+
+  background:url(https://png.icons8.com/color/30/ok.png) no-repeat center top;
+  cursor: pointer;
+  height: 30px;
+  width: 30px;
+  border:none;
+}
+
+.GuestProfile .btn-danger {
+  color:#ffffff;
+}
+
+.GuestProfile div {
+  margin-bottom: 5px;
+}
+
+.rowTest {
+  margin-left: 0px;
+}
+
+.cardGuest {
+  margin-bottom: 10px;
+  margin-left: 0px;
+  margin-top: 10px;
+
+}
+
+.friendCard {
+  background-color: green;
+  border-radius: 10px;
+  padding-top: 5px;
+  margin-bottom: 5px;
+  text-align:center;
+  vertical-align: middle;
+}
+
+
+.friendList h1 {
+
+}
+
+/* Select Drink page */
+.leftPanel {
+
+}
+
+.drinkCard {
+   border-radius: 10px;
+   padding-top: 10px;
+   background-color: #333366;
+   margin:5px;
+}
+
+.FilterDrink {
+  padding-left:0;
+
+}
+
+.drinkType {
+
+}
+
+.FilterDrink input {
+  color: #000000;
+}
+
+.ChosenDrinkMenu {
+  padding-left: 0px;
+}
+
+.chosenDrinkList{
+  margin-left: 0px;
+  margin-bottom: 15px;
+  font-size: 15px;
+  font-weight: bold;
+  padding-bottom: 5px;
+  border-bottom: 2px solid;
+}
+
+.chosenDrinkButton{
+  text-align: center;
+}
+
+.chosenDrink button {
+  color: #000000;
+}
+
+.chosenDrink .btn {
+  color: #ffffff;
+}
+
+.partyDetail {
+  border-bottom: 2px solid #ffffff;
+  margin-bottom: 10px;
+  font-size: 20px;
+  padding:10px;
+}
+
+
+/* Summary page */
+.Summary {
+  height: 80vh;
+  text-align: center;
+  padding-top: 20px;
+
+
+}
+
+.SummaryInside {
+  background-color: white;
+  color: black;
+  border-radius: 20px;
+    padding:20px;
+    display:inline-block;
+  width: 50%;
+
+}
+
+.SummaryInside h1{
+  border-bottom: 2px double black;
+  margin-bottom: 30px;
+  margin-top:0;
+}
+
+.SummaryInside .listOfDrink {
+  font-size: 15pt;
+  margin-top:20px;
+}
+
+.Summary .divDrinkList {
+  text-align: center;
+}
+
+.drinkList {
+  border-radius: 10px;
+  padding-top: 10px;
+  background-color: #333366;
+  color: white;
+}
+
+/* Final page */
+.Final {
+  height: 80vh;
+  text-align: center;
+  margin-top:20%;
 }
