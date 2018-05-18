@@ -109,7 +109,7 @@ class Welcome extends Component {
       return(
         <div className="WelcomeOne col-12">
           <h3> Welcome To Partybolaget, a Platform that can manage your party and help you prepare enough drink for the party</h3>
-          <button	type="button" className="btn" onClick={this.goToBuildParty}>
+          <button	type="button" className="btn btn-primary" onClick={this.goToBuildParty}>
             Build Party
           </button>
         </div>
@@ -123,7 +123,7 @@ class Welcome extends Component {
             {/*  PARTY NAME  */}
             <div>
               <p> Name of the Party: </p>
-              <input type="text" ref="partyName" /> <br/> <br/>
+              <input type="text" ref="partyName"   /> <br/> <br/>
             </div>
             {/*  DURATION  */}
             <div>

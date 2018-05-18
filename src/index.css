@@ -56,6 +56,12 @@ body {
 }
 
 /* Welcome page */
+.WelcomeOne {
+  height: 85vh;
+  text-align: center;
+ padding-top: 15%;
+}
+
 .Welcome input {
   color: #000000;
 }
