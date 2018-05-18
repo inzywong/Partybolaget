@@ -74,20 +74,20 @@ class App extends Component {
     return (
       <div className="App">
         {/* HEADER --------------------------------------------------- */}
-        <div className="row myHeader col-lg-12 col-sm-12">
-          <div className="col-sm-2"></div>
-          <div className="col-sm-8">
+        <div className="row myHeader ">
+          <div className="col-sm-3"></div>
+          <div className="col-sm-6">
             <h1><img style={{height: "20px", width: "20px"}} src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Emoji_u1f378.svg/2000px-Emoji_u1f378.svg.png" ></img>
             <b>Partybolaget</b></h1>
           </div>
-          <div className="col-sm-2">
+          <div className="col-sm-3">
             {this.state.user  ?  (<SignOut  model={this.props.model} />) : (SignUp)}
           </div>
         </div>
         {/* END OF HEADER -------------------------------------------- */}
 
         {/* CONTENT -------------------------------------------------- */}
-        <div className="row appContent container-fluid col-lg-12 col-sm-12">
+        <div className="row appContent container-fluid">
           {this.state.user  ? (<Welcome model={modelInstance}/>) : (<SignIn/>)}
           {/* We render different components based on the path
             <Route exact path="/" render={() => <Welcome model={modelInstance}/>}/> */}{/* This brings us to the Welcome view */}
@@ -103,7 +103,7 @@ class App extends Component {
 
 
           {/* FOOTER --------------------------------------------------- */}
-          <div className="row myFooter col-lg-12 col-sm-12">
+          <div className="row myFooter">
             <center><p> @2018 KTH</p></center>
           </div>
           {/* END OF FOOTER -------------------------------------------- */}
