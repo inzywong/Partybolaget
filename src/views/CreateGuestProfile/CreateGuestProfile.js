@@ -154,10 +154,10 @@ class CreateGuestProfile extends Component {
             </div>
 
           </div>
-          <div>
+          <div className="friendList col-sm-2">
             <h1>List of Friends</h1>
             {this.state.friends.map((friend)=>
-              <div className= "col-sm-2">
+              <div className= "row friendCard">
                 <p>{friend.name}</p>
               </div>
             )}

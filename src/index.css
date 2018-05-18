@@ -24,6 +24,10 @@ body {
   text-align: center;
 }
 
+.navigationDiv {
+
+}
+
 /* Footer */
 .myFooter {
   background-color: #ffffff;
@@ -64,16 +68,22 @@ body {
   color: #000000;
 }
 
+.DivWelcomeDuration {
+  margin-bottom: 10px;
+}
+
 .Welcome button {
   color: #000000;
 }
 
 .Welcome .btn-primary {
   color: #ffffff;
+  
 }
 
 .txtParty {
-  width: 200px;
+  width: 250px;
+  text-align: center;
 }
 
 .partyHistory {
@@ -98,6 +108,19 @@ body {
 
 .GuestProfile .btn-danger {
   color:#ffffff;
+}
+
+.friendCard {
+  background-color: green;
+  border-radius: 10px;
+  padding-top: 5px;
+  margin-bottom: 5px;
+  text-align:center;
+  vertical-align: middle;
+}
+
+.friendList h1 {
+
 }
 
 /* Select Drink page */
