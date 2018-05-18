@@ -77,6 +77,14 @@ class GuestProfile extends Component {
 		e.preventDefault(); // preventing from submitting the form
 	}
 
+	handleChange(e){
+/*
+		this.setState({
+			weight: e
+		});
+		e.preventDefault(); // preventing from submitting the form*/
+	}
+
 	onWeightChanged = (increment) =>{
 		var w = this.state.weight + increment;
 
@@ -197,7 +205,7 @@ class GuestProfile extends Component {
 						{/*  WEIGHT  --------------------------------*/}
 						<div>
 							<p> Weight: {this.state.weight} Kg</p>
-              <input type="range" min="1" max="100" ></input>
+              				<input type="range" min="1" max="150" defaultValue={this.state.weight} onChange={this.handleChange.bind(this)}></input>
 							<button	type="button" className="btn" onClick={() => this.onWeightChanged(-1)}>
 								<span className="glyphicon glyphicon-minus"> </span>
 							</button>
