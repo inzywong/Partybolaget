@@ -61,10 +61,11 @@ class SummaryPage extends Component {
     this.setState({
 			redirectToConfirm: true
 		})
+    this.props.model.submitDataToFirebase();
   }
 
   render() {
-
+      console.log(this.props.model.getGuests())
   		// REDIRECT TO PLAN PARTY PAGE
   		if(this.state.returnToEditParty)
   		{

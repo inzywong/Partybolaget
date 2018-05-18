@@ -277,6 +277,7 @@ this.addDrinkType = function(drinkType)
     status: 'didNotReachThreshold'
   });
 
+/*
   var user = fire.auth().currentUser;
   var database = fire.database();
   fire.database().ref("users/" + user.uid + "/listOfParty/"  +partyName+ "/listOfDrinkType").push({
@@ -286,6 +287,7 @@ this.addDrinkType = function(drinkType)
     currentAlchoholVolume: 0,
     status: 'didNotReachThreshold'
   });
+  */
 
 }
 
@@ -367,10 +369,11 @@ this.saveGuest = function(guest){
   guests[index] = guest;
 
   //-------------------Add number of guests to firebase ----------------------
+  /*
   var user = fire.auth().currentUser;
   var database = fire.database();
   fire.database().ref("users/" + user.uid + "/listOfFriends").push(guest);
-
+*/
   notifyObservers();
 }
 
@@ -459,13 +462,14 @@ this.getPartyNames = function() {
 
 this.setPartyDetail = function(){
 
+/*
   var user = fire.auth().currentUser;
   var database = fire.database().ref("users/" + user.uid + "/listOfParty/"+partyName+"/partyDetail").push({
     name: partyName,
     duration: partyDuration,
     totalGuest: numberOfGuests
   });
-
+*/
   notifyObservers();
 }
 
@@ -529,10 +533,11 @@ this.addDrinkToMenu = function (drink){
   drinkMenu.push(drink);
 
   //-------------------Add drink menu to firebase ----------------------
+  /*
   var user = fire.auth().currentUser;
   var database = fire.database();
   fire.database().ref("users/" + user.uid + "/listOfParty/" +partyName+ "/listOfdrinks").push(drink);
-
+*/
   notifyObservers('amountchange');
 }
 
@@ -716,6 +721,55 @@ this.getPrice = function(){
   return price;
   notifyObservers();
 }
+
+this.submitDataToFirebase = function (){
+  var user = fire.auth().currentUser;
+  var database = fire.database();
+  for (var i = 0; i < drinkTypesChosenByGuests.length; i++) {
+      fire.database().ref("users/" + user.uid + "/listOfParty/"+partyName+"/listOfDrinkType/").push({
+        code:drinkTypesChosenByGuests[i].code,
+        currentAlchoholVolume:drinkTypesChosenByGuests[i].currentAlchoholVolume,
+        minimumAlcoholVolume:drinkTypesChosenByGuests[i].minimumAlcoholVolume,
+        status:drinkTypesChosenByGuests[i].status,
+        type:drinkTypesChosenByGuests[i].type,
+      });
+  }
+
+  fire.database().ref("users/" + user.uid + "/listOfParty/"+partyName+"/partyDetail/").push({
+    name: partyName,
+    duration: partyDuration,
+    totalGuest: numberOfGuests
+  });
+
+  for (var j = 0; j < drinkMenu.length; j++) {
+    fire.database().ref("users/" + user.uid + "/listOfParty/" +partyName+"/listOfdrinks/").push({
+      alcohol:drinkMenu[j].alcohol,
+      amount:drinkMenu[j].amount,
+      id: drinkMenu[j].id,
+      name: drinkMenu[j].name,
+      price: drinkMenu[j].price,
+      type: drinkMenu[j].type,
+      volume: drinkMenu[j].volume,
+    });
+  }
+
+
+  for (var k = 0; k < guests.length; k++) {
+    fire.database().ref("users/" + user.uid + "/listOfFriends/").push({
+      drinkingSkills:guests[k].drinkingSkills,
+      id:guests[k].id,
+      name:guests[k].name,
+      preferedDrink:guests[k].preferedDrink,
+      saved: guests[k].saved,
+      sex:guests[k].sex,
+      weight:guests[k].weight,
+    });
+  }
+
+  notifyObservers();
+
+}
+
 
 this.getAllDrinks = function () {
   let url = 'https://karlroos-systemet.p.mashape.com/product?'

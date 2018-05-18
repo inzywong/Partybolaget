@@ -43,7 +43,7 @@ class SignOut extends Component {
     var userName = localStorage.getItem("akun");
     if(this.state.toWelcome)
     {
-      return <Redirect push to="/welcome" />;
+      return <Redirect push to="/" />;
     }
     return (
       <div>
