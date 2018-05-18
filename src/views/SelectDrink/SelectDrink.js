@@ -71,7 +71,7 @@ class SelectDrink extends Component {
     var d = {
       id: e.target.attributes.getNamedItem("drink_id").value,
       name: e.target.attributes.getNamedItem("drink_name").value,
-      amount: 1,
+      amount: 0,
       alcohol: e.target.attributes.getNamedItem("drink_alcohol").value,
       volume: e.target.attributes.getNamedItem("drink_volume").value,
       price: e.target.attributes.getNamedItem("drink_price").value,
