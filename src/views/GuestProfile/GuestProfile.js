@@ -166,7 +166,7 @@ class GuestProfile extends Component {
               <img src="https://png.icons8.com/color/30/trash.png" onClick={() => this.deleteGuest()}  />
             </div>
           </div>
-          
+
 				</div>
 			);
 

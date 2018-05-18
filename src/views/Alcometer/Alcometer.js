@@ -11,18 +11,18 @@ class Alcometer extends Component {
     }
   }
 
-	
+
 	// Called by React when the component is shown to the user (mounted to DOM)
   componentDidMount() {
-		
+
 		// setState causes the component to re-render
     //this.setState({
 		//	drinkType: ''
 		//})
-    this.props.model.addObserver(this);				
+    this.props.model.addObserver(this);
   }
-	
-	
+
+
   update() {
   this.setState({
 		drinkType: this.props.model.getDrinkTypeName()
@@ -31,8 +31,8 @@ class Alcometer extends Component {
 
   render() {
     return (
-      <div className="FilterDrink">
-        <h3> Alcometer for {this.state.drinkType}</h3>
+      <div className="Alcometer">
+        <h3 className="headline"> Alcometer for {this.state.drinkType}</h3>
         <p> You need <b>{Math.floor(this.props.model.getDrinkTypeThreshold())} </b> ml of Alcohol </p>
         <p> You have <b>{this.props.model.getDrinkTypeAmount()} </b> ml </p>
         <p>{this.props.model.checkThreshold(this.state.drinkType)}</p>

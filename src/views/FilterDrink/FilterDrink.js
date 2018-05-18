@@ -11,9 +11,9 @@ class FilterDrink extends Component {
       drinkPrice: 'Drink Price',
       alcoholPercentage: 'Alcohol Percentage',
       sort:'Sort by',
-      partyName : 'Name of The Party: ' + this.props.model.getPartyName(),
-      numberOfGuests : 'Number Of Guests: ' + this.props.model.getNumberOfGuests() + ' People',
-      partyDuration : 'Party Duration: ' + this.props.model.getPartyDuration() + ' Hours'
+      partyName : 'Party name: ' + this.props.model.getPartyName(),
+      numberOfGuests : ' ' + this.props.model.getNumberOfGuests() + ' Guests',
+      partyDuration : 'Duration: ' + this.props.model.getPartyDuration() + ' Hours'
     }
   }
 
@@ -92,7 +92,7 @@ class FilterDrink extends Component {
               </select>
             </div>
             <div>
-              <button value={this.state.sortStatus} onClick={this.onSortClicked} className="btn btn-danger">
+              <button value={this.state.sortStatus} onClick={this.onSortClicked} className="btn btn-secondary">
                 {this.state.message}
               </button>
             </div>

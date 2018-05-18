@@ -77,27 +77,30 @@ class ChosenDrinkMenu extends Component {
 
 
 			chosenDrinksList=this.state.nameOfChosenDrink.map((drink) =>
-					<div className="row" key={drink.id}>
-						<div className="row">
-							<p className="col">{drink.name} : {drink.amount}</p>
+					<div className="chosenDrinkList" key={drink.id}>
+						<div className="">
+							<p className="">{drink.name} : {drink.amount}</p>
 						</div>
-						<div className="row">
-							<button value={drink.id} drink_type={drink.type} onClick={this.onPlusButtonClicked}>
-                +
-              </button>
-
+						<div className="">
 							<button value={drink.id} drink_type={drink.type} onClick={this.onMinusButtonClicked}>
                 -
+              </button>
+              <button value={drink.id} drink_type={drink.type} onClick={this.onPlusButtonClicked}>
+                +
               </button>
 						</div>
 					</div>
 				)
 
 			return (
-				<div className="chosenDrink col-md-12">
-					<h3>{this.state.drinkMenu}</h3>
-					{chosenDrinksList}
-          <button className="btn btn-success" value="SummaryPage" onClick={this.onConfirmClick}>Confirm</button>
+				<div className="chosenDrink">
+					<h3 className="headline">{this.state.drinkMenu}</h3>
+          <div className="">
+            {chosenDrinksList}
+          </div>
+          <div className="chosenDrinkButton">
+            <button className="btn btn-success" value="SummaryPage" onClick={this.onConfirmClick}>Confirm</button>
+          </div>
 				</div>
 			);
 		}

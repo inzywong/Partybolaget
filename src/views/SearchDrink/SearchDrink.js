@@ -57,11 +57,11 @@ class SearchDrink extends Component {
       case 'LOADED':
       return (
         <div className="searchDrink row">
-          <div className="col-md-2">
+          <div className="col-md-2 leftPanel">
             <div className="drinkType">
               <DrinkType model={this.props.model}/>
             </div>
-            <div className="">
+            <div className="ChosenDrinkMenu">
               <ChosenDrinkMenu model={this.props.model}/>
             </div>
           </div>
@@ -73,7 +73,7 @@ class SearchDrink extends Component {
               <SelectDrink model={this.props.model} />
             </div>
           </div>
-          <div className="alcometer col-md-2">
+          <div className="alcometer col-md-2 rightPanel">
             <Alcometer  model={this.props.model} />
           </div>
         </div>

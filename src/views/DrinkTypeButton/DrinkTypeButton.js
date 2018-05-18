@@ -30,7 +30,7 @@ class DrinkTypeButton extends Component {
 
   render() {
     return (
-      <div className="row"> {/* Print a button for each drink */}
+      <div className=""> {/* Print a button for each drink */}
         <button className={this.props.classes} onClick={this.onDrinkTypeClicked}>
 					{this.props.drinkName}
         </button>

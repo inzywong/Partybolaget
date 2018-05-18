@@ -113,7 +113,7 @@ class SelectDrink extends Component {
 
     return (
       <div className="row Drinks col-md-12">
-        <h3 className="row">{this.state.chooseDrinkWithName}</h3>
+        <h3 className="row headline">{this.state.chooseDrinkWithName}</h3>
         <div className="row">
           {drinksList}
         </div>
